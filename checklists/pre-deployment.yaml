@@ -1,0 +1,346 @@
+---
+name: pre-deployment
+version: 1.0
+description: Pre-deployment checklist for production readiness
+owners:
+  - DevOps Engineer
+  - Release Manager
+estimated_duration_minutes: 45
+automation_support: true
+
+phases:
+  - name: Code Quality Gates
+    duration_minutes: 10
+    automated: true
+    steps:
+      - id: lint
+        name: Run linting
+        command: npm run lint
+        expected_result: "0 errors"
+        failure_action: BLOCK
+        automation_tool: eslint/pylint
+      
+      - id: format
+        name: Check code formatting
+        command: npm run format:check
+        expected_result: "0 diffs"
+        failure_action: BLOCK
+        automation_tool: prettier/black
+      
+      - id: typecheck
+        name: Type checking
+        command: tsc --noEmit
+        expected_result: "0 type errors"
+        failure_action: BLOCK
+        automation_tool: typescript/mypy
+      
+      - id: complexity
+        name: Measure cyclomatic complexity
+        command: npm run complexity
+        threshold: "average < 10"
+        failure_action: WARN
+        automation_tool: sonarqube/eslint-plugin-complexity
+
+  - name: Security Scanning
+    duration_minutes: 10
+    automated: true
+    steps:
+      - id: sast
+        name: Static application security testing
+        tool: semgrep
+        command: semgrep --config=p/owasp-top-ten .
+        expected_result: "0 critical/high findings"
+        failure_action: BLOCK
+        automation_tool: semgrep/sonarqube
+      
+      - id: secrets
+        name: Detect secrets
+        command: trivy fs . --scanners secret
+        expected_result: "0 secrets found"
+        failure_action: BLOCK
+        automation_tool: trivy/git-secrets
+      
+      - id: dependencies
+        name: SCA - dependency scanning
+        command: snyk test
+        expected_result: "0 critical/high vulns"
+        failure_action: BLOCK
+        automation_tool: snyk/owasp-dependency-check
+      
+      - id: container_scan
+        name: Container image scan
+        command: trivy image myapp:latest
+        expected_result: "0 critical/high vulns"
+        failure_action: BLOCK
+        automation_tool: trivy/grype
+        condition: "if containerized"
+
+  - name: Performance Baselines
+    duration_minutes: 10
+    automated: true
+    steps:
+      - id: api_latency
+        name: Check API response time
+        tool: k6
+        metric: p95_latency_ms
+        threshold: "< SLO value"
+        failure_action: WARN
+        automation_tool: k6/postman
+      
+      - id: db_query
+        name: Database query performance
+        query: "EXPLAIN ANALYZE on critical queries"
+        expected_result: "Index usage confirmed"
+        failure_action: BLOCK
+        automation_tool: database-explain
+      
+      - id: memory_leak
+        name: Memory leak detection
+        duration_seconds: 300
+        expected_result: "Stable memory usage"
+        failure_action: BLOCK
+        automation_tool: heap-snapshot/memory-profiler
+      
+      - id: load_test
+        name: Load testing (100 concurrent users)
+        duration_minutes: 5
+        concurrent_users: 100
+        metrics:
+          - name: p99_latency_ms
+            threshold: "< SLO"
+          - name: error_rate
+            threshold: "< 0.1%"
+        failure_action: BLOCK
+        automation_tool: k6/jmeter
+
+  - name: Database Migrations
+    duration_minutes: 10
+    automated: true
+    steps:
+      - id: migration_exists
+        name: Migration scripts exist
+        path: migrations/
+        format: "numbered (001_, 002_)"
+        failure_action: BLOCK
+      
+      - id: rollback_plan
+        name: Rollback procedure documented
+        file: ROLLBACK.md
+        required_sections:
+          - step_by_step_procedure
+          - sql_scripts
+          - data_validation
+        failure_action: BLOCK
+      
+      - id: data_validation
+        name: Data validation script
+        command: npm run validate-migration
+        expected_result: "Data integrity confirmed"
+        failure_action: BLOCK
+      
+      - id: dry_run
+        name: Dry-run on staging
+        environment: staging
+        expected_result: "Migration succeeds, app starts"
+        failure_action: BLOCK
+        automation_tool: terraform/ansible
+      
+      - id: backwards_compat
+        name: Backwards compatibility check
+        check_type: schema_compatibility
+        failure_action: WARN
+        condition: "if blue-green deployment"
+
+  - name: Environment Configuration
+    duration_minutes: 5
+    automated: true
+    steps:
+      - id: env_vars
+        name: Environment variables set
+        source: ".env or secrets manager"
+        required_vars: "all vars from env.example"
+        failure_action: BLOCK
+        automation_tool: env-validator
+      
+      - id: secrets
+        name: Secrets in vault
+        manager: "AWS Secrets Manager / Azure Key Vault"
+        check: "zero secrets in code"
+        failure_action: BLOCK
+        automation_tool: trivy/detect-secrets
+      
+      - id: scaling
+        name: Scaling config updated
+        components:
+          - hpa_replicas
+          - resource_requests_limits
+          - health_checks
+        failure_action: WARN
+      
+      - id: feature_flags
+        name: Feature flags configured
+        tool: launchDarkly/unleash
+        check: "new features disabled by default"
+        failure_action: WARN
+
+  - name: Documentation
+    duration_minutes: 5
+    automated: false
+    steps:
+      - id: deployment_runbook
+        name: Deployment runbook updated
+        file: docs/deployment.md
+        required_sections:
+          - pre_checks
+          - deployment_steps
+          - post_checks
+          - rollback_procedure
+        failure_action: BLOCK
+      
+      - id: monitoring
+        name: Monitoring enabled
+        checks:
+          - alerts_configured
+          - dashboards_created
+          - alert_routing_verified
+        expected_result: "Alerts reach on-call < 1 min"
+        failure_action: BLOCK
+      
+      - id: rollback_tested
+        name: Rollback tested on staging
+        environment: staging
+        expected_result: "Rollback completes < 5 min"
+        failure_action: BLOCK
+      
+      - id: changelog
+        name: Changelog updated
+        format: semantic_versioning
+        sections:
+          - Added
+          - Fixed
+          - Security
+        failure_action: WARN
+      
+      - id: release_notes
+        name: Release notes written
+        audience:
+          - customers
+          - support
+          - internal_stakeholders
+        failure_action: WARN
+
+go_no_go_criteria:
+  criteria:
+    - id: code_quality
+      status: true
+      description: "All code quality gates passed"
+      blocking: true
+    
+    - id: security
+      status: true
+      description: "Zero critical/high security findings"
+      blocking: true
+    
+    - id: performance
+      status: true
+      description: "Performance baselines met (no regression > 20%)"
+      blocking: true
+    
+    - id: migrations
+      status: true
+      description: "Database migrations validated"
+      blocking: true
+    
+    - id: configuration
+      status: true
+      description: "Environment config verified"
+      blocking: true
+    
+    - id: monitoring
+      status: true
+      description: "Monitoring & alerting enabled"
+      blocking: false
+    
+    - id: approvals
+      status: true
+      description: "All required approvals obtained"
+      blocking: false
+  
+  decision: PROCEED_TO_DEPLOYMENT
+
+deployment_execution:
+  steps:
+    - step: 1
+      name: Create release branch
+      command: "git checkout -b release/v${VERSION} && git tag -a v${VERSION} && git push"
+    
+    - step: 2
+      name: Build artifact
+      command: "docker build -t myapp:${VERSION} . && docker push myapp:${VERSION}"
+    
+    - step: 3
+      name: Deploy to staging
+      condition: "if staging_available"
+      command: "kubectl set image deployment/myapp myapp=myapp:${VERSION} -n staging"
+    
+    - step: 4
+      name: Run smoke tests
+      duration_seconds: 300
+      tests:
+        - health_check
+        - api_endpoints_sample
+        - critical_workflows
+    
+    - step: 5
+      name: Deploy to production
+      deployment_strategy: blue-green
+      command: "kubectl apply -f deployment-v${VERSION}.yaml && kubectl patch service"
+    
+    - step: 6
+      name: Monitor for 30 minutes
+      metrics:
+        - error_rate_threshold: "< 0.1%"
+        - latency_p99_threshold: "< SLO"
+        - cpu_memory: "steady"
+        - alerts: "0 triggered"
+    
+    - step: 7
+      name: Declare success
+      notifications:
+        - slack_channel
+        - jira_ticket
+        - dashboard_screenshot
+
+rollback_procedure:
+  minor_issue:
+    error_rate_threshold: "< 1%"
+    action: "Enable detailed logging, monitor 10 more minutes"
+    escalation: "If persists, proceed to rollback"
+  
+  major_issue:
+    error_rate_threshold: ">= 1%"
+    steps:
+      - name: Initiate rollback
+        duration_seconds: 300
+        command: "kubectl rollout undo deployment/myapp -n production"
+      
+      - name: Notify stakeholders
+        immediate: true
+        channels:
+          - slack
+          - email
+          - pagerduty
+      
+      - name: Create incident ticket
+        reference: "incident-response.yaml"
+      
+      - name: Post-mortem
+        timeline: "within 24 hours"
+
+metadata:
+  created_date: 2026-07-23
+  last_updated: 2026-07-23
+  approval_required: true
+  estimated_automation_coverage: 85%
+  manual_steps: 15
+  automated_steps: 35

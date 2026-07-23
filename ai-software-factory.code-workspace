@@ -1,0 +1,34 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "files.associations": {
+      "*.prompt.md": "markdown",
+      "*.instructions.md": "markdown"
+    },
+    "github.copilot.chat.codeGeneration.instructions": [
+      {
+        "file": ".github/copilot-instructions.md"
+      }
+    ],
+    "chat.promptFiles.enabled": true,
+    "chat.promptFilesLocations": {
+      ".github/prompts": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "github.copilot",
+      "github.copilot-chat",
+      "ms-playwright.playwright",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "hediet.vscode-drawio",
+      "bierner.markdown-mermaid"
+    ]
+  }
+}

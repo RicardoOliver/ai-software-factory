@@ -1,0 +1,289 @@
+---
+name: performance-testing
+version: 1.0
+description: Performance testing workflow covering load, stress, spike, and soak tests
+owners:
+  - Performance Engineer
+  - DevOps Engineer
+estimated_duration_hours: 8
+automation_support: true
+
+phases:
+  - phase: Setup
+    duration_minutes: 30
+    steps:
+      - step: Test Environment Preparation
+        checks:
+          - database_size_mirrors_production: true
+          - hardware_same_instance_types: true
+          - network_bandwidth_limits_same: true
+          - configuration_identical: true
+          - secrets_configured: true
+      
+      - step: Baseline Metrics Recorded
+        metrics:
+          - current_p50_latency_ms: "record"
+          - current_p95_latency_ms: "record"
+          - current_p99_latency_ms: "record"
+          - current_error_rate: "record"
+          - current_throughput_rps: "record"
+          - current_cpu_usage: "record"
+          - current_memory_usage: "record"
+      
+      - step: Monitoring Set Up
+        components:
+          - prometheus_collecting: true
+          - grafana_dashboards: true
+          - loki_elk_logs: true
+          - apm_tracing: true
+          - csv_export: true
+      
+      - step: Test Scenarios Created
+        scenarios:
+          - realistic_user_workflows: true
+          - test_data_prepared: true
+          - load_distribution_matches: "80% read, 20% write"
+          - ramp_up_profiles_defined: true
+      
+      - step: Success Criteria Defined
+        thresholds:
+          - p99_latency_threshold: "< SLO"
+          - error_rate_threshold: "< 0.1%"
+          - pod_cpu_threshold: "< 70%"
+          - pod_memory_threshold: "< 80%"
+          - gc_pause_time: "< 100ms"
+          - database_conn_pool: "< 90%"
+
+  - phase: Load Test
+    duration_hours: 1-2
+    goal: "Verify system performance under expected peak load"
+    steps:
+      - step: Baseline Load Test
+        load_profile:
+          concurrent_users: "[expected peak users]"
+          duration_minutes: 10
+          ramp_up_minutes: 1
+        metrics_recorded:
+          - p50_latency
+          - p95_latency
+          - p99_latency
+          - error_rate
+          - cpu_usage
+          - memory_usage
+      
+      - step: Repeat with New Code
+        comparison:
+          - baseline_vs_new: true
+          - acceptable_regression: "< 5%"
+      
+      - step: Breakpoint Discovery (Optional)
+        method:
+          - start_with_peak_load: true
+          - increase_users_by_50_percent: "every 10 min"
+          - stop_when: "error_rate > 1% or latency > 2x normal"
+          - record_maximum_throughput: true
+      
+      - step: Analysis
+        checks:
+          - database_bottleneck: "Check CPU/memory"
+          - network_bottleneck: "Check bandwidth"
+          - application_bottleneck: "Check process"
+          - external_api_bottleneck: "Are they the limit?"
+    
+    success_criteria:
+      - p99_latency_within_slo: true
+      - error_rate_under_threshold: true
+      - resource_usage_acceptable: true
+      - regression_acceptable: "< 5%"
+
+  - phase: Stress Test
+    duration_hours: 1-2
+    goal: "Find breaking point and verify graceful degradation"
+    steps:
+      - step: Ramp-Up Stress Test
+        phases:
+          - phase_1: "Baseline load (5 min)"
+          - phase_2: "Baseline + 50% (10 min)"
+          - phase_3: "Baseline + 100% (10 min)"
+          - phase_4: "Baseline + 150% (10 min)"
+          - phase_5: "Baseline + 200% (10 min)"
+        stop_when: "error_rate > 5% or latency > 5x normal"
+      
+      - step: Observe System Behavior
+        observations:
+          - error_handling_graceful: "Returns 503 or crashes?"
+          - degradation_recovery: "Slow but recoverable?"
+          - resource_cleanup: "Memory released after spike?"
+          - alerting_triggered: true
+      
+      - step: Recovery Test
+        procedure:
+          - reduce_load_gradually: true
+          - error_rate_returns_normal: true
+          - stuck_connections_check: true
+          - pod_restart_needed: "Check"
+      
+      - step: Analysis
+        checks:
+          - circuit_breaker_threshold: "Correct?"
+          - rate_limiting_working: true
+          - connection_pool_handling: true
+          - graceful_shutdown: "Clean or crashed?"
+    
+    success_criteria:
+      - graceful_degradation: true
+      - error_rate_during_stress: "< 5%"
+      - recovery_successful: true
+      - no_cascading_failures: true
+
+  - phase: Spike Test
+    duration_minutes: 30
+    goal: "Verify system handles sudden traffic spikes"
+    test_scenarios:
+      - scenario: Sudden 10x Increase
+        increase: "10x instantly"
+        duration_minutes: 5
+        then: "Back to baseline"
+      
+      - scenario: Gradual Spike
+        increase: "50% every 30 sec"
+        peak_multiplier: "10x"
+        duration_at_peak_minutes: 5
+    
+    success_criteria:
+      - immediate_spike_latency_increase: "< 2x acceptable"
+      - immediate_spike_error_rate: "< 1%"
+      - auto_scaling_triggered: "< 2 min"
+      - recovery_time: "< 2 min"
+      - error_rate_recovery: "< 0.1%"
+    
+    analysis:
+      - hpa_minmax_replicas: "Appropriate?"
+      - scale_up_time: "< 2 min acceptable?"
+      - database_scaling: "Can handle spike?"
+      - cache_warmup: "Pre-warm before spike?"
+
+  - phase: Soak Test
+    duration_hours: 8-12
+    goal: "Verify system stability under sustained load"
+    steps:
+      - step: Long-Running Load
+        load_profile:
+          concurrent_users: "[expected peak users]"
+          duration_hours: 8-12
+          ramp_up_minutes: 5
+          ramp_down_minutes: 5
+      
+      - step: Continuous Monitoring
+        frequency: "Hourly snapshots"
+        metrics:
+          - latency_p99
+          - error_rate
+          - cpu_usage
+          - memory_usage
+        comparison:
+          - hour_1_vs_hour_8: "Any drift?"
+          - memory_growth: "Yes = potential leak"
+          - gc_pauses: "Increasing?"
+      
+      - step: Memory Leak Detection
+        procedure:
+          - check_memory_growth: true
+          - heap_snapshot_at_4h: true
+          - look_for: "Retained objects, circular references"
+          - profile_tools: "YourKit, Chrome DevTools, JFR"
+      
+      - step: Connection Leak Detection
+        checks:
+          - database_connections: "Growing?"
+          - http_connections: "Closed properly?"
+          - check_logs: "Connection pool logs"
+      
+      - step: Performance Degradation Detection
+        procedure:
+          - compare_hour_1_vs_hour_8: true
+          - acceptable_variation: "< 5%"
+          - if_degrading: "Investigate root cause"
+          - common_causes: "Connection leak, memory leak, lock contention"
+    
+    success_criteria:
+      - p99_latency_consistent: "±5%"
+      - error_rate_under_threshold: "< 0.1%"
+      - memory_not_growing: "> 5%"
+      - cpu_steady: true
+      - gc_pauses_stable: true
+      - no_pod_crashes: true
+
+tools:
+  - name: k6
+    best_for: "Modern, JS-based load testing"
+    pros: "Easy scripting, real-time metrics"
+    cons: "Smaller scale (< 1M RPS)"
+    recommended: true
+  
+  - name: JMeter
+    best_for: "Distributed testing"
+    pros: "Scale to 1M+ RPS"
+    cons: "Verbose, steep learning curve"
+  
+  - name: Locust
+    best_for: "Python-based"
+    pros: "Intuitive, Python familiar"
+    cons: "Python overhead"
+  
+  - name: Gatling
+    best_for: "High throughput"
+    pros: "1M+ RPS, beautiful reports"
+    cons: "Scala-based"
+
+monitoring_stack:
+  metrics: "Prometheus"
+  visualization: "Grafana"
+  logs: "Loki/ELK"
+  apm: "Datadog/NewRelic/Jaeger"
+
+regression_detection:
+  comparison:
+    - metric: p99_latency
+      threshold: "> 10%"
+      action: "BLOCK, optimize"
+    
+    - metric: error_rate
+      threshold: "> 20%"
+      action: "BLOCK, investigate bugs"
+    
+    - metric: throughput
+      threshold: "> 5% decrease"
+      action: "WARN, may indicate inefficiency"
+    
+    - metric: memory
+      threshold: "> 10% increase"
+      action: "WARN, potential memory leak"
+    
+    - metric: cpu
+      threshold: "> 20% increase"
+      action: "WARN, may need resources"
+
+optimization_workflow:
+  step_1: "Profile the code (inspect, cProfile, JFR)"
+  step_2: "Identify hotspots (top 3 functions)"
+  step_3: "Optimize (add index, cache, optimize algorithm)"
+  step_4: "Re-test (verify regression resolved)"
+
+pre_deployment_checklist:
+  - load_test_passed: "< 5% regression"
+  - stress_test_passed: "Graceful degradation"
+  - spike_test_passed: "Auto-scaling works"
+  - soak_test_passed: "No memory leaks, stable"
+  - no_performance_regressions: true
+  - monitoring_alerts_configured: true
+  - runbook_updated: true
+  - results_documented: true
+
+metadata:
+  created_date: 2026-07-23
+  last_updated: 2026-07-23
+  total_tests: 4
+  estimated_total_hours: 8
+  automation_coverage: 80%
+  manual_analysis_required: true

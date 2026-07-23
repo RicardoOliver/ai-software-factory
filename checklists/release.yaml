@@ -1,0 +1,295 @@
+---
+name: release
+version: 1.0
+description: Release checklist for SemVer versioning and production deployment
+owners:
+  - Release Manager
+  - DevOps Engineer
+  - Product Owner
+estimated_duration_hours: 2
+automation_support: true
+
+semver_rules:
+  patch:
+    description: "Backward compatible bug fixes"
+    increment: "1.2.3 → 1.2.4"
+    changes:
+      - bug_fixes
+      - security_patches
+      - performance_optimizations
+      - internal_refactors
+    compatible: true
+  
+  minor:
+    description: "Backward compatible new features"
+    increment: "1.2.0 → 1.3.0"
+    changes:
+      - new_features
+      - deprecations_with_warnings
+      - internal_improvements
+    compatible: true
+  
+  major:
+    description: "Breaking changes"
+    increment: "1.0.0 → 2.0.0"
+    changes:
+      - breaking_api_changes
+      - removed_deprecated_features
+      - breaking_database_schema_changes
+    compatible: false
+
+phases:
+  - phase: Pre-Release Planning
+    duration_minutes: 60
+    steps:
+      - step: Determine Version Number
+        decision_tree:
+          - new_feature: "MINOR"
+          - bug_fix: "PATCH"
+          - breaking_change: "MAJOR"
+          - api_response_format_changed: "MAJOR"
+          - optional_field_added: "MINOR"
+          - required_field_removed: "MAJOR"
+      
+      - step: Generate Changelog
+        source: "git log"
+        format: "Keep a Changelog"
+        sections:
+          - added: "New features"
+          - fixed: "Bug fixes"
+          - changed: "Changed features"
+          - deprecated: "Deprecated features"
+          - removed: "Removed features"
+          - security: "Security fixes"
+        commits_categorized:
+          - "feat:" → "Added"
+          - "fix:" → "Fixed"
+          - "security:" → "Security"
+        breaking_changes_documented: true
+      
+      - step: Create Git Tag
+        command: "git tag -a v{VERSION} -m \"Release notes\""
+        format: "v1.5.0"
+        push: "git push origin v{VERSION}"
+      
+      - step: Write Release Notes
+        audience:
+          - customers
+          - support_team
+          - internal_stakeholders
+        content:
+          - highlights: "Top 3-5 features"
+          - breaking_changes: "If any"
+          - migration_guide: "If breaking"
+          - known_issues: "With workarounds"
+
+  - phase: Build & Artifacts
+    duration_minutes: 45
+    steps:
+      - step: Code Freeze
+        branch: "release/v{VERSION}"
+        allowed: "Only hotfixes"
+      
+      - step: Test Suite
+        tests:
+          - unit_tests: "100% pass"
+          - integration_tests: "100% pass"
+          - e2e_tests: "100% pass"
+          - linting: "0 errors"
+          - type_checking: "0 errors"
+      
+      - step: Build Artifact
+        container:
+          - command: "docker build -t myapp:{VERSION}"
+          - tag_latest: true
+          - push: true
+        compiled:
+          - command: "mvn package / go build"
+          - output: "Binary ready"
+      
+      - step: Artifact Verification
+        checks:
+          - image_scan: "0 critical/high vulns"
+          - binary_size: "Acceptable"
+          - dependencies: "No surprises"
+          - sbom_generated: true
+      
+      - step: Smoke Test
+        tests:
+          - health_check: "GET /health = 200"
+          - api_call: "GET /api/status works"
+          - database_connection: "Successful"
+
+  - phase: Staging Deployment
+    duration_minutes: 45
+    steps:
+      - step: Deploy to Staging
+        command: "kubectl set image deployment/myapp myapp=myapp:{VERSION} -n staging"
+        verify_rollout: true
+      
+      - step: Staging Tests
+        tests:
+          - api_endpoints: "All responding"
+          - database_migration: "Ran successfully"
+          - feature_flags: "New features disabled"
+          - smoke_tests: "Pass"
+          - performance_test: "p99 acceptable"
+      
+      - step: Stakeholder Sign-Offs
+        signatories:
+          - product_owner: "Feature completeness"
+          - qa_lead: "Test coverage"
+          - tech_lead: "Code quality"
+          - devops: "Infrastructure readiness"
+
+  - phase: Go-NoGo Decision
+    duration_minutes: 15
+    criteria:
+      - all_staging_tests_pass: true
+      - no_critical_security_issues: true
+      - performance_regression_acceptable: "< 5%"
+      - rollback_plan_tested: true
+      - monitoring_enabled: true
+      - on_call_available: true
+      - stakeholder_signoffs: true
+      - no_business_conflicts: true
+    
+    decision_options:
+      - option: GO
+        condition: "All criteria met"
+        action: "Proceed to production"
+      
+      - option: NO-GO
+        condition: "Any criteria failed"
+        action: "Resolve issues or defer release"
+
+  - phase: Production Deployment
+    duration_minutes: 30
+    deployment_strategy: blue-green
+    steps:
+      - step: Deploy New Version (Green)
+        command: "kubectl apply -f deployment-v{VERSION}.yaml -n production"
+        verify_rollout: true
+        health_checks:
+          - health_endpoint: "GET /health"
+          - pod_resources: "Within limits"
+          - error_logs: "No errors"
+          - replicas_ready: true
+      
+      - step: Canary (5% Traffic)
+        traffic_split: 5
+        duration_minutes: 5
+        monitoring:
+          - error_rate: "< 0.1%"
+          - latency_p99: "< SLO"
+          - cpu_memory: "< 70%"
+          - alerts: "None triggered"
+        action_if_fail: "Rollback immediately"
+      
+      - step: Gradual Rollout
+        stages:
+          - stage_1: "5% (monitor 5 min)"
+          - stage_2: "25% (monitor 5 min)"
+          - stage_3: "50% (monitor 5 min)"
+          - stage_4: "100% (monitor 15 min)"
+      
+      - step: Full Production (100%)
+        condition: "After 30 minutes monitoring"
+        final_checks:
+          - all_metrics_normal: true
+          - alerts_cleared: true
+          - business_metrics_normal: true
+        success_message: "✅ Release complete"
+
+  - phase: Post-Deployment Monitoring
+    duration_minutes: 30
+    continuous_checks:
+      - frequency: "Every 5 minutes"
+        metrics:
+          - error_rate: "< 0.1%"
+          - latency_p95: "< SLO"
+          - latency_p99: "< SLO"
+          - pod_restarts: "0"
+      
+      - business_metrics:
+          - logins_per_hour: "Normal?"
+          - requests_per_hour: "Normal?"
+          - transactions_processing: true
+          - errors_by_service: "No spikes?"
+    
+    issue_response:
+      - minor_issue:
+          condition: "< 0.5% error rate"
+          action: "Monitor 10 more minutes"
+      
+      - major_issue:
+          condition: "> 1% error rate"
+          action: "ROLLBACK IMMEDIATELY"
+
+  - phase: Rollback (If Needed)
+    duration_minutes: 5
+    procedure_blue_green:
+      - command: "kubectl patch service myapp -p '{\"spec\":{\"selector\":{\"version\":\"v1.4.2\"}}}'"
+      - verify_metrics: "Error rate returns to normal"
+    
+    procedure_rolling:
+      - command: "kubectl rollout undo deployment/myapp -n production"
+      - verify_rollout: true
+    
+    post_rollback:
+      - error_rate_normal: true
+      - latency_baseline: true
+      - alerts_cleared: true
+      - postmortem_scheduled: true
+
+  - phase: Release Completion
+    duration_minutes: 15
+    steps:
+      - step: Success Announcement
+        channels:
+          - slack: "#releases"
+          - email: "team@example.com"
+        content:
+          - version_released: "v{VERSION}"
+          - key_features: "Summarized"
+          - monitoring_status: "Green ✅"
+          - changelog_link: "Included"
+      
+      - step: Update Documentation
+        items:
+          - status_dashboard: "Update version"
+          - runbook: "Document process"
+          - deployment_guide: "Update if changed"
+      
+      - step: Notify Stakeholders
+        recipients:
+          - customers: "Release notes email"
+          - support: "Feature/fix summary"
+          - help_center: "Updated docs"
+      
+      - step: Archive Artifacts
+        files:
+          - dashboard_screenshot: "Before/after"
+          - performance_metrics: "Exported"
+          - release_notes: "Archived"
+
+frequency:
+  patch_releases: "As needed (security, critical bugs)"
+  minor_releases: "Every 2 weeks"
+  major_releases: "Every quarter"
+
+deployment_windows:
+  preferred_times: "10am - 3pm business hours"
+  avoid_times: "5pm - 10am off-hours"
+  blackout_periods:
+    - product_launches
+    - major_sales_events
+    - holidays
+
+metadata:
+  created_date: 2026-07-23
+  last_updated: 2026-07-23
+  total_steps: 25
+  automation_coverage: 85%
+  manual_reviews_required: 3
+  sla_total_hours: 2

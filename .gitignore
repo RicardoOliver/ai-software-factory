@@ -1,0 +1,82 @@
+# VS Code
+.vscode/
+!.vscode/*.code-workspace
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+
+# OS-specific
+.DS_Store
+Thumbs.db
+.directory
+desktop.ini
+
+# IDEs
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+*.sublime-workspace
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+package-lock.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# Environment variables (SECRETS!)
+.env
+.env.local
+.env.*.local
+secrets.json
+credentials.json
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+.cache/
+dist/
+build/
+*.log
+
+# IDE workspace
+.idea
+.vscode
+*.code-workspace
+
+# macOS
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+$RECYCLE.BIN/
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.Trash-*
+
+# Project-specific (if needed)
+# .env files with secrets
+# Local test data
+# Generated artifacts (if applicable)
+
+# Don't ignore workspace file (important!)
+!ai-software-factory.code-workspace

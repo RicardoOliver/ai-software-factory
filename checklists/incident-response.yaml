@@ -1,0 +1,360 @@
+---
+name: incident-response
+version: 1.0
+description: Structured incident response playbook and procedures
+owners:
+  - Incident Investigator
+  - Platform Engineer
+  - On-Call Engineer
+estimated_duration_hours: "varies"
+automation_support: true
+
+severity_levels:
+  - level: SEV-1
+    name: Complete Outage
+    description: "All users affected, complete service down"
+    response_time_minutes: 5
+    examples:
+      - "API completely unreachable"
+      - "Database offline"
+      - "All requests returning 500"
+    escalation: "Page VP Engineering, Backend Lead, DevOps Lead"
+    mitigation_options:
+      - rollback_deployment
+      - scale_up
+      - restart_service
+      - failover_standby
+  
+  - level: SEV-2
+    name: Partial Degradation
+    description: "Some users affected, service partially down"
+    response_time_minutes: 15
+    examples:
+      - "Payment processing failing for 10% of users"
+      - "Specific endpoint returning errors"
+    escalation: "Page Backend Lead + on-call backup"
+    mitigation_options:
+      - feature_flag_disable
+      - scale_up
+      - circuit_breaker
+      - restart_service
+  
+  - level: SEV-3
+    name: Performance Degradation
+    description: "Degraded performance, workaround exists"
+    response_time_minutes: 60
+    examples:
+      - "API latency 5x normal"
+      - "Non-critical service slow"
+    escalation: "Monitor, escalate if worsens"
+    mitigation_options:
+      - scale_up
+      - cache_clear
+      - optimize_query
+  
+  - level: SEV-4
+    name: Minor Issue
+    description: "No user impact, low priority"
+    response_time_minutes: 1440
+    examples:
+      - "Non-critical background job failing"
+      - "Internal tool slow"
+    escalation: "None, normal priority"
+    mitigation_options: []
+
+phases:
+  - phase: 1
+    name: Detection & Alerting
+    duration_minutes: 5
+    steps:
+      - step: 1
+        name: "Alert triggered"
+        triggers:
+          - metric: error_rate
+            threshold_sev1: "> 1%"
+            threshold_sev2: "> 0.5%"
+          - metric: p99_latency
+            threshold_sev1: "> SLO + 20%"
+            threshold_sev2: "> SLO"
+          - metric: cpu_memory
+            threshold_sev1: "> 80%"
+            threshold_sev2: "> 60%"
+          - metric: disk_space_free
+            threshold_sev1: "< 10%"
+          - metric: database_connections_pool_exhausted
+            threshold_sev1: true
+          - metric: pod_restart_loops
+            threshold_sev1: true
+      
+      - step: 2
+        name: "Alert routed to on-call"
+        primary: "PagerDuty notification + SMS"
+        secondary: "Slack #incidents"
+        escalation: "Manager notified if no ack in 5 min"
+      
+      - step: 3
+        name: "Alert contains critical info"
+        fields:
+          - service_name
+          - component
+          - current_metric_values
+          - threshold_values
+          - runbook_link
+          - dashboard_link
+          - logs_link
+
+  - phase: 2
+    name: Initial Response
+    duration_minutes: 10
+    steps:
+      - step: 1
+        name: "Acknowledge incident"
+        actions:
+          - acknowledge_pagerduty: true
+          - create_slack_thread: true
+          - post_status: "Acknowledged at [time], investigating..."
+      
+      - step: 2
+        name: "Assess severity"
+        checks:
+          - are_users_affected: true
+          - how_many_users: "count/percentage"
+          - error_rate_current: "[value]"
+          - latency_current: "[value]"
+          - business_metrics: "[impacted services]"
+        decision: "Confirm or adjust SEV level"
+      
+      - step: 3
+        name: "Gather initial context"
+        actions:
+          - access_grafana_dashboard: true
+          - access_logs_loki_elk: true
+          - check_status_page: true
+          - check_recent_deployments: true
+          - check_feature_flags: true
+          - check_database_migrations: true
+          - check_infrastructure_scaling: true
+      
+      - step: 4
+        name: "Escalation decision"
+        sev1: "Page Backend Lead, DevOps Lead, Manager"
+        sev2: "Page Backend Lead + on-call backup"
+        sev3_4: "Monitor, escalate if needed"
+
+  - phase: 3
+    name: Investigation
+    duration_minutes: 45
+    steps:
+      - step: 1
+        name: "Error rate investigation"
+        actions:
+          - identify_affected_endpoint: true
+          - identify_error_code: true
+          - get_stack_trace: true
+          - get_error_context: "request ID, user ID, correlation ID"
+      
+      - step: 2
+        name: "Performance investigation"
+        actions:
+          - check_database_slow_query_log: true
+          - check_external_api_response: true
+          - check_network_latency: true
+          - check_cpu_memory_constrained: true
+      
+      - step: 3
+        name: "Resource usage check"
+        checks:
+          - pod_cpu_memory_limits: "Approaching?"
+          - database_connection_pool: "Exhausted?"
+          - disk_io_utilization: "High?"
+          - memory_leaks: "Check GC logs?"
+      
+      - step: 4
+        name: "Dependency check"
+        dependencies:
+          - third_party_apis: "Responding?"
+          - database: "Health check passing?"
+          - redis_cache: "Connected?"
+          - message_queue: "Processing backlog?"
+      
+      - step: 5
+        name: "Apply bug investigator patterns"
+        patterns:
+          - memory_leak: "Gradual latency increase?"
+          - n_plus_one_queries: "Correlate error with DB queries?"
+          - race_condition: "Intermittent failures?"
+          - cascading_failure: "One service down others?"
+      
+      - step: 6
+        name: "Root cause diagnosis"
+        diagnosis_tree:
+          - is_error_rate_high:
+              yes:
+                - check_exception_stack_trace
+                - check_null_pointer: "Recent code change?"
+                - check_out_of_memory: "Memory leak? Large data processing?"
+                - check_database_exception: "Connection pool exhausted? Slow queries?"
+                - check_timeout_exception: "External service down? Network issue?"
+              no:
+                - is_latency_high:
+                    yes:
+                      - is_database_slow: "Check EXPLAIN ANALYZE"
+                      - is_external_service_slow: true
+                    no:
+                      - is_resource_constrained:
+                          yes:
+                            - cpu_hot_loop: "Inefficient algorithm?"
+                            - memory_leak: "Large data loading?"
+                            - disk_io: "Full disk?"
+
+  - phase: 4
+    name: Mitigation
+    duration_minutes: "varies"
+    mitigation_options:
+      - option: feature_flag_disable
+        time_minutes: 2
+        downside: "Feature unavailable"
+        use_when: "New feature causing errors"
+      
+      - option: scale_up_hpa
+        time_minutes: 5
+        downside: "Costs $, doesn't fix root cause"
+        use_when: "Resource constrained but service works"
+      
+      - option: rollback_deployment
+        time_minutes: 10
+        downside: "Loses recent changes, brief downtime"
+        use_when: "Recent deploy introduced bug"
+      
+      - option: database_connection_reset
+        time_minutes: 1
+        downside: "Brief connection drops"
+        use_when: "Connection pool exhausted"
+      
+      - option: cache_clear
+        time_minutes: 1
+        downside: "Brief performance degradation"
+        use_when: "Corrupted cache data"
+      
+      - option: restart_service
+        time_minutes: 5
+        downside: "Temporary downtime, doesn't fix root cause"
+        use_when: "Memory leak, stuck threads"
+      
+      - option: failover_standby
+        time_minutes: 15
+        downside: "Brief request loss, DNS TTL delay"
+        use_when: "Primary database/region down"
+    
+    decision_framework:
+      sev1:
+        - "Is it a bad deployment? → ROLLBACK"
+        - "Is it resource constrained? → SCALE UP"
+        - "Is it a new feature? → DISABLE FLAG"
+        - "Otherwise → Restart service"
+      sev2:
+        - "Identify root cause if obvious"
+        - "Try safest mitigation first"
+        - "If unsuccessful, escalate to rollback/restart"
+      sev3:
+        - "Gather full context"
+        - "Implement targeted fix"
+        - "Monitor for 15 minutes"
+    
+    execution:
+      - document_action_taken: true
+      - document_root_cause_hypothesis: true
+      - monitor_immediately: true
+      - declare_mitigated_when: "Metrics return to normal"
+
+  - phase: 5
+    name: Resolution
+    duration_minutes: "varies"
+    quick_fix:
+      condition: "Available in < 30 minutes"
+      steps:
+        - code_change
+        - run_tests
+        - deploy_staging
+        - deploy_production
+        - post_message: "Fixed at [time]"
+    
+    complex_fix:
+      condition: "Requires > 30 minutes"
+      steps:
+        - continue_with_mitigation: true
+        - work_on_permanent_fix: true
+        - target_deployment_time: "[time]"
+        - staged_rollout:
+            - canary_5_percent: "Monitor 5 min"
+            - rollout_25_percent: "Monitor 5 min"
+            - rollout_100_percent: true
+    
+    validation:
+      - error_rate: "< 0.1% for 10 min"
+      - latency: "Back to normal"
+      - business_metrics: "Recovered"
+      - no_regressions: true
+
+  - phase: 6
+    name: Post-Mortem
+    duration_minutes: 45
+    timing: "24-48 hours after resolution"
+    attendees:
+      - incident_commander
+      - on_call_engineer
+      - backend_lead
+      - devops_lead
+      - qa_lead
+    
+    agenda:
+      - timeline: 5
+      - root_cause_5_porques: 10
+      - detection_response: 5
+      - mitigation_effectiveness: 5
+      - lessons_learned: 5
+      - action_items: 10
+    
+    deliverables:
+      - document_path: "incidents/INCIDENT-[date]-[service].md"
+      - shared: "Slack, email, wiki"
+      - action_items_tracked: "JIRA tickets"
+      - owners_assigned: true
+      - target_dates: true
+
+  - phase: 7
+    name: Prevention
+    duration_minutes: "variable"
+    follow_up:
+      - action_items_tracked: true
+      - code_changes_deployed: true
+      - tests_added: true
+      - documentation_updated: true
+      - runbook_updated: true
+      - monitoring_for_recurrence: true
+      - alert_created: true
+      - baseline_metrics_established: true
+
+incident_report_template:
+  fields:
+    - date
+    - severity
+    - duration
+    - affected_users
+    - summary
+    - timeline
+    - root_cause
+    - impact
+    - mitigation
+    - permanent_fix
+    - action_items
+    - lessons_learned
+    - references
+
+metadata:
+  created_date: 2026-07-23
+  last_updated: 2026-07-23
+  review_frequency_quarters: 1
+  automation_coverage: 70%
+  manual_steps: 15
+  automated_steps: 8

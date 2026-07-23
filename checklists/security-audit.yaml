@@ -1,0 +1,470 @@
+---
+name: security-audit
+version: 1.0
+description: Comprehensive security audit aligned with OWASP Top 10 2023
+owners:
+  - DevSecOps Engineer
+  - Security QA
+estimated_duration_hours: 4
+automation_support: true
+
+owasp_domains:
+  - domain: A01
+    name: Broken Access Control
+    duration_minutes: 30
+    automated: false
+    checks:
+      - id: authentication
+        name: Authentication verification
+        criteria:
+          - all_endpoints_have_auth: true
+          - no_public_private_mix: true
+          - tokens_have_expiration: true
+          - sessions_secure: true
+      
+      - id: authorization
+        name: Authorization verification
+        criteria:
+          - rbac_implemented: true
+          - permissions_checked: true
+          - admin_operations_logged: true
+          - privilege_escalation_not_possible: true
+      
+      - id: api_tokens
+        name: API key/token security
+        criteria:
+          - rotation_frequency_days: 90
+          - scoped_permissions: true
+          - leaked_tokens_revocable: true
+          - no_tokens_in_logs: true
+      
+      - id: resource_access
+        name: Resource access control
+        criteria:
+          - user_data_isolated: true
+          - tenant_isolation: true
+          - admin_authorization_explicit: true
+          - parameter_tampering_tested: true
+    
+    risk_level: CRITICAL
+    automation_tool: "burp-suite/owasp-zap"
+
+  - domain: A02
+    name: Cryptographic Failures
+    duration_minutes: 30
+    automated: true
+    checks:
+      - id: transit
+        name: Data in transit
+        criteria:
+          - tls_enforced: true
+          - tls_version_min: "1.2"
+          - strong_ciphers: true
+          - certificate_pinning: "if mobile"
+          - no_downgrade_attacks: true
+      
+      - id: at_rest
+        name: Data at rest
+        criteria:
+          - sensitive_data_encrypted: true
+          - algorithm: "AES-256"
+          - key_management_secure: true
+          - keys_rotated_annually: true
+      
+      - id: passwords
+        name: Password security
+        criteria:
+          - hash_algorithm: "bcrypt/scrypt/argon2"
+          - salt_used: true
+          - cost_factor_min: 12
+          - never_logged: true
+      
+      - id: key_management
+        name: Cryptographic key management
+        criteria:
+          - keys_in_vault: true
+          - rotation_policy: true
+          - old_keys_retained: true
+          - access_audited: true
+    
+    risk_level: CRITICAL
+    automation_tool: "testssl.sh/trivy"
+
+  - domain: A03
+    name: Injection
+    duration_minutes: 30
+    automated: true
+    checks:
+      - id: sql
+        name: SQL injection prevention
+        criteria:
+          - parameterized_queries: true
+          - no_string_concatenation: true
+          - orm_used_correctly: true
+          - dynamic_queries_validated: true
+      
+      - id: command
+        name: Command injection prevention
+        criteria:
+          - no_shell_execution: true
+          - input_whitelist: true
+          - shell_escaping: true
+      
+      - id: code
+        name: Code injection prevention
+        criteria:
+          - no_eval: true
+          - no_dynamic_loading: true
+          - deserialization_safe: true
+      
+      - id: ldap_xml
+        name: LDAP/XML/NoSQL injection
+        criteria:
+          - ldap_escaped: true
+          - xxe_disabled: true
+          - nosql_parameterized: true
+    
+    risk_level: CRITICAL
+    automation_tool: "semgrep/sonarqube"
+
+  - domain: A04
+    name: Insecure Design
+    duration_minutes: 30
+    automated: false
+    checks:
+      - id: threat_model
+        name: Threat modeling
+        criteria:
+          - threat_model_created: true
+          - high_risk_flows_identified: true
+          - mitigations_documented: true
+      
+      - id: secure_defaults
+        name: Secure defaults
+        criteria:
+          - features_disabled_by_default: true
+          - fail_secure: true
+          - admin_mode_explicit: true
+          - debug_disabled: true
+      
+      - id: api_security
+        name: API security
+        criteria:
+          - rate_limiting: true
+          - input_validation: true
+          - output_encoding: true
+          - cors_restrictive: true
+      
+      - id: data_flow
+        name: Data flow security
+        criteria:
+          - sensitive_encrypted_flow: true
+          - data_minimization: true
+          - retention_policy: true
+    
+    risk_level: HIGH
+    automation_tool: "manual-review"
+
+  - domain: A05
+    name: Security Misconfiguration
+    duration_minutes: 30
+    automated: false
+    checks:
+      - id: defaults
+        name: Default credentials
+        criteria:
+          - all_defaults_changed: true
+          - documented_in_runbook: true
+      
+      - id: services
+        name: Unnecessary services disabled
+        criteria:
+          - dev_tools_disabled: true
+          - directory_listing_disabled: true
+          - debug_endpoints_removed: true
+          - service_scan_done: true
+      
+      - id: headers
+        name: Security headers
+        criteria:
+          - hsts_enabled: true
+          - x_frame_options: "DENY"
+          - x_content_type_options: "nosniff"
+          - csp_configured: true
+          - referrer_policy_configured: true
+      
+      - id: errors
+        name: Error handling
+        criteria:
+          - no_stack_traces_shown: true
+          - errors_logged_server_side: true
+          - user_errors_generic: true
+      
+      - id: dependencies
+        name: Dependencies updated
+        criteria:
+          - latest_versions: true
+          - vulnerabilities_scanned: true
+          - monthly_updates: true
+    
+    risk_level: HIGH
+    automation_tool: "nikto/header-check"
+
+  - domain: A06
+    name: Vulnerable & Outdated Components
+    duration_minutes: 20
+    automated: true
+    checks:
+      - id: management
+        name: Dependency management
+        criteria:
+          - dependency_list_maintained: true
+          - no_unmaintained: true
+          - licenses_compatible: true
+      
+      - id: scanning
+        name: Vulnerability scanning
+        criteria:
+          - sca_tool_integrated: true
+          - critical_high_block_builds: true
+          - vulnerabilities_tracked: true
+      
+      - id: updates
+        name: Update strategy
+        criteria:
+          - security_patches_within_48h: true
+          - major_updates_tested: true
+      
+      - id: sbom
+        name: SBOM generation
+        criteria:
+          - sbom_generated: true
+          - sbom_tracked: true
+    
+    risk_level: HIGH
+    automation_tool: "snyk/trivy"
+
+  - domain: A07
+    name: Identification & Authentication Failures
+    duration_minutes: 30
+    automated: true
+    checks:
+      - id: password_policy
+        name: Password policy
+        criteria:
+          - min_length: 12
+          - complexity: true
+          - no_common_passwords: true
+      
+      - id: mfa
+        name: Multi-factor authentication
+        criteria:
+          - mfa_available_critical: true
+          - totp_preferred: true
+      
+      - id: sessions
+        name: Session management
+        criteria:
+          - tokens_random: true
+          - timeout_minutes: "15-30"
+          - logout_invalidates: true
+          - no_session_in_url: true
+      
+      - id: password_reset
+        name: Password reset
+        criteria:
+          - reset_link_limited: true
+          - single_use: true
+          - no_predictable_tokens: true
+          - confirmation_email: true
+      
+      - id: lockout
+        name: Account lockout
+        criteria:
+          - lockout_after_attempts: 5
+          - lockout_duration_minutes: 15
+          - admin_unlock_available: true
+          - lockout_logged: true
+    
+    risk_level: HIGH
+    automation_tool: "burp-suite"
+
+  - domain: A08
+    name: Software & Data Integrity Failures
+    duration_minutes: 20
+    automated: true
+    checks:
+      - id: code_integrity
+        name: Code integrity
+        criteria:
+          - git_commits_signed: true
+          - pr_reviews_required: true
+          - ci_protected: true
+          - artifacts_signed: true
+      
+      - id: data_integrity
+        name: Data integrity
+        criteria:
+          - transactions_used: true
+          - checksums_verified: true
+          - audit_logs_immutable: true
+          - backups_tested: true
+      
+      - id: updates
+        name: Third-party updates
+        criteria:
+          - official_sources_only: true
+          - signature_verification: true
+    
+    risk_level: MEDIUM
+    automation_tool: "cosign/in-toto"
+
+  - domain: A09
+    name: Logging & Monitoring Failures
+    duration_minutes: 30
+    automated: true
+    checks:
+      - id: audit_logging
+        name: Audit logging
+        criteria:
+          - login_attempts_logged: true
+          - admin_actions_logged: true
+          - sensitive_access_logged: true
+          - failed_auth_logged: true
+          - config_changes_logged: true
+      
+      - id: log_content
+        name: Log content
+        criteria:
+          - detail_sufficient: true
+          - no_passwords_keys: true
+          - no_pii: true
+          - timestamp_included: true
+          - user_id_included: true
+          - ip_address_included: true
+      
+      - id: retention
+        name: Log retention
+        criteria:
+          - retention_days_min: 90
+          - immutable: true
+          - centralized: true
+      
+      - id: monitoring
+        name: Monitoring & alerting
+        criteria:
+          - failed_login_spikes: true
+          - admin_action_spikes: true
+          - unusual_patterns_detected: true
+          - alert_sla_minutes: 5
+      
+      - id: incident_response
+        name: Incident response
+        criteria:
+          - response_plan_documented: true
+          - on_call_rotation: true
+          - severity_levels_defined: true
+          - postmortems_conducted: true
+    
+    risk_level: HIGH
+    automation_tool: "elk/splunk/datadog"
+
+  - domain: A10
+    name: Server-Side Request Forgery (SSRF)
+    duration_minutes: 20
+    automated: false
+    checks:
+      - id: url_validation
+        name: URL validation
+        criteria:
+          - destination_whitelisted: true
+          - internal_ips_blocked: true
+          - scheme_validated: true
+      
+      - id: network
+        name: Network isolation
+        criteria:
+          - dmz_isolation: true
+          - egress_filtering: true
+          - security_groups: true
+      
+      - id: redirects
+        name: Redirect validation
+        criteria:
+          - redirects_whitelisted: true
+    
+    risk_level: MEDIUM
+    automation_tool: "burp-suite"
+
+cross_cutting_concerns:
+  - concern: Compliance
+    items:
+      - gdpr_compliance
+      - lgpd_compliance
+      - pci_dss_compliance
+      - hipaa_compliance
+  
+  - concern: Secrets Management
+    items:
+      - no_secrets_in_code
+      - secrets_scanning_enabled
+      - vault_storage
+      - rotation_automated
+  
+  - concern: Infrastructure
+    items:
+      - firewall_configured
+      - ddos_protection
+      - waf_enabled
+      - vulnerability_scanning
+      - least_privilege
+      - immutable_infrastructure
+      - patch_automation
+
+security_testing:
+  - testing_type: SAST
+    tool: "semgrep/sonarqube"
+    frequency: "on every commit"
+    threshold_block: "critical"
+  
+  - testing_type: DAST
+    tool: "burp-suite/owasp-zap"
+    frequency: "pre-deployment"
+    threshold_block: "critical"
+  
+  - testing_type: "Penetration Testing"
+    tool: "manual"
+    frequency: "annually"
+    scope:
+      - external_network
+      - internal_network
+      - physical_security
+  
+  - testing_type: "Code Review"
+    frequency: "on every PR"
+    focus: security
+
+sign_off:
+  fields:
+    - field: security_review_complete
+      type: boolean
+    - field: critical_findings
+      type: integer
+    - field: medium_findings
+      type: integer
+    - field: low_findings
+      type: integer
+    - field: decision
+      type: enum
+      values:
+        - APPROVE
+        - CONDITIONAL
+        - REJECT
+
+metadata:
+  created_date: 2026-07-23
+  last_updated: 2026-07-23
+  total_checks: 85
+  automation_coverage: 65%
+  review_frequency_months: 6
+  penetration_testing_frequency_months: 12

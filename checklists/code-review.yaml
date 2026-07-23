@@ -1,0 +1,420 @@
+---
+name: code-review
+version: 1.0
+description: 8-dimension code review framework for standardized PR reviews
+owners:
+  - PR Reviewer
+  - Code Reviewer
+estimated_duration_minutes: 30
+automation_support: false
+
+dimensions:
+  - dimension: 1
+    name: Context & Scope
+    duration_minutes: 5
+    automated: false
+    blocking: true
+    criteria:
+      - id: pr_title_description
+        name: PR title and description clear
+        checks:
+          - follows_pattern: "[TYPE] Descriptive title"
+          - explains: "what, why, how"
+          - linked_issues: true
+      
+      - id: requirements
+        name: Requirements understood
+        checks:
+          - feature_requirements_met: true
+          - bug_fix_root_cause: true
+          - refactoring_measurable: true
+      
+      - id: scope
+        name: Scope is reasonable
+        checks:
+          - single_responsibility: true
+          - no_scope_creep: true
+          - lines_of_code_limit: 400
+          - flag_if_exceeds: 600
+      
+      - id: dependencies
+        name: Dependencies clear
+        checks:
+          - dependent_prs_documented: true
+          - database_migrations_sequenced: true
+          - env_vars_documented: true
+    
+    scoring:
+      pass: "All clear"
+      warn: "Minor clarification needed"
+      fail: "Unclear scope or concerning changes"
+    
+    blocking: true
+
+  - dimension: 2
+    name: Design & Architecture
+    duration_minutes: 10
+    automated: false
+    blocking: true
+    criteria:
+      - id: architectural_alignment
+        name: Architectural alignment
+        checks:
+          - follows_patterns: true
+          - fits_system_layers: true
+          - no_shortcuts: true
+      
+      - id: design_patterns
+        name: Design patterns applied
+        patterns:
+          - factory_builder
+          - strategy
+          - observer_event
+          - dependency_injection
+      
+      - id: consistency
+        name: Consistency with codebase
+        checks:
+          - naming_conventions: true
+          - folder_structure: true
+          - framework_conventions: true
+      
+      - id: modularity
+        name: Modularity and reusability
+        checks:
+          - testable_in_isolation: true
+          - no_premature_abstraction: true
+          - shared_logic_extracted: true
+          - duplication_minimized: true
+      
+      - id: performance
+        name: Performance considered
+        checks:
+          - no_n_plus_one: true
+          - loops_optimized: true
+          - caching_strategy: true
+          - no_blocking_operations: true
+    
+    scoring:
+      pass: "Design is sound"
+      warn: "Minor design improvements"
+      fail: "Architectural concerns"
+    
+    blocking: true
+
+  - dimension: 3
+    name: Correctness
+    duration_minutes: 10
+    automated: false
+    blocking: true
+    criteria:
+      - id: logic_correctness
+        name: Logic correctness
+        checks:
+          - algorithm_matches_spec: true
+          - math_verified: true
+          - state_transitions_valid: true
+          - no_infinite_loops: true
+      
+      - id: edge_cases
+        name: Edge cases handled
+        edge_cases:
+          - null_undefined
+          - empty_collections
+          - boundary_conditions
+          - error_scenarios
+      
+      - id: error_handling
+        name: Error handling
+        checks:
+          - try_catch_appropriate: true
+          - user_facing_messages: true
+          - errors_logged_with_context: true
+          - graceful_degradation: true
+      
+      - id: data_integrity
+        name: Data integrity
+        checks:
+          - transactions_for_multi_step: true
+          - concurrent_updates_handled: true
+          - deleted_data_handled: true
+          - cascading_deletes_verified: true
+    
+    scoring:
+      pass: "Logic is correct, edge cases handled"
+      warn: "Minor edge cases or improvements"
+      fail: "Logical errors or missing edge cases"
+    
+    blocking: true
+
+  - dimension: 4
+    name: Security
+    duration_minutes: 10
+    automated: false
+    blocking: true
+    criteria:
+      - id: auth
+        name: Authentication & Authorization
+        checks:
+          - user_identity_verified: true
+          - permissions_checked: true
+          - no_hardcoded_credentials: true
+          - token_expiration_handled: true
+      
+      - id: input_validation
+        name: Input validation
+        checks:
+          - user_inputs_validated: true
+          - no_sql_injection: true
+          - no_xss: true
+          - no_command_injection: true
+      
+      - id: data_protection
+        name: Data protection
+        checks:
+          - tls_in_transit: true
+          - encryption_at_rest: true
+          - pii_not_logged: true
+          - secrets_in_env: true
+      
+      - id: owasp_top_10
+        name: OWASP Top 10 Compliance
+        checks:
+          - a01_access_control: true
+          - a02_cryptographic_failures: true
+          - a03_injection: true
+          - a04_insecure_design: true
+          - a05_misconfiguration: true
+          - a06_vulnerable_components: true
+          - a07_auth_failures: true
+          - a08_integrity_failures: true
+          - a09_logging_monitoring: true
+          - a10_ssrf: true
+    
+    scoring:
+      pass: "No security issues"
+      warn: "Minor security improvements"
+      fail: "Security vulnerabilities"
+    
+    blocking: true
+    escalation: "security-team"
+
+  - dimension: 5
+    name: Tests
+    duration_minutes: 5
+    automated: true
+    blocking: true
+    criteria:
+      - id: coverage
+        name: Test coverage
+        checks:
+          - unit_tests_present: true
+          - coverage_minimum: 80
+          - integration_tests: true
+          - error_scenarios_covered: true
+      
+      - id: quality
+        name: Test quality
+        checks:
+          - single_assertion: true
+          - descriptive_names: true
+          - proper_mocking: true
+          - deterministic: true
+      
+      - id: maintenance
+        name: Test maintenance
+        checks:
+          - updated_with_changes: true
+          - no_skipped_tests: true
+          - no_duplication: true
+    
+    scoring:
+      pass: "Good coverage, quality tests"
+      warn: "Coverage acceptable but could improve"
+      fail: "Insufficient tests or low quality"
+    
+    blocking: true
+
+  - dimension: 6
+    name: Maintainability
+    duration_minutes: 5
+    automated: false
+    blocking: false
+    criteria:
+      - id: readability
+        name: Readability
+        checks:
+          - descriptive_naming: true
+          - no_ambiguous_abbreviations: true
+          - comments_explain_why: true
+          - formatted_consistently: true
+      
+      - id: complexity
+        name: Complexity
+        checks:
+          - function_length_limit: 50
+          - cyclomatic_complexity_limit: 10
+          - nesting_depth_limit: 3
+      
+      - id: documentation
+        name: Documentation
+        checks:
+          - public_apis_documented: true
+          - complex_algorithms_explained: true
+          - config_documented: true
+          - breaking_changes_documented: true
+      
+      - id: technical_debt
+        name: No technical debt
+        checks:
+          - todo_comments_referenced: true
+          - no_deprecated_apis: true
+          - no_known_bugs: true
+          - dead_code_removed: true
+    
+    scoring:
+      pass: "Code is maintainable"
+      warn: "Minor readability improvements"
+      fail: "Poor readability, high complexity"
+    
+    blocking: false
+
+  - dimension: 7
+    name: Performance
+    duration_minutes: 5
+    automated: true
+    blocking: false
+    criteria:
+      - id: algorithmic_efficiency
+        name: Algorithmic efficiency
+        checks:
+          - appropriate_data_structures: true
+          - acceptable_complexity: true
+          - no_quadratic_algorithms: true
+      
+      - id: database_queries
+        name: Database queries
+        checks:
+          - no_n_plus_one: true
+          - indexes_used: true
+          - explain_analyze_reviewed: true
+          - pagination_used: true
+      
+      - id: resource_usage
+        name: Memory and resource usage
+        checks:
+          - no_memory_leaks: true
+          - proper_disposal: true
+          - connection_pools_configured: true
+          - timeouts_set: true
+      
+      - id: benchmarks
+        name: Benchmarks
+        checks:
+          - regression_test_added: true
+          - baseline_metrics_recorded: true
+          - impact_estimated: true
+    
+    scoring:
+      pass: "No performance concerns"
+      warn: "Minor optimization opportunities"
+      fail: "Performance regression likely"
+    
+    blocking: false
+    automation_tool: "k6/jmeter/datadog"
+
+  - dimension: 8
+    name: Breaking Changes
+    duration_minutes: 5
+    automated: false
+    blocking: false
+    criteria:
+      - id: api_changes
+        name: API changes
+        checks:
+          - endpoint_changes_documented: true
+          - migration_guide_provided: true
+          - deprecation_timeline: true
+          - backwards_compatible: true
+      
+      - id: database_schema
+        name: Database schema changes
+        checks:
+          - column_removal_migration: true
+          - type_changes_compatibility: true
+          - new_constraints_validation: true
+      
+      - id: dependency_changes
+        name: Dependency changes
+        checks:
+          - major_version_changelog_reviewed: true
+          - license_compatibility: true
+          - security_audit_done: true
+      
+      - id: config_changes
+        name: Configuration changes
+        checks:
+          - new_env_vars_documented: true
+          - migration_path_provided: true
+    
+    scoring:
+      pass: "No breaking changes or well documented"
+      warn: "Minor breaking changes, migration path provided"
+      fail: "Major breaking changes, no migration path"
+    
+    blocking: false
+
+review_summary:
+  total_dimensions: 8
+  blocking_dimensions: 4
+  optional_dimensions: 4
+  fields:
+    - name: context_and_scope
+      blocking: true
+    - name: design_and_architecture
+      blocking: true
+    - name: correctness
+      blocking: true
+    - name: security
+      blocking: true
+    - name: tests
+      blocking: true
+    - name: maintainability
+      blocking: false
+    - name: performance
+      blocking: false
+    - name: breaking_changes
+      blocking: false
+
+decision_options:
+  - option: APPROVE
+    condition: "All blocking dimensions pass"
+    icon: "✅"
+  
+  - option: REQUEST_CHANGES
+    condition: "One or more blocking dimensions fail"
+    icon: "❌"
+  
+  - option: COMMENT
+    condition: "Informational only, no changes required"
+    icon: "💬"
+
+reviewer_guidance:
+  - be_constructive: true
+  - suggest_improvements: true
+  - reference_best_practices: true
+  - prioritize_issues: true
+  - ask_questions_when_unclear: true
+  - approve_good_code: true
+  - respect_author_expertise: true
+  - review_promptly_hours: 4
+  - pay_special_attention_to_tests: true
+
+metadata:
+  created_date: 2026-07-23
+  last_updated: 2026-07-23
+  estimated_automation_coverage: 50%
+  manual_review_required: true
+  peer_review_recommended: false
+  required_for_merge: true
+  sla_minutes: 240
