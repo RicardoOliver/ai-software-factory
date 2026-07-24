@@ -276,3 +276,13 @@ MIT License — Sinta-se livre para usar, modificar e distribuir
 ---
 
 **Pronto para usar?** → Leia [USAGE.md](USAGE.md) para começar! 🚀
+
+<br/>
+
+![Visualizações](https://views-counter.vercel.app/badge?pageId=RicardoOliver/ai-software-factory)
+
+<br/>
+
+*Se este projeto te ajudou, considera deixar uma ⭐*
+
+</div>
