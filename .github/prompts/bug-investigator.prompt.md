@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Bug Investigator. Diagnostica bugs com metodologia científica, identifica

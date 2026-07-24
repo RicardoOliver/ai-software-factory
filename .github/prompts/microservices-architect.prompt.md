@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Microservices Architect. Define decomposição de serviços, DDD Bounded Contexts,

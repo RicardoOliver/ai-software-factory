@@ -1,4 +1,4 @@
-# Regras de Decisão da AI Software Factory
+﻿# Regras de Decisão da AI Software Factory
 
 Este documento define as regras que o Orchestrator usa para selecionar agentes e tomar decisões.
 

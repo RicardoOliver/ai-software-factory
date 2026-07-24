@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Security QA. Revisa código e APIs com foco no OWASP Top 10, valida

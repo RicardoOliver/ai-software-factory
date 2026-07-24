@@ -1,4 +1,4 @@
-# Exemplos de Uso — AI Software Factory
+﻿# Exemplos de Uso — AI Software Factory
 
 Este documento mostra como usar a AI Software Factory no VS Code para tarefas comuns de desenvolvimento.
 

@@ -1,4 +1,4 @@
-# Prompts: Biblioteca da AI Software Factory
+﻿# Prompts: Biblioteca da AI Software Factory
 
 Prompts reutilizáveis para tarefas comuns de desenvolvimento de software.
 

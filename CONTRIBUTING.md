@@ -1,4 +1,4 @@
-# 🤝 Guia de Contribuição
+﻿# 🤝 Guia de Contribuição
 
 Obrigado por querer contribuir ao **AI Software Factory**! Este guia explica como adicionar novos agents, checklists e melhorias.
 
@@ -14,7 +14,7 @@ Obrigado por querer contribuir ao **AI Software Factory**! Este guia explica com
 
 ---
 
-## 🚀 Como Criar um Novo Agent
+## ðŸš€ Como Criar um Novo Agent
 
 ### Passo 1: Planejar
 
@@ -30,7 +30,7 @@ Defina claramente:
 Crie `agents/seu-agent.md` seguindo este template:
 
 ```markdown
-# 🎯 Nome do Agent
+# ðŸŽ¯ Nome do Agent
 
 ## Identidade
 Quem é este agent? Qual expertise ele representa?
@@ -293,7 +293,7 @@ git push origin add/novo-checklist
 
 ---
 
-## 🐛 Reportar Bugs
+## ðŸ› Reportar Bugs
 
 Encontrou um problema? Abra uma **Issue** com:
 
@@ -323,7 +323,7 @@ O que realmente acontece.
 
 ---
 
-## 🌟 Melhorias em Agents/Checklists Existentes
+## ðŸŒŸ Melhorias em Agents/Checklists Existentes
 
 Para melhorar um agent ou checklist:
 
@@ -405,7 +405,7 @@ Descrição completa explicando:
 
 ---
 
-## 🔄 Processo de Review
+## ðŸ”„ Processo de Review
 
 1. **Submeta PR** com descrição clara
 2. **CI checks** devem passar
@@ -415,7 +415,7 @@ Descrição completa explicando:
 
 ---
 
-## 📞 Perguntas?
+## ðŸ“ž Perguntas?
 
 - **Documentação**: Veja [USAGE.md](../USAGE.md)
 - **Issues**: Abra uma issue

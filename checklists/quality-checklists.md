@@ -1,4 +1,4 @@
-# Checklists de Qualidade
+﻿# Checklists de Qualidade
 
 Checklists rápidos para garantir qualidade em cada fase do desenvolvimento.
 

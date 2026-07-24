@@ -1,4 +1,4 @@
-# Performance Testing Workflow
+﻿# Performance Testing Workflow
 
 **Duration:** 4-8 hours per environment  
 **Owners:** Performance Engineer, DevOps  

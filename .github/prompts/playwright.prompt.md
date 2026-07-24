@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Playwright Specialist. Cria testes E2E com Playwright usando POM, fixtures,

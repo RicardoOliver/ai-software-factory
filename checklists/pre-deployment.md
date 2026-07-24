@@ -1,4 +1,4 @@
-# Pre-Deployment Checklist
+﻿# Pre-Deployment Checklist
 
 **Duration:** 30-45 minutes  
 **Owners:** DevOps Engineer, Release Manager  
@@ -170,7 +170,7 @@
 
 ---
 
-## 🚀 Go/No-Go Decision
+## ðŸš€ Go/No-Go Decision
 
 ### ✅ PROCEED TO DEPLOYMENT IF:
 - [x] All code quality gates passed
@@ -181,7 +181,7 @@
 - [x] Runbooks & documentation complete
 - [x] All approvals obtained (if required)
 
-### 🛑 DO NOT DEPLOY IF:
+### ðŸ›‘ DO NOT DEPLOY IF:
 - ❌ Any critical/high security findings open
 - ❌ Performance baseline regression > 20%
 - ❌ Test coverage < 70% (if threshold set)
@@ -191,7 +191,7 @@
 
 ---
 
-## 📋 Deployment Execution
+## ðŸ“‹ Deployment Execution
 
 Once approved:
 
@@ -242,7 +242,7 @@ Once approved:
 
 ---
 
-## 🔄 If Issues Found
+## ðŸ”„ If Issues Found
 
 ### Minor Issue (< 1% error rate)
 1. Enable detailed logging

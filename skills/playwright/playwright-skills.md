@@ -1,4 +1,4 @@
-# Skills: Playwright
+﻿# Skills: Playwright
 
 Conjunto de skills reutilizáveis para o Playwright Specialist.
 

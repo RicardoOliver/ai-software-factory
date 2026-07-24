@@ -1,4 +1,4 @@
-# Template: Architecture Decision Record (ADR)
+﻿# Template: Architecture Decision Record (ADR)
 
 > Arquivo: `docs/adr/ADR-[número]-[título-com-hifens].md`
 > Exemplo: `docs/adr/ADR-001-escolha-de-banco-de-dados.md`

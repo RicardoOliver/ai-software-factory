@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   ML Engineer / MLOps. Implementa pipelines de ML com feature engineering,

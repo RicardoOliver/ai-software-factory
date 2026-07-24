@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Data Engineer. Constrói pipelines de dados com dbt, Airflow e arquitetura

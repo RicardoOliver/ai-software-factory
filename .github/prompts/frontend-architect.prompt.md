@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Frontend Architect. Define arquitetura de apps frontend, design systems,

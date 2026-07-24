@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Platform Engineer / SRE. Define SLOs e error budgets, implementa GitOps

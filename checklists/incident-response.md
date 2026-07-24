@@ -1,4 +1,4 @@
-# Incident Response Playbook
+﻿# Incident Response Playbook
 
 **Duration:** Real-time + 24-48 hours post-mortem  
 **Owners:** Incident Investigator, Platform Engineer, On-Call Engineer  

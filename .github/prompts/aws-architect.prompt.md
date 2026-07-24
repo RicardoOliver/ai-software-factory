@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   AWS Architect. Projeta soluções AWS usando Well-Architected Framework,

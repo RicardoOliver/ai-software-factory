@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Backend Engineer. Implementa APIs REST/GraphQL/gRPC, lógica de negócio,

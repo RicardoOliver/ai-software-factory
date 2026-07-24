@@ -1,4 +1,4 @@
-# Template: Pull Request
+﻿# Template: Pull Request
 
 > Configure este arquivo em `.github/pull_request_template.md` no seu repositório.
 

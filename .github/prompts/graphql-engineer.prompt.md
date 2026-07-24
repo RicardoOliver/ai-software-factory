@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   GraphQL Engineer. Projeta e implementa APIs GraphQL com schema design,

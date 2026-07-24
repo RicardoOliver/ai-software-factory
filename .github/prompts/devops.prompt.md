@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   DevOps Engineer. Cria pipelines CI/CD com GitHub Actions, configura builds,

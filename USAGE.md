@@ -1,4 +1,4 @@
-# 📖 Como Usar — AI Software Factory
+﻿# 📖 Como Usar — AI Software Factory
 
 Guia completo para utilizar os 50 agents especializados, 6 checklists de produção e integração com VS Code Copilot Chat.
 
@@ -121,7 +121,7 @@ cp -r ai-software-factory/checklists novo-projeto/
 
 ---
 
-## 🎯 Casos de Uso Principais
+## ðŸŽ¯ Casos de Uso Principais
 
 ### Caso 1: Implementar uma Nova Feature (Workflow Completo)
 
@@ -295,7 +295,7 @@ Abrir arquivo [checklists/pre-deployment.md](checklists/pre-deployment.md):
 
 ---
 
-## 📚 Usando os 50 Agents
+## ðŸ“š Usando os 50 Agents
 
 ### Por Domínio
 
@@ -349,7 +349,7 @@ Abrir arquivo [checklists/pre-deployment.md](checklists/pre-deployment.md):
 
 ---
 
-## 📋 Usando os 6 Checklists
+## ðŸ“‹ Usando os 6 Checklists
 
 ### Pre-Deployment Checklist
 **Quando:** 30-45 min antes de deploy  
@@ -458,7 +458,7 @@ Abrir arquivo [checklists/pre-deployment.md](checklists/pre-deployment.md):
 
 ---
 
-## 🔄 Workflows Completos (Multi-Agent)
+## ðŸ”„ Workflows Completos (Multi-Agent)
 
 ### Workflow 1: Feature Completa (Do Zero até Produção)
 
@@ -595,7 +595,7 @@ git tag -a checklist-v1.1 -m "Checklist updates"
 
 ---
 
-## 🔍 Encontrar o Agent Certo
+## ðŸ” Encontrar o Agent Certo
 
 **Usar quando você precisa de...**
 
@@ -613,7 +613,7 @@ git tag -a checklist-v1.1 -m "Checklist updates"
 
 ---
 
-## 📁 Estrutura de Arquivos
+## ðŸ“ Estrutura de Arquivos
 
 ```
 ai-software-factory/
@@ -672,7 +672,7 @@ R: Compartilhe o workspace no Git, configure um `.code-workspace` compartilhado
 
 ---
 
-## 🎓 Recursos Adicionais
+## ðŸŽ“ Recursos Adicionais
 
 - [Guia dos 50 Agents](.github/copilot-instructions.md)
 - [Exemplos de Uso Completos](examples/usage-examples.md)
@@ -681,7 +681,7 @@ R: Compartilhe o workspace no Git, configure um `.code-workspace` compartilhado
 
 ---
 
-## 📞 Suporte
+## ðŸ“ž Suporte
 
 **Problema com um agent?**
 1. Verifique se o agent existe em `agents/`

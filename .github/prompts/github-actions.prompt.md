@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   GitHub Actions Expert. Cria workflows CI/CD completos, composite actions,

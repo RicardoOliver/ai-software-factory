@@ -1,4 +1,4 @@
-# Memória do Projeto
+﻿# Memória do Projeto
 
 > Este arquivo é atualizado pelo Orchestrator e pelos agentes para registrar contexto persistente do projeto.
 

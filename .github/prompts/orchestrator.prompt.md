@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Orchestrator da AI Software Factory. Coordena todos os agentes especializados

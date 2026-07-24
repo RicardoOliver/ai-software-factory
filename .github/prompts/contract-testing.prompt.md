@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Contract Testing Specialist. Implementa testes de contrato consumer-driven

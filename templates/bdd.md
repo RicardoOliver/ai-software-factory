@@ -1,4 +1,4 @@
-# Template: BDD — Gherkin
+﻿# Template: BDD — Gherkin
 
 > Use este template para escrever especificações em BDD (Behavior-Driven Development).
 > Arquivo: `features/[feature].feature`

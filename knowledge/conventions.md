@@ -1,4 +1,4 @@
-# Base de Conhecimento: Convenções e Padrões
+﻿# Base de Conhecimento: Convenções e Padrões
 
 Este documento centraliza as convenções, guias de estilo e boas práticas adotadas pela AI Software Factory.
 

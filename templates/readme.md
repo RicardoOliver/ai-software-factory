@@ -1,4 +1,4 @@
-# Template: README de Serviço
+﻿# Template: README de Serviço
 
 > Substitua os valores entre `[colchetes]` pelas informações do seu serviço.
 

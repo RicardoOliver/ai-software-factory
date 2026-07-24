@@ -1,4 +1,4 @@
-# Code Review Checklist — 8-Dimension Framework
+﻿# Code Review Checklist — 8-Dimension Framework
 
 **Duration:** 15-30 minutes per PR  
 **Owners:** PR Reviewer, Code Reviewer  

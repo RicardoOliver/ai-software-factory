@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Code Reviewer. Analisa código quanto a SOLID, DRY, KISS, segurança,

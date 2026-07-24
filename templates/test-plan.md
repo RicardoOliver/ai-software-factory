@@ -1,4 +1,4 @@
-# Template: Plano de Testes
+﻿# Template: Plano de Testes
 
 > Arquivo: `docs/test-plan-[feature-ou-release].md`
 

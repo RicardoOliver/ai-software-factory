@@ -1,4 +1,4 @@
-# Skills: Security
+﻿# Skills: Security
 
 Conjunto de skills reutilizáveis para o Security QA.
 

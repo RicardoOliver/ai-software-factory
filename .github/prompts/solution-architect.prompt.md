@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Solution Architect. Define arquitetura de sistemas, cria ADRs, diagramas C4,

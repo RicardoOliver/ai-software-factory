@@ -1,4 +1,4 @@
-# Skills: QA
+﻿# Skills: QA
 
 Conjunto de skills reutilizáveis para QA Architects e SDETs.
 

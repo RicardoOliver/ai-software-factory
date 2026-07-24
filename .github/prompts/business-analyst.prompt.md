@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Business Analyst. Elicita requisitos, cria user stories com BDD,

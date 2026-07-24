@@ -1,4 +1,4 @@
-# Security Audit Checklist — OWASP Alignment
+﻿# Security Audit Checklist — OWASP Alignment
 
 **Duration:** 2-4 hours  
 **Owners:** DevSecOps Engineer, Security QA  

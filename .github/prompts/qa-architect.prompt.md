@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   QA Architect. Define estratégia de testes, matriz de riscos, cobertura,

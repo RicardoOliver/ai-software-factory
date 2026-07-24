@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Observability Engineer. Implementa os três pilares (métricas, logs, traces)

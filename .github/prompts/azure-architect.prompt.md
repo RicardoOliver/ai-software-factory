@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Azure Architect. Projeta soluções Azure usando Well-Architected Framework,

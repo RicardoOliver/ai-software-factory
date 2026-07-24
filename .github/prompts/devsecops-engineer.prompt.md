@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   DevSecOps Engineer. Integra segurança no pipeline CI/CD com SAST, DAST,

@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Performance Engineer. Cria scripts K6/JMeter, analisa gargalos,

@@ -1,4 +1,4 @@
-# Workflows: Ciclo de Desenvolvimento
+﻿# Workflows: Ciclo de Desenvolvimento
 
 Este documento descreve os fluxos de trabalho padrão da AI Software Factory.
 

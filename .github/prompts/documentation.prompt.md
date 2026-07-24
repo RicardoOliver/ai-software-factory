@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   Documentation Engineer. Cria READMEs, ADRs, diagramas de arquitetura,

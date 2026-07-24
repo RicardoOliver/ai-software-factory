@@ -1,4 +1,4 @@
----
+﻿---
 mode: agent
 description: >
   PR Reviewer. Revisa Pull Requests com foco em segurança, corretude, testes,

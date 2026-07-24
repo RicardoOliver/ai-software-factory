@@ -1,4 +1,4 @@
----
+﻿---
 name: release
 version: 1.0
 description: Release checklist for SemVer versioning and production deployment
