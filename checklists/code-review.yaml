@@ -397,7 +397,7 @@ decision_options:
   
   - option: COMMENT
     condition: "Informational only, no changes required"
-    icon: "ðŸ’¬"
+    icon: "💬"
 
 reviewer_guidance:
   - be_constructive: true

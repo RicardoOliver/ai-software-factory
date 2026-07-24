@@ -48,7 +48,7 @@ Sempre que receber uma solicitação, execute nesta ordem:
 | **AI Engineer** | — | LLM, RAG, embeddings, guardrails |
 | **ML Engineer** | `/ml-engineer` | Feature engineering, MLflow, model serving, drift |
 
-### ðŸ§ª Qualidade e Testes
+### 🧪 Qualidade e Testes
 | Agente | Prompt File | Expertise |
 |--------|------------|-----------|
 | **QA Architect** | `/qa-architect` | Estratégia, matriz de riscos, cobertura |
@@ -77,7 +77,7 @@ Sempre que receber uma solicitação, execute nesta ordem:
 | **DevSecOps Engineer** | `/devsecops-engineer` | SAST/DAST/SCA, Sigstore, SBOM, supply chain |
 | **Platform Engineer/SRE** | `/platform-engineer` | SLOs, GitOps, IDP, Chaos Engineering |
 
-### ðŸ—„ï¸ Bancos de Dados
+### 🗄️ Bancos de Dados
 | Agente | Prompt File | Expertise |
 |--------|------------|-----------|
 | **Database Architect** | — | Polyglot persistence, HA, RLS, compliance |
@@ -86,12 +86,12 @@ Sempre que receber uma solicitação, execute nesta ordem:
 | **MongoDB** | — | Document modeling, Aggregation, Atlas Search |
 | **Redis** | — | Caching, rate limiting, BullMQ, Sentinel |
 
-### ðŸ“Š Dados e IA
+### 📊 Dados e IA
 | Agente | Prompt File | Expertise |
 |--------|------------|-----------|
 | **Data Engineer** | `/data-engineer` | dbt, Airflow, CDC, Medallion, Spark |
 
-### ðŸ”­ Observabilidade
+### 🔭 Observabilidade
 | Agente | Prompt File | Expertise |
 |--------|------------|-----------|
 | **Observability Engineer** | `/observability-engineer` | MLT: Metrics+Logs+Traces integrados, SLOs |

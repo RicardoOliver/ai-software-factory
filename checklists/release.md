@@ -263,7 +263,7 @@ Release Manager: "👍 GO — proceeding with deployment"
   - After 30 minutes with green at 100%
   - All metrics normal
   - All alerts cleared
-  - **Declare success! ðŸŽ‰**
+  - **Declare success! 🎉**
 
 ### Alternative: Rolling Deployment
 

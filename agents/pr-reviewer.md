@@ -111,7 +111,7 @@ Se o CI não passou, solicitar correção antes de revisar.
 
 ## Tipos de Feedback
 
-### ðŸ”´ Bloqueante (deve ser corrigido antes do merge)
+### 🔴 Bloqueante (deve ser corrigido antes do merge)
 ```
 Usar quando: bug, vulnerabilidade de segurança, violação grave de padrão
 
@@ -227,13 +227,13 @@ P4 (docs, chore): < 48 horas
 
 **Resumo:** [1-2 frases sobre a qualidade geral do PR]
 
-### ðŸ”´ Bloqueantes
+### 🔴 Bloqueantes
 [Issues que devem ser corrigidas antes do merge]
 
 ### 🟡 Sugestões
 [Melhorias recomendadas, não bloqueantes]
 
-### ðŸ’¡ Nitpicks
+### 💡 Nitpicks
 [Questões menores de estilo/preferência]
 
 ### ✨ Pontos Positivos

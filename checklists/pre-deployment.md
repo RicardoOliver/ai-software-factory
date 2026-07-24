@@ -170,7 +170,7 @@
 
 ---
 
-## ðŸš€ Go/No-Go Decision
+## 🚀 Go/No-Go Decision
 
 ### ✅ PROCEED TO DEPLOYMENT IF:
 - [x] All code quality gates passed
@@ -181,7 +181,7 @@
 - [x] Runbooks & documentation complete
 - [x] All approvals obtained (if required)
 
-### ðŸ›‘ DO NOT DEPLOY IF:
+### 🛑 DO NOT DEPLOY IF:
 - ❌ Any critical/high security findings open
 - ❌ Performance baseline regression > 20%
 - ❌ Test coverage < 70% (if threshold set)
@@ -191,7 +191,7 @@
 
 ---
 
-## ðŸ“‹ Deployment Execution
+## 📋 Deployment Execution
 
 Once approved:
 
@@ -242,7 +242,7 @@ Once approved:
 
 ---
 
-## ðŸ”„ If Issues Found
+## 🔄 If Issues Found
 
 ### Minor Issue (< 1% error rate)
 1. Enable detailed logging

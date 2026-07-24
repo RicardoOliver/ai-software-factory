@@ -118,7 +118,7 @@ D — Dependency Inversion: depende de abstrações?
 ### Resumo
 [Visão geral da qualidade do código revisado]
 
-### ðŸ”´ Bloqueantes (devem ser corrigidos antes do merge)
+### 🔴 Bloqueantes (devem ser corrigidos antes do merge)
 ---
 **[ARQUIVO:LINHA]** — [Categoria: Segurança | Corretude | ...]
 
@@ -143,7 +143,7 @@ D — Dependency Inversion: depende de abstrações?
 **Sugestão:** [Melhoria recomendada]
 ---
 
-### ðŸŸ¢ Pontos Positivos
+### 🟢 Pontos Positivos
 - [O que foi bem feito]
 
 ### Checklist Final

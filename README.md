@@ -1,4 +1,4 @@
-﻿# ðŸ¤– AI Software Factory
+﻿# 🤖 AI Software Factory
 
 > **50 AI Agents + 6 Production Checklists + VS Code Copilot Chat Integration**
 
@@ -15,9 +15,9 @@ Uma **fábrica completa de inteligência artificial** com 50 agents especializad
 | 🏗️ **Estratégia** | Solution Architect, Tech Lead, Product Manager | Design de sistemas, decisões tecnológicas |
 | 💻 **Desenvolvimento** | Backend, Frontend, Full-Stack, Mobile, Desktop | Implementação em múltiplas stacks |
 | ✅ **Qualidade** | QA Architect, Bug Investigator, Security Auditor | Testes, bugs, segurança |
-| ðŸ”§ **Infraestrutura** | DevOps, Kubernetes, Cloud Architect, Monitoring | Deploy, escalabilidade, observabilidade |
-| ðŸ“Š **Dados** | Data Engineer, Analytics Engineer, ML Engineer | ETL, pipelines, machine learning |
-| ðŸŽ¯ **IA/Observabilidade** | MLOps, Logging Engineer, Incident Investigator | MLOps, logs estruturados, RCA |
+| 🔧 **Infraestrutura** | DevOps, Kubernetes, Cloud Architect, Monitoring | Deploy, escalabilidade, observabilidade |
+| 📊 **Dados** | Data Engineer, Analytics Engineer, ML Engineer | ETL, pipelines, machine learning |
+| 🎯 **IA/Observabilidade** | MLOps, Logging Engineer, Incident Investigator | MLOps, logs estruturados, RCA |
 | 🎓 **Especialistas** | API Architect, GraphQL, Microservices, Databases | Domínios técnicos específicos |
 
 ---
@@ -55,7 +55,7 @@ Pronto! ✅ Use `/` + nome do agent para acessar 50 especialistas
 
 ---
 
-## ðŸ“ Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
 ```
 ai-software-factory/
@@ -90,7 +90,7 @@ ai-software-factory/
 
 ---
 
-## ðŸŽ¯ Como Usar
+## 🎯 Como Usar
 
 ### Opção 1: Workspace Compartilhado ⭐ RECOMENDADO
 
@@ -126,7 +126,7 @@ code seu-projeto-api/
 
 ---
 
-## ðŸŒŸ Principais Agents
+## 🌟 Principais Agents
 
 ### Estratégia & Arquitetura
 - 🏗️ **Solution Architect** — C4 models, system design
@@ -179,7 +179,7 @@ Cada checklist vem em **2 formatos**:
 
 ---
 
-## ðŸ’¡ Casos de Uso
+## 💡 Casos de Uso
 
 ### Implementar Nova Feature (2-3 dias)
 ```
@@ -239,7 +239,7 @@ Cada checklist vem em **2 formatos**:
 
 ---
 
-## ðŸ¤ Como Contribuir
+## 🤝 Como Contribuir
 
 Quer adicionar novo agent ou checklist? Veja [CONTRIBUTING.md](CONTRIBUTING.md)
 
@@ -265,7 +265,7 @@ MIT License — Sinta-se livre para usar, modificar e distribuir
 
 ---
 
-## ðŸŒŸ Roadmap
+## 🌟 Roadmap
 
 - [ ] Mais 10 agents (total 60)
 - [ ] Integração GitHub Copilot X

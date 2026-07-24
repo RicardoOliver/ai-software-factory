@@ -4,7 +4,7 @@ Comprehensive checklists and playbooks for key engineering processes. Use in con
 
 ---
 
-## ðŸ“‹ Available Checklists
+## 📋 Available Checklists
 
 ### 1. [Pre-Deployment Checklist](./pre-deployment.md) | [YAML](./pre-deployment.yaml)
 **Purpose:** Ensure production-readiness before release  
@@ -98,7 +98,7 @@ Comprehensive checklists and playbooks for key engineering processes. Use in con
 
 ---
 
-## ðŸŽ¯ Integration with Agents
+## 🎯 Integration with Agents
 
 ### Cross-Agent Workflows
 
@@ -128,7 +128,7 @@ Comprehensive checklists and playbooks for key engineering processes. Use in con
 
 ---
 
-## ðŸ“– How to Use
+## 📖 How to Use
 
 ### For Humans
 1. Open the Markdown checklist (`.md` file)
@@ -154,7 +154,7 @@ Comprehensive checklists and playbooks for key engineering processes. Use in con
 
 ---
 
-## ðŸ”— Files Overview
+## 🔗 Files Overview
 
 | File | Format | Agent(s) | Lines |
 |------|--------|----------|-------|
@@ -207,7 +207,7 @@ LOW: Minor issue, best practice deviation (nice-to-have)
 
 ---
 
-## ðŸ“Š Metrics & Success Criteria
+## 📊 Metrics & Success Criteria
 
 By using these checklists:
 - **Incident Response Time:** ↓ 50% (from detection to mitigation)
@@ -218,7 +218,7 @@ By using these checklists:
 
 ---
 
-## ðŸ”„ Maintenance
+## 🔄 Maintenance
 
 These checklists are living documents. Update them when:
 - New security vulnerabilities emerge

@@ -206,7 +206,7 @@ curl https://api.meuapp.com/v1/produtos \
 
 ---
 
-## ðŸš€ Novidades
+## 🚀 Novidades
 
 ### Exportação de relatórios em PDF
 Agora você pode exportar qualquer relatório diretamente para PDF
@@ -239,7 +239,7 @@ faixa de preço e disponibilidade em estoque simultaneamente.
 
 ---
 
-## ðŸ”§ Para Desenvolvedores
+## 🔧 Para Desenvolvedores
 
 **API:** Novo endpoint `GET /api/v1/relatorios/exportar?formato=pdf`
 **Depreciado:** `GET /api/v1/relatorios/pdf` — remover na v3.0
