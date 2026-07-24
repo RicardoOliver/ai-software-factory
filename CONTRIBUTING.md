@@ -417,7 +417,7 @@ Descrição completa explicando:
 
 ## 📞 Perguntas?
 
-- **Documentação**: Veja [USAGE.md](../USAGE.md)
+- **Documentação**: Veja [USAGE.md](USAGE.md)
 - **Issues**: Abra uma issue
 - **Discussões**: Use GitHub Discussions
 
