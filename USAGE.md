@@ -1,6 +1,6 @@
 ﻿# 📖 Como Usar — AI Software Factory
 
-Guia completo para utilizar os 50 agents especializados, 6 checklists de produção e integração com VS Code Copilot Chat.
+Guia completo para utilizar os **53 agents especializados** (incluindo sistemas multi-agente com LangGraph, CrewAI e AutoGen), 6 checklists de produção e integração com VS Code Copilot Chat.
 
 ---
 
@@ -36,7 +36,7 @@ Use o ai-software-factory como workspace raiz e adicione seus projetos como subp
 
 ```
 ai-software-factory/
-├─ agents/ (50 agents — acessíveis globalmente)
+├─ agents/ (53 agents — acessíveis globalmente)
 ├─ checklists/ (6 checklists — compartilhados)
 ├─ USAGE.md
 ├─ projeto-api/ ← Seu projeto 1
@@ -295,7 +295,63 @@ Abrir arquivo [checklists/pre-deployment.md](checklists/pre-deployment.md):
 
 ---
 
-## 📚 Usando os 50 Agents
+### Caso 4: Code Review Autônomo com IA (NOVO)
+
+**Objetivo:** Configurar pipeline de code review sem intervenção humana para PRs
+
+```
+/ai-agent-orchestrator
+
+"Configure um workflow LangGraph de code review autônomo:
+- Analisar qualidade do código (SOLID, DRY, complexidade)
+- Security scan automático (OWASP Top 10)
+- Aprovação automática se score > 80
+- Iteração até aprovação (máx 3 rodadas)
+- Notificação no Slack com relatório final"
+```
+
+**Resultado esperado:** Código Python/TypeScript com grafo LangGraph, DataLoader, guardrails e observabilidade LangSmith.
+
+---
+
+### Caso 5: Security-First Feature (NOVO)
+
+**Objetivo:** Desenvolver feature com segurança integrada desde o início
+
+**Passo 1: Threat Modeling com IA**
+```
+/devsecops-advanced
+
+"Gerar threat model STRIDE para:
+- Componente: API de transferência bancária
+- Fluxo: Cliente → HTTPS → API Gateway → Transfer Service → DB
+- Usar GPT-4o para identificar ameaças automaticamente"
+```
+
+**Passo 2: Design com Security by Design**
+```
+/solution-architect
+
+"Projetar arquitetura considerando:
+- Threat model do passo anterior
+- Zero Trust networking
+- Secrets dinâmicos com Vault"
+```
+
+**Passo 3: Pipeline com SBOM e Assinatura**
+```
+/devsecops-advanced
+
+"Configurar pipeline com:
+- SAST: Semgrep + CodeQL
+- SCA: Trivy + OSV Scanner
+- SBOM gerado com Syft
+- Assinatura keyless com Sigstore/Cosign"
+```
+
+---
+
+## 📚 Usando os 53 Agents
 
 ### Por Domínio
 
@@ -617,7 +673,10 @@ git tag -a checklist-v1.1 -m "Checklist updates"
 
 ```
 ai-software-factory/
-├─ agents/                    # 50 agents especializados
+├─ agents/                    # 53 agents especializados
+│  ├─ ai-agent-orchestrator.md  ← LangGraph, CrewAI, AutoGen
+│  ├─ devsecops-advanced.md     ← SBOM, Sigstore, Threat Modeling
+│  └─ platform-engineer-advanced.md ← SLOs, Chaos, IDP, FinOps
 │  ├─ backend.md
 │  ├─ frontend.md
 │  ├─ devops.md
@@ -661,8 +720,8 @@ R: Sim! Comece com `/orchestrator` ou chame agents sequencialmente
 **P: Como atualizar os checklists para minha empresa?**  
 R: Edite os arquivos em `checklists/` e commite as mudanças
 
-**P: Onde estão os 50 agents?**  
-R: Em `agents/` (50 arquivos .md) e em `.github/prompts/` (25 prompt files)
+**P: Onde estão os 53 agents?**  
+R: Em `agents/` (53 arquivos .md) e em `.github/prompts/` (51 prompt files). Veja o catálogo completo em [DASHBOARD.md](DASHBOARD.md).
 
 **P: Posso exportar um checklist para usar offline?**  
 R: Sim, os checklists estão em formato Markdown puro - abra em qualquer editor
@@ -674,7 +733,8 @@ R: Compartilhe o workspace no Git, configure um `.code-workspace` compartilhado
 
 ## 🎓 Recursos Adicionais
 
-- [Guia dos 50 Agents](.github/copilot-instructions.md)
+- [Catálogo Completo dos 53 Agents](DASHBOARD.md)
+- [Guia do Orchestrator](.github/copilot-instructions.md)
 - [Exemplos de Uso Completos](examples/usage-examples.md)
 - [Guia dos Checklists](checklists/README.md)
 - [CHANGELOG com atualizações](CHANGELOG.md)

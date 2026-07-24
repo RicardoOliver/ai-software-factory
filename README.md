@@ -1,8 +1,8 @@
 ﻿# 🤖 AI Software Factory
 
-> **50 AI Agents + 6 Production Checklists + VS Code Copilot Chat Integration**
+> **53 AI Agents + 6 Production Checklists + VS Code Copilot Chat Integration**
 
-Uma **fábrica completa de inteligência artificial** com 50 agents especializados para cobrir todo o ciclo de vida do desenvolvimento de software — do design até produção — com integração nativa ao VS Code Copilot Chat.
+Uma **fábrica completa de inteligência artificial** com **53 agents especializados** — incluindo agents avançados de IA multi-agente (LangGraph, CrewAI, AutoGen), DevSecOps com SBOM/Sigstore e Platform Engineering com SLO Engineering e Chaos Engineering — cobrindo todo o ciclo de vida do software com integração nativa ao VS Code Copilot Chat.
 
 ---
 
@@ -19,6 +19,7 @@ Uma **fábrica completa de inteligência artificial** com 50 agents especializad
 | 📊 **Dados** | Data Engineer, Analytics Engineer, ML Engineer | ETL, pipelines, machine learning |
 | 🎯 **IA/Observabilidade** | MLOps, Logging Engineer, Incident Investigator | MLOps, logs estruturados, RCA |
 | 🎓 **Especialistas** | API Architect, GraphQL, Microservices, Databases | Domínios técnicos específicos |
+| 🤖 **IA Avançada** | AI Agent Orchestrator | LangGraph, CrewAI, AutoGen, RAG, Guardrails |
 
 ---
 
@@ -51,7 +52,7 @@ code ai-software-factory.code-workspace
 "Design uma estratégia de testes para API GraphQL"
 ```
 
-Pronto! ✅ Use `/` + nome do agent para acessar 50 especialistas
+Pronto! ✅ Use `/` + nome do agent para acessar **53 especialistas**
 
 ---
 
@@ -59,15 +60,12 @@ Pronto! ✅ Use `/` + nome do agent para acessar 50 especialistas
 
 ```
 ai-software-factory/
-├── agents/                      # 50 agents especializados (~14,728 linhas)
+├── agents/                      # 53 agents especializados
 │   ├── backend.md
-│   ├── frontend.md
-│   ├── devops.md
-│   ├── bug-investigator.md
-│   ├── incident-investigator.md
-│   ├── kubernetes.md
-│   ├── data-engineer.md
-│   └── ... (50 total)
+│   ├── ai-agent-orchestrator.md  ← NOVO: LangGraph, CrewAI, AutoGen
+│   ├── devsecops-advanced.md     ← NOVO: SBOM, Sigstore, Threat Modeling IA
+│   ├── platform-engineer-advanced.md ← NOVO: SLOs, Chaos, IDP, FinOps
+│   └── ... (53 total)
 │
 ├── checklists/                  # 6 production checklists (dual format)
 │   ├── pre-deployment.md/.yaml
@@ -77,12 +75,13 @@ ai-software-factory/
 │   ├── performance-testing.md/.yaml
 │   └── release-checklist.md/.yaml
 │
-├── .github/prompts/             # 25 VS Code Copilot prompt files
+├── .github/prompts/             # 51 VS Code Copilot prompt files
 │   ├── backend.prompt.md
-│   ├── devops.prompt.md
-│   └── ... (25 total)
+│   ├── ai-agent-orchestrator.prompt.md
+│   └── ... (51 total)
 │
-├── USAGE.md                     # Guia completo (800+ linhas)
+├── DASHBOARD.md                 # Catálogo completo + métricas + scorecard
+├── USAGE.md                     # Guia completo
 ├── CONTRIBUTING.md             # Como contribuir
 ├── .gitignore                   # GitHub safety
 └── ai-software-factory.code-workspace
@@ -160,6 +159,15 @@ code seu-projeto-api/
 - 🔍 **Observability Engineer** — Tracing, metrics
 - 🚨 **Incident Investigator** — 5 Porquês RCA
 
+### 🤖 IA Avançada — Multi-Agent Systems (NOVO)
+- 🧠 **AI Agent Orchestrator** — LangGraph, CrewAI, AutoGen, memória persistente (Mem0 + Qdrant), RAG hierárquico, NeMo Guardrails
+
+### 🔐 DevSecOps Avançado (NOVO)
+- 🛡️ **DevSecOps Advanced** — SBOM com Syft, assinatura Sigstore/Cosign, Threat Modeling STRIDE+IA, OPA/Rego policies, auto-remediação de CVEs
+
+### 🚀 Platform Engineering Avançado (NOVO)
+- 🏗️ **Platform Engineer Advanced** — IDP com Backstage, SLO Engineering com Error Budgets, Chaos Engineering, FinOps com Infracost, GitOps multi-cluster
+
 ---
 
 ## ✅ Checklists de Produção
@@ -212,18 +220,38 @@ Cada checklist vem em **2 formatos**:
 /devops              → Blue-green deployment
 ```
 
+### Code Review Autônomo com IA (NOVO)
+```
+/ai-agent-orchestrator
+"Configure um workflow LangGraph de code review autônomo
+ com security scan integrado e aprovação automática"
+```
+
+### Security-First Feature (NOVO)
+```
+/devsecops-advanced  → Threat model STRIDE+IA
+  ↓
+/solution-architect  → Architecture com security by design
+  ↓
+/backend             → Implementação
+  ↓
+/devsecops-advanced  → SAST + SBOM + Sigstore
+```
+
 ---
 
 ## 📊 Estatísticas
 
 | Métrica | Valor |
 |---------|-------|
-| **Agents** | 50 especializados |
+| **Agents** | 53 especializados |
 | **Checklists** | 6 de produção |
-| **Linhas de Código** | 19,700+ |
-| **Domínios** | 7 principais |
+| **Linhas de Código** | 20,000+ |
+| **Domínios** | 8 (inclui IA Avançada) |
 | **Formato Dual** | Markdown + YAML |
-| **Prompt Files** | 25 para Copilot Chat |
+| **Prompt Files** | 51 para Copilot Chat |
+| **SBOM + Supply Chain** | Syft + Sigstore |
+| **Multi-Agent Frameworks** | LangGraph, CrewAI, AutoGen |
 
 ---
 
@@ -252,9 +280,10 @@ Quer adicionar novo agent ou checklist? Veja [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## 📖 Documentação Completa
 
-- **[USAGE.md](USAGE.md)** — Guia completo com 3 casos de uso e workflows
+- **[DASHBOARD.md](DASHBOARD.md)** — Catálogo completo, scorecard e registro de inovações
+- **[USAGE.md](USAGE.md)** — Guia completo com casos de uso e workflows
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** — Como contribuir novos agents
-- **[Cada Agent](agents/)** — Expertise especializada com exemplos
+- **[Cada Agent](agents/)** — Expertise especializada com exemplos de código
 - **[Cada Checklist](checklists/)** — Markdown + YAML para automação
 
 ---
