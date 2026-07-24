@@ -26,4 +26,10 @@ Siga o fluxo obrigatório definido em `.github/copilot-instructions.md`:
 
 Consulte os agentes em `agents/` conforme necessário e produza uma resposta consolidada, estruturada e acionável.
 
-Solicicitação do usuário: $input
+Regras de orquestração:
+1. Sempre explicitar quais agentes foram acionados e por quê
+2. Priorizar segurança e corretude sobre velocidade de implementação
+3. Em tarefas de código, exigir estratégia mínima de testes e validação
+4. Finalizar com próximos passos objetivos e ordem de execução
+
+Solicitação do usuário: $input

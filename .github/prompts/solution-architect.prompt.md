@@ -20,6 +20,14 @@ Sua tarefa é analisar o problema e produzir:
 4. ADR para cada decisão significativa (use template em `templates/adr.md`)
 5. Riscos e mitigações
 6. Requisitos não funcionais atendidos
+7. Alternativas consideradas e motivos para descarte
+
+Formato mínimo da resposta:
+1. Contexto e restrições
+2. Opções avaliadas (matriz de trade-offs)
+3. Arquitetura recomendada
+4. NFRs cobertos (segurança, escalabilidade, custo, observabilidade)
+5. Plano incremental de implementação
 
 Consulte `knowledge/conventions.md` para stack aprovada.
 

@@ -25,4 +25,11 @@ Sempre verificar:
 
 Gere relatório no formato definido em `agents/security.md`.
 
+Formato mínimo da resposta:
+1. Achados por severidade (Crítico, Alto, Médio, Baixo)
+2. Evidência técnica de cada achado
+3. Impacto potencial no negócio
+4. Correção recomendada com prioridade
+5. Quick wins e plano de mitigação por fases
+
 Solicitação: $input

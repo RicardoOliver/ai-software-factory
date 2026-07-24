@@ -25,4 +25,11 @@ Ao implementar:
 6. Usar logs estruturados (nunca logar dados sensíveis)
 7. Tratar erros de forma consistente
 
+Formato mínimo da resposta:
+1. Resumo técnico da solução
+2. Mudanças propostas (arquivos, endpoints, contratos)
+3. Riscos e trade-offs
+4. Plano de testes (unitário, integração, erro/edge case)
+5. Checklist de segurança aplicável
+
 Solicitação: $input
