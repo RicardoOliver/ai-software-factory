@@ -19,22 +19,20 @@
 ---
 
 <!-- governance-metrics:start -->
-## 🎯 Governance & Quality KPIs
+## Governance KPIs (Auto)
 
-Updated at: 2026-07-28T02:15:00.000Z
+Updated at: 2026-07-28T03:16:58.119Z
 
 | KPI | Value |
 |-----|-------|
-| **Agents Consolidated** | 23 (53→23, 57% reduction) |
-| **Prompt Inventory** | 23/23 (100%) |
-| **Prompt Structure Validation** | ✅ 100% pass rate (pattern-based lexical validation) |
-| **Parity Coverage** | 23/23 (100%) |
-| **Frontmatter Valid** | 23/23 (100%) |
-| **Link Integrity** | All valid ✅ |
-| **Agent Tiers** | 6 strategic tiers (Strategy, Dev, Quality, Infra, Data&AI, Auxiliary) |
-| **Test Framework** | Pattern-based prompt validation (checks for required keywords in source) |
-
-**Validation Note**: Current framework validates prompt file structure (contains expected terminology). Future enhancement: LLM-based semantic validation (actual output testing with OPENAI_API_KEY).
+| Agents inventory | 23 |
+| Prompt inventory | 23 |
+| Checklists (md/yaml) | 7/6 |
+| Parity coverage | 23/23 (100%) |
+| Dependency policy | threshold=high, policy=PASS, high=0, critical=0, domains=4 |
+| Dependency managers | npm:pass=1,fail=0,skip=1,execErr=0 | pnpm:pass=1,fail=0,skip=0,execErr=0 | yarn:pass=1,fail=0,skip=0,execErr=0 |
+| Last 7 snapshots pass rate | 97.96% (48/49) |
+| Manager reliability (7d) | npm:100% | pnpm:100% | yarn:100% |
 
 <!-- governance-metrics:end -->
 
