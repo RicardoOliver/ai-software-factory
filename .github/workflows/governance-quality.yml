@@ -92,6 +92,10 @@ jobs:
       - name: Validate export HTTP integration
         run: node tools/governance/tests-export-http-integration.mjs
 
+      - name: Evaluate prompt quality (golden-file tests)
+        continue-on-error: true
+        run: node tools/governance/eval-prompts.mjs backend,frontend,api-architect,qa-architect,devops
+
       - name: Export governance history (optional)
         if: env.GOVERNANCE_HISTORY_ENDPOINT != ''
         env:

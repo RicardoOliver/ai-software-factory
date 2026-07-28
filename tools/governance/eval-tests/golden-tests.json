@@ -1,0 +1,99 @@
+{
+  "backend": {
+    "agentName": "Backend Engineer",
+    "promptFile": ".github/prompts/backend.prompt.md",
+    "input": "Crie um endpoint POST /api/v1/users com validação de email usando Express, Zod e JWT. Inclua tratamento de erro estruturado.",
+    "expectedPatterns": [
+      "Express",
+      "POST",
+      "router",
+      "Zod",
+      "schema",
+      "validate",
+      "JWT",
+      "middleware",
+      "error",
+      "async"
+    ],
+    "minMatchPercent": 70,
+    "description": "Backend should generate Express endpoint with Zod validation and JWT"
+  },
+  "frontend": {
+    "agentName": "Frontend Engineer",
+    "promptFile": ".github/prompts/frontend.prompt.md",
+    "input": "Crie um componente React de formulário de login com validação de email e senha, usando hooks. Mostre mensagens de erro.",
+    "expectedPatterns": [
+      "React",
+      "useState",
+      "form",
+      "input",
+      "email",
+      "password",
+      "validate",
+      "error",
+      "onClick",
+      "onChange"
+    ],
+    "minMatchPercent": 70,
+    "description": "Frontend should generate React component with form handling and validation"
+  },
+  "api-architect": {
+    "agentName": "API Architect",
+    "promptFile": ".github/prompts/api.prompt.md",
+    "input": "Design uma API REST para um sistema de e-commerce. Inclua resources para produtos, pedidos e usuários. Mostre endpoints, métodos HTTP e status codes.",
+    "expectedPatterns": [
+      "REST",
+      "HTTP",
+      "GET",
+      "POST",
+      "PUT",
+      "DELETE",
+      "resource",
+      "endpoint",
+      "200",
+      "201",
+      "404",
+      "error"
+    ],
+    "minMatchPercent": 65,
+    "description": "API Architect should define REST resources with HTTP methods and status codes"
+  },
+  "qa-architect": {
+    "agentName": "QA Architect",
+    "promptFile": ".github/prompts/qa-architect.prompt.md",
+    "input": "Descreva uma estratégia de testes para uma API de autenticação. Inclua unit tests, integration tests, e security tests.",
+    "expectedPatterns": [
+      "test",
+      "unit",
+      "integration",
+      "security",
+      "JWT",
+      "unauthorized",
+      "coverage",
+      "edge case",
+      "mock",
+      "assert"
+    ],
+    "minMatchPercent": 65,
+    "description": "QA Architect should define test strategy with multiple test types"
+  },
+  "devops": {
+    "agentName": "DevOps Engineer",
+    "promptFile": ".github/prompts/devops.prompt.md",
+    "input": "Configure a CI/CD pipeline using GitHub Actions. Include build, test, and deploy stages. Deploy to Docker and push to a registry.",
+    "expectedPatterns": [
+      "GitHub Actions",
+      "workflow",
+      "jobs",
+      "build",
+      "test",
+      "deploy",
+      "Docker",
+      "registry",
+      "push",
+      "stage"
+    ],
+    "minMatchPercent": 65,
+    "description": "DevOps should define GitHub Actions workflow with build/test/deploy stages"
+  }
+}
