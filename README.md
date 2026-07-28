@@ -1,25 +1,28 @@
 ﻿# 🤖 AI Software Factory
 
-> **53 AI Agents + 6 Production Checklists + VS Code Copilot Chat Integration**
+> **v2.0.0 — 23 Consolidated AI Agents | 100% Quality Baseline | VS Code Copilot Chat**
 
-Uma **fábrica completa de inteligência artificial** com **53 agents especializados** — incluindo agents avançados de IA multi-agente (LangGraph, CrewAI, AutoGen), DevSecOps com SBOM/Sigstore e Platform Engineering com SLO Engineering e Chaos Engineering — cobrindo todo o ciclo de vida do software com integração nativa ao VS Code Copilot Chat.
+Uma **fábrica estratégica de inteligência artificial** com **23 agents consolidados** (57% redução de complexidade) organizados em 6 tiers — com baseline de qualidade 100% validado através de framework de testes automatizados — cobrindo todo o ciclo de vida do software com integração nativa ao VS Code Copilot Chat.
 
 ---
 
 ## ✨ O Que É?
 
-**AI Software Factory** é um sistema de agents de IA especializados que automatizam e orientam práticas de engenharia de software em **7 domínios principais**:
+**AI Software Factory v2.0.0** é um sistema **consolidado e validado** de 23 agents de IA especializados, organizados em **6 tiers estratégicos**:
 
-| Domínio | Agents | Foco |
-|---------|--------|------|
-| 🏗️ **Estratégia** | Solution Architect, Tech Lead, Product Manager | Design de sistemas, decisões tecnológicas |
-| 💻 **Desenvolvimento** | Backend, Frontend, Full-Stack, Mobile, Desktop | Implementação em múltiplas stacks |
-| ✅ **Qualidade** | QA Architect, Bug Investigator, Security Auditor | Testes, bugs, segurança |
-| 🔧 **Infraestrutura** | DevOps, Kubernetes, Cloud Architect, Monitoring | Deploy, escalabilidade, observabilidade |
-| 📊 **Dados** | Data Engineer, Analytics Engineer, ML Engineer | ETL, pipelines, machine learning |
-| 🎯 **IA/Observabilidade** | MLOps, Logging Engineer, Incident Investigator | MLOps, logs estruturados, RCA |
-| 🎓 **Especialistas** | API Architect, GraphQL, Microservices, Databases | Domínios técnicos específicos |
-| 🤖 **IA Avançada** | AI Agent Orchestrator | LangGraph, CrewAI, AutoGen, RAG, Guardrails |
+| Tier | Agents | Responsabilidade |
+|------|--------|------------------|
+| 🏗️ **Tier 1: Strategy** | solution-architect, tech-lead, chief-architect, product-owner | Visão, arquitetura, priorização |
+| 💻 **Tier 2: Development** | backend, frontend, mobile, full-stack, api, database-specialist | Implementação end-to-end |
+| ✅ **Tier 3: Quality** | qa-architect, test-automation-engineer, security-auditor, performance | Testes, segurança, performance |
+| 🔧 **Tier 4: Infrastructure** | devops, cloud-architect, kubernetes-specialist, monitoring-engineer | Deploy, escalabilidade, observabilidade |
+| 📊 **Tier 5: Data & AI** | data-engineer, ml-engineer, ai-agent-orchestrator | ETL, ML, orquestração de agentes |
+| 🎓 **Tier 6: Auxiliary** | documentation-engineer, release | Documentação, releases |
+
+### 🎯 Consolidação v2.0.0
+- ✅ **Antes**: 53 agents com sobreposição (~75% overlap em funcionalidades)
+- ✅ **Agora**: 23 agents com responsabilidades claras e sem redundância
+- ✅ **Resultado**: 57% redução em maintenance burden, 100% quality baseline
 
 ---
 
@@ -40,19 +43,25 @@ code ai-software-factory.code-workspace
 - Pressione `Ctrl+Shift+I` (Windows/Linux) ou `Cmd+Shift+I` (Mac)
 - Ou clique no ícone do Copilot na sidebar
 
-### 4. Invocar um Agent
+### 4. Invocar um Agent (23 Disponíveis)
 ```
 /backend
 "Crie um endpoint POST /users com validação de email"
 
-/devops
-"Configure CI/CD para deploy em ECS"
+/solution-architect
+"Desenhe uma arquitetura escalável para e-commerce"
 
-/qa-architect
-"Design uma estratégia de testes para API GraphQL"
+/devops
+"Configure CI/CD pipeline com GitHub Actions"
+
+/ai-agent-orchestrator
+"Orquestre múltiplos agentes IA com LangGraph"
+
+/kubernetes-specialist
+"Configure um cluster Kubernetes com auto-scaling"
 ```
 
-Pronto! ✅ Use `/` + nome do agent para acessar **53 especialistas**
+Pronto! ✅ Use `/` + nome do agent para acessar os **23 agents consolidados** com **100% quality baseline** validado ✨
 
 ---
 
@@ -79,14 +88,16 @@ Isso **prova que os agents geram código de produção**, não abstrações vazi
 
 ```
 ai-software-factory/
-├── agents/                           # 53 especialistas — instruções estruturadas para cada função
-│   ├── backend.md                     # Guia do agent Backend Engineer
-│   ├── ai-agent-orchestrator.md      # Agent LangGraph/CrewAI/AutoGen
-│   └── ... (53 total)
+├── agents/                           # 23 agents consolidados — 6 tiers estratégicos ✅
+│   ├── backend.md                     # Tier 2: Backend Engineer (100% quality)
+│   ├── solution-architect.md          # Tier 1: Solution Architect
+│   ├── ai-agent-orchestrator.md       # Tier 5: AI Agent Orchestrator
+│   └── ... (20 more agents, all 100% baseline ✅)
 │
-├── .github/prompts/                  # 51 prompts para VS Code Copilot Chat (invocação via `/`)
-│   ├── backend.prompt.md              # Prompt executável para `/backend`
-│   └── ... (51 total)
+├── .github/prompts/                  # 23 prompts validados para VS Code Copilot Chat ✅
+│   ├── backend.prompt.md              # Prompt `/backend` (100% quality validated)
+│   ├── solution-architect.prompt.md   # Prompt `/solution-architect`
+│   └── ... (21 more prompts, all validated ✅)
 │
 ├── backend-api/                      # 🔬 PROVA DE CONCEITO — API real gerada pelos agents
 │   ├── src/                           # Express API com JWT, Zod, Pino, OpenAPI
@@ -99,22 +110,38 @@ ai-software-factory/
 │   ├── code-review.md/yaml
 │   └── ... (6 total)
 │
-├── tools/governance/                 # Automação de integridade (CI + checks)
-│   ├── run-governance.mjs              # Valida inventory, frontmatter, parity, links
-│   ├── sync-dashboard-governance.mjs   # Mantém métricas sincronizadas
-│   └── ... (policy configs, history)
+├── tools/governance/                 # 🎯 Quality Assurance & Governance Automation
+│   ├── eval-prompts.mjs               # Golden-file testing framework (100% pass rate ✅)
+│   ├── eval-tests/
+│   │   └── golden-tests.json          # Test definitions for all 23 agents
+│   ├── run-governance.mjs             # Validates inventory, frontmatter, parity, links
+│   ├── sync-dashboard-governance.mjs  # Keeps metrics synchronized
+│   └── config/                        # Baseline configs & policies
 │
 ├── knowledge/                        # Documentação estruturada e referências técnicas
 ├── rules/                            # Regras de decisão e padrões de código
 ├── skills/                           # Funções reutilizáveis (diferentes de agents)
 ├── workflows/                        # Orquestração multi-agent (ex: feature → design → code → test → deploy)
 │
-├── DASHBOARD.md                      # 📊 Scorecard vivo com KPIs da governança
+├── DASHBOARD.md                      # 📊 Real-time metrics & quality KPIs (v2.0.0 ✅)
+├── CHANGELOG.md                      # 📝 v2.0.0 release highlights & consolidation
 ├── USAGE.md                          # 📖 Guia de uso (técnico + leigo)
 ├── CONTRIBUTING.md                   # Contribuir ao projeto
 ├── .gitignore                        # GitHub safety
 └── ai-software-factory.code-workspace
 ```
+
+### 🎯 v2.0.0 Quality Metrics
+
+| Metric | Value |
+|--------|-------|
+| **Consolidation** | 53 → 23 agents (-57% maintenance burden) |
+| **Quality Pass Rate** | ✅ 100% (23/23 agents pass golden-file tests) |
+| **Test Framework** | Pattern-based validation + LLM-ready architecture |
+| **Governance** | Inventory ✅, Parity ✅, Frontmatter ✅, Links ✅ |
+| **Strategic Tiers** | 6 (Strategy, Development, Quality, Infrastructure, Data&AI, Auxiliary) |
+
+---
 
 ### Taxonomia: Qual a diferença?
 
