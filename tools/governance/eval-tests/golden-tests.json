@@ -36,6 +36,23 @@
     "minMatchPercent": 56,
     "description": "Frontend prompt should define engineer role with quality, security, and best practices"
   },
+  "full-stack": {
+    "agentName": "Full-Stack Engineer",
+    "promptFile": ".github/prompts/full-stack.prompt.md",
+    "input": "Implemente uma feature completa: criar usuário (backend + frontend + database). Inclua validação, testes e documentação.",
+    "expectedPatterns": [
+      "Full-Stack",
+      "backend",
+      "frontend",
+      "database",
+      "testes",
+      "integrar",
+      "feature",
+      "end-to-end"
+    ],
+    "minMatchPercent": 50,
+    "description": "Full-Stack prompt should define end-to-end feature implementation"
+  },
   "solution-architect": {
     "agentName": "Solution Architect",
     "promptFile": ".github/prompts/solution-architect.prompt.md",
@@ -54,6 +71,54 @@
     "minMatchPercent": 67,
     "description": "Solution Architect prompt should define system architecture with components, decisions, and non-functional requirements"
   },
+  "tech-lead": {
+    "agentName": "Tech Lead",
+    "promptFile": ".github/prompts/tech-lead.prompt.md",
+    "input": "Qual é o roadmap técnico de 3-6 meses para reduzir débito técnico? Inclua priorizacao e impacto.",
+    "expectedPatterns": [
+      "Tech Lead",
+      "roadmap",
+      "debito",
+      "priorizar",
+      "refatoracao",
+      "impacto",
+      "qualidade"
+    ],
+    "minMatchPercent": 50,
+    "description": "Tech Lead prompt should define technical roadmap and mentorship"
+  },
+  "chief-architect": {
+    "agentName": "Chief Architect",
+    "promptFile": ".github/prompts/chief-architect.prompt.md",
+    "input": "Revise a decisão de migrar para microsserviços. Qual é o impacto 12-36 meses e trade-offs?",
+    "expectedPatterns": [
+      "Chief Architect",
+      "visao",
+      "estrategico",
+      "trade-offs",
+      "longo prazo",
+      "alinhamento",
+      "negocio"
+    ],
+    "minMatchPercent": 50,
+    "description": "Chief Architect prompt should define long-term strategic vision"
+  },
+  "database-specialist": {
+    "agentName": "Database Specialist",
+    "promptFile": ".github/prompts/database-specialist.prompt.md",
+    "input": "Desenhe um schema para um e-commerce com usuários, produtos, pedidos. Otimize para leitura-pesada.",
+    "expectedPatterns": [
+      "Database Specialist",
+      "schema",
+      "banco de dados",
+      "otimizar",
+      "indices",
+      "escalabilidade",
+      "performance"
+    ],
+    "minMatchPercent": 50,
+    "description": "Database Specialist prompt should define database design and optimization"
+  },
   "qa-architect": {
     "agentName": "QA Architect",
     "promptFile": ".github/prompts/qa-architect.prompt.md",
@@ -68,6 +133,54 @@
     ],
     "minMatchPercent": 50,
     "description": "QA Architect prompt should define testing strategy and quality concerns"
+  },
+  "test-automation-engineer": {
+    "agentName": "Test Automation Engineer",
+    "promptFile": ".github/prompts/test-automation-engineer.prompt.md",
+    "input": "Crie testes E2E para um login flow usando Cypress. Inclua happy path e edge cases.",
+    "expectedPatterns": [
+      "Test Automation",
+      "teste",
+      "Cypress",
+      "Playwright",
+      "Selenium",
+      "framework",
+      "flaky"
+    ],
+    "minMatchPercent": 50,
+    "description": "Test Automation Engineer prompt should consolidate testing tools and frameworks"
+  },
+  "security-auditor": {
+    "agentName": "Security Auditor",
+    "promptFile": ".github/prompts/security-auditor.prompt.md",
+    "input": "Faca um threat model para um app de pagamento. Identifique vulnerabilidades e mitigacoes.",
+    "expectedPatterns": [
+      "Security",
+      "threats",
+      "vulnerabilidades",
+      "OWASP",
+      "mitigacao",
+      "compliance",
+      "autenticacao"
+    ],
+    "minMatchPercent": 50,
+    "description": "Security Auditor prompt should define security review and threat modeling"
+  },
+  "performance": {
+    "agentName": "Performance Engineer",
+    "promptFile": ".github/prompts/performance.prompt.md",
+    "input": "Analise performance de um endpoint que retorna 10k registros. Como otimizar?",
+    "expectedPatterns": [
+      "Performance",
+      "latencia",
+      "throughput",
+      "otimizacao",
+      "profiling",
+      "cache",
+      "load"
+    ],
+    "minMatchPercent": 50,
+    "description": "Performance Engineer prompt should define performance optimization"
   },
   "devops": {
     "agentName": "DevOps Engineer",
@@ -84,5 +197,182 @@
     ],
     "minMatchPercent": 50,
     "description": "DevOps prompt should define deployment, infrastructure, and operational concerns"
+  },
+  "cloud-architect": {
+    "agentName": "Cloud Architect",
+    "promptFile": ".github/prompts/cloud-architect.prompt.md",
+    "input": "Desenhe arquitetura cloud para e-commerce em AWS. Inclua load balancer, database, storage, CDN.",
+    "expectedPatterns": [
+      "Cloud",
+      "AWS",
+      "Azure",
+      "GCP",
+      "arquitetura",
+      "custo",
+      "escalabilidade",
+      "DR"
+    ],
+    "minMatchPercent": 50,
+    "description": "Cloud Architect prompt should define cloud architecture and optimization"
+  },
+  "kubernetes-specialist": {
+    "agentName": "Kubernetes Specialist",
+    "promptFile": ".github/prompts/kubernetes-specialist.prompt.md",
+    "input": "Configure um cluster Kubernetes com 3 replicas. Inclua networking, storage, auto-scaling.",
+    "expectedPatterns": [
+      "Kubernetes",
+      "cluster",
+      "pods",
+      "helm",
+      "networking",
+      "storage",
+      "auto-scaling"
+    ],
+    "minMatchPercent": 50,
+    "description": "Kubernetes Specialist prompt should define orchestration and scaling"
+  },
+  "monitoring-engineer": {
+    "agentName": "Monitoring Engineer",
+    "promptFile": ".github/prompts/monitoring-engineer.prompt.md",
+    "input": "Configure observabilidade (logs, metricas, traces) para uma API. Defina SLOs.",
+    "expectedPatterns": [
+      "Monitoring",
+      "observabilidade",
+      "logs",
+      "metricas",
+      "traces",
+      "alertas",
+      "SLO"
+    ],
+    "minMatchPercent": 50,
+    "description": "Monitoring Engineer prompt should define observability and SLOs"
+  },
+  "data-engineer": {
+    "agentName": "Data Engineer",
+    "promptFile": ".github/prompts/data-engineer.prompt.md",
+    "input": "Desenhe um pipeline ETL para sincronizar dados de CRM para warehouse. Inclua validacao e tratamento de erros.",
+    "expectedPatterns": [
+      "Data Engineer",
+      "ETL",
+      "pipeline",
+      "warehouse",
+      "validacao",
+      "escalabilidade",
+      "qualidade"
+    ],
+    "minMatchPercent": 50,
+    "description": "Data Engineer prompt should define ETL pipelines and data quality"
+  },
+  "ml-engineer": {
+    "agentName": "ML Engineer",
+    "promptFile": ".github/prompts/ml-engineer.prompt.md",
+    "input": "Treine um modelo de recomendação de produtos. Inclua feature engineering, validacao e deployment.",
+    "expectedPatterns": [
+      "ML",
+      "modelo",
+      "treinamento",
+      "features",
+      "validacao",
+      "deploy",
+      "versioning"
+    ],
+    "minMatchPercent": 50,
+    "description": "ML Engineer prompt should define model training and deployment"
+  },
+  "ai-agent-orchestrator": {
+    "agentName": "AI Agent Orchestrator",
+    "promptFile": ".github/prompts/ai-agent-orchestrator.prompt.md",
+    "input": "Orquestre multiplos agentes IA para resolver um problema complexo. Use LangGraph ou CrewAI.",
+    "expectedPatterns": [
+      "AI",
+      "agent",
+      "orquestrador",
+      "LangGraph",
+      "CrewAI",
+      "AutoGen",
+      "workflow"
+    ],
+    "minMatchPercent": 50,
+    "description": "AI Agent Orchestrator prompt should define agent workflows"
+  },
+  "documentation-engineer": {
+    "agentName": "Documentation Engineer",
+    "promptFile": ".github/prompts/documentation-engineer.prompt.md",
+    "input": "Documente um novo endpoint de API usando OpenAPI. Inclua ejemplos, erros e rate limiting.",
+    "expectedPatterns": [
+      "Documentation",
+      "documentar",
+      "API",
+      "OpenAPI",
+      "guia",
+      "runbook",
+      "onboarding"
+    ],
+    "minMatchPercent": 50,
+    "description": "Documentation Engineer prompt should define documentation standards"
+  },
+  "api": {
+    "agentName": "API Engineer",
+    "promptFile": ".github/prompts/api.prompt.md",
+    "input": "Desenhe uma API REST para um sistema de e-commerce. Inclua recursos, métodos HTTP e status codes.",
+    "expectedPatterns": [
+      "API",
+      "REST",
+      "endpoint",
+      "HTTP",
+      "recurso",
+      "design",
+      "contract"
+    ],
+    "minMatchPercent": 50,
+    "description": "API Engineer prompt should define API design patterns"
+  },
+  "mobile": {
+    "agentName": "Mobile Engineer",
+    "promptFile": ".github/prompts/mobile.prompt.md",
+    "input": "Implemente um app mobile de e-commerce em React Native. Inclua navegação, state management e offline sync.",
+    "expectedPatterns": [
+      "Mobile Engineer",
+      "qualidade",
+      "seguranca",
+      "praticas",
+      "contexto",
+      "objetivos",
+      "riscos"
+    ],
+    "minMatchPercent": 40,
+    "description": "Mobile Engineer prompt should define mobile development with best practices"
+  },
+  "product-owner": {
+    "agentName": "Product Owner",
+    "promptFile": ".github/prompts/product-owner.prompt.md",
+    "input": "Defina requisitos para uma feature de recomendacao de produtos. Inclua user stories e acceptance criteria.",
+    "expectedPatterns": [
+      "Product",
+      "qualidade",
+      "praticas",
+      "contexto",
+      "objetivos",
+      "usuario",
+      "riscos"
+    ],
+    "minMatchPercent": 40,
+    "description": "Product Owner prompt should define requirements and prioritization"
+  },
+  "release": {
+    "agentName": "Release Manager",
+    "promptFile": ".github/prompts/release.prompt.md",
+    "input": "Prepare release v2.0.0. Inclua changelog, versionamento e rollback plan.",
+    "expectedPatterns": [
+      "Release",
+      "qualidade",
+      "praticas",
+      "contexto",
+      "objetivos",
+      "riscos",
+      "deploy"
+    ],
+    "minMatchPercent": 40,
+    "description": "Release Manager prompt should define release management"
   }
 }
