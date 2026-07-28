@@ -65,9 +65,43 @@ Pronto! ✅ Use `/` + nome do agent para acessar os **23 agents consolidados** c
 
 ---
 
-## � Prova de Conceito Real
+## 🔬 Prova de Conceito Real (Não é Teórico!)
 
-**Não é teórico.** O projeto inclui `backend-api/` — um API REST funcional gerado pelos agents `/backend`:
+> **Este é o diferencial:** Não é um catálogo de prompts no vácuo. Os agents geram código de produção.
+
+O projeto inclui **`backend-api/`** — uma **API REST funcional de verdade**, completamente gerada pelos agents (`/backend`), pronta para usar:
+
+### ⚡ Executar em 30 segundos
+
+```bash
+cd backend-api
+npm install
+npm run dev
+```
+
+Abra: **http://localhost:3000/docs** → Swagger UI com OpenAPI documentation  
+Endpoints: `/auth/register`, `/auth/login`, `/users`, `/admin/stats` com RBAC real
+
+### 🛠️ Stack Real (Não é Mock)
+
+✅ **Node.js 24 + Express + TypeScript** — Compiled and runnable  
+✅ **Zod** — Runtime schema validation  
+✅ **JWT** — Authentication com tokens seguros  
+✅ **Pino** — Structured logging (JSON)  
+✅ **Jest + Supertest** — Test suite com coverage  
+✅ **OpenAPI 3.0** — Auto-generated from code  
+
+### 📊 Cobertura de Testes
+
+```bash
+cd backend-api
+npm test                 # Run all tests
+npm run test:coverage    # See coverage report
+```
+
+**Por que isso importa:** Este não é um projeto teórico de "agora vou usar prompts". É prova viva de que `/backend` agent realmente produz código de qualidade produção. Tudo aqui foi gerado, iterado, e testado — é seu modelo de referência.
+
+---
 
 ```bash
 cd backend-api
@@ -143,19 +177,49 @@ ai-software-factory/
 
 ---
 
-### Taxonomia: Qual a diferença?
+## 🧠 Taxonomia: Diferença Prática Entre Cada Conceito
 
-| Conceito | O que é | Exemplo | Invocação |
-|----------|---------|---------|----------|
-| **Agent** | Especialista com guias estruturados (identidade, objetivo, responsabilidades, limitações) | `backend.md` (Backend Engineer) | `/backend` no Copilot Chat |
-| **Prompt** | Instruções executáveis para LLM + frontmatter YAML | `.github/prompts/backend.prompt.md` | Mesmo que agent (`/backend`) |
-| **Skill** | Função reutilizável (ex: ferramenta de refatoração, gerador de testes) | `skills/refactor-unused-imports.mjs` | Usada por múltiplos agents |
-| **Knowledge** | Documentação e referências estruturadas | `knowledge/governance-architecture.md` | Leitura durante elaboração de prompts |
-| **Rule** | Critério de decisão (ex: quando usar REST vs GraphQL) | `rules/api-style-decision.md` | Consultado durante design |
-| **Workflow** | Orquestração de múltiplos agents em sequência | `workflows/feature-development.md` (design → backend → frontend → test) | Guia para o humano coordenar agents |
-| **Checklist** | Lista verificável com critérios de pronto | `checklists/pre-deployment.yaml` | Manual ou automático no CI |
+Muitas pastas (`agents/`, `skills/`, `rules/`, `knowledge/`, `workflows/`, `checklists/`). Qual a diferença **de verdade**?
 
-**Modelo mental**: Agent ≈ persona com expertise; Prompt ≈ instrução executável; Skill ≈ ferramenta; Knowledge ≈ referência; Rule ≈ decisão; Workflow ≈ pipeline; Checklist ≈ gate.
+### Resumo Prático
+
+| Conceito | **O Que É** | **Onde Vive** | **Quando Usar** | **Exemplo Real** |
+|----------|-----------|-------------|----------------|-----------------|
+| **Agent** | Uma persona especializada com identidade, objetivo e responsabilidades | `agents/backend.md` | Invoque via `/backend` no Copilot | "Crie um endpoint POST com validação" |
+| **Prompt** | Instruções executáveis (frontmatter + corpo) enviadas ao LLM | `.github/prompts/backend.prompt.md` | Automático quando você chama `/backend` | Mesmo do agent, mas em formato estruturado |
+| **Skill** | Função reutilizável — ferramenta que múltiplos agents usam | `skills/` | Um agent chama: "use a skill de refatoração" | Skill `extract-unused-imports.mjs` usada por 3+ agents |
+| **Knowledge** | Referência documentada — padrões, convenções, arquitetura | `knowledge/api-conventions.md` | Agent consulta durante o trabalho | "Veja em knowledge/api-conventions.md como nomear endpoints" |
+| **Rule** | Regra de decisão — quando usar A vs B? | `rules/rest-vs-graphql.md` | Agent segue regra para escolher tecnologia | "Se dataset < 100K, use REST; se > 1M, GraphQL" |
+| **Workflow** | Orquestração — sequência de agents trabalhando juntos | `workflows/feature-development.md` | Você coordena: design → backend → frontend → test → deploy | "Siga este workflow para features novas" |
+| **Checklist** | Lista verificável com critérios de pronto (DoD) | `checklists/pre-deployment.yaml` | Executar no CI ou manualmente | "Antes de fazer deploy: testes passando? Docs atualizadas?" |
+
+### 🧩 Diagrama de Fluxo
+
+```
+Você invoca: /backend
+    ↓
+Copilot carrega: .github/prompts/backend.prompt.md
+    ↓
+Backend Agent executa, consultando:
+    • knowledge/api-conventions.md (padrões)
+    • rules/rest-vs-graphql.md (decisões)
+    • skills/extract-unused-imports.mjs (ferramentas)
+    ↓
+Agent entrega código
+    ↓
+Você aplica: checklists/code-review.yaml
+    ↓
+Workflow sequencial: design → frontend → devops → checklists/pre-deployment.yaml
+```
+
+**Modelo mental:** 
+- **Agent** = Quem faz (persona)
+- **Prompt** = Como invocar (instrução)
+- **Skill** = Ferramenta compartilhada
+- **Knowledge** = Base de referência
+- **Rule** = Critério de decisão
+- **Workflow** = Pipeline multi-agent
+- **Checklist** = Gate de qualidade
 
 ---
 
@@ -191,49 +255,53 @@ code ai-software-factory
 code seu-projeto-api/
 ```
 
-### Leia [USAGE.md](USAGE.md) para Detalhes Completos
+---
+
+## 📚 Catálogo Completo de 23 Agents
+
+A consolidação v2.0.0 organizou todos os agents em **6 tiers estratégicos** com responsabilidades claras e sem sobreposição.
+
+**Veja a lista completa, atualizada, com métricas de qualidade:**
+
+👉 **[DASHBOARD.md](DASHBOARD.md)** — Catálogo oficial com quality scores por tier  
+👉 **[ANALYSIS_AGENT_CONSOLIDATION.md](ANALYSIS_AGENT_CONSOLIDATION.md)** — Rationale: por que consolidamos 53 → 23
+
+Alguns destaques:
+
+| Tier | Agentes | Stack |
+|------|---------|-------|
+| **Strategy** | solution-architect, tech-lead, chief-architect, product-owner | C4 models, roadmaps, prioritization |
+| **Development** | backend, frontend, mobile, full-stack, api, database-specialist | Node.js, React, React Native, REST/GraphQL |
+| **Quality** | qa-architect, test-automation-engineer, security-auditor, performance | Test strategy, automation frameworks, threat modeling |
+| **Infrastructure** | devops, cloud-architect, kubernetes-specialist, monitoring-engineer | CI/CD, K8s, AWS/Azure/GCP, SLOs |
+| **Data & AI** | data-engineer, ml-engineer, ai-agent-orchestrator | ETL, ML training, LangGraph/CrewAI |
+| **Auxiliary** | documentation-engineer, release | OpenAPI docs, semantic versioning |
 
 ---
 
-## 🌟 Principais Agents
+## ✅ Garantias de Qualidade
 
-### Estratégia & Arquitetura
-- 🏗️ **Solution Architect** — C4 models, system design
-- 👔 **Tech Lead** — Technical roadmaps, team guidance
-- 🔌 **API Architect** — REST, GraphQL, gRPC design
+Este projeto não promete quantidade. Promete **qualidade validada**:
 
-### Desenvolvimento
-- 🖥️ **Backend** — Node.js, Python, Go, Java
-- 🎨 **Frontend** — React, Vue, Angular
-- 📱 **Mobile** — React Native, Flutter, iOS/Android
-- 🖲️ **Desktop** — Electron, MAUI, WPF
+### 🎯 O Que Você Obtém
 
-### Qualidade & Segurança
-- 🧪 **QA Architect** — Test strategy, automation
-- 🐛 **Bug Investigator** — 7-step systematic approach
-- 🔒 **Security Auditor** — OWASP Top 10, compliance
+| Aspecto | Antes (v1.0) | Agora (v2.0) |
+|--------|--------------|-------------|
+| **Agents** | 53 (muita sobreposição) | 23 (1 agent = 1 caso de uso claro) |
+| **Validação** | Nenhuma | ✅ 100% golden-file testing |
+| **Prova Real** | Nenhuma | ✅ `backend-api/` (testado e funcional) |
+| **Manutenção** | Insustentável | ✅ 57% redução (focada em qualidade) |
+| **Governança** | Estrutura validada | ✅ Estrutura + comportamento validado |
 
-### Infraestrutura
-- ⚙️ **DevOps** — CI/CD pipelines, containerization
-- ☸️ **Kubernetes** — K8s clusters, helm charts
-- ☁️ **Cloud Architect** — AWS, Azure, GCP
-- 📊 **Monitoring** — Prometheus, Grafana, SLOs
+### 🔍 Como Validamos
 
-### Dados & ML
-- 📈 **Data Engineer** — dbt, Airflow, Medallion
-- 🤖 **ML Engineer** — ML pipelines, model training
-- 🔬 **MLOps** — Model versioning, A/B testing
+Cada agent passa por:
 
-### Observabilidade
-- 📝 **Logging Engineer** — Structured JSON, ELK, Loki
-- 🔍 **Observability Engineer** — Tracing, metrics
-- 🚨 **Incident Investigator** — 5 Porquês RCA
+1. **Golden-File Testing** — Validação de padrões esperados (100% pass rate ✅)
+2. **Governance Checks** — Inventory, parity, frontmatter, links (all ✅)
+3. **Real World Testing** — `backend-api/` prova que agents geram código funcional
 
-### 🤖 IA Avançada — Multi-Agent Systems (NOVO)
-- 🧠 **AI Agent Orchestrator** — LangGraph, CrewAI, AutoGen, memória persistente (Mem0 + Qdrant), RAG hierárquico, NeMo Guardrails
-
-### 🔐 DevSecOps Avançado (NOVO)
-- 🛡️ **DevSecOps Advanced** — SBOM com Syft, assinatura Sigstore/Cosign, Threat Modeling STRIDE+IA, OPA/Rego policies, auto-remediação de CVEs
+---
 
 ### 🚀 Platform Engineering Avançado (NOVO)
 - 🏗️ **Platform Engineer Advanced** — IDP com Backstage, SLO Engineering com Error Budgets, Chaos Engineering, FinOps com Infracost, GitOps multi-cluster
