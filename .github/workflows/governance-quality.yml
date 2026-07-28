@@ -93,8 +93,7 @@ jobs:
         run: node tools/governance/tests-export-http-integration.mjs
 
       - name: Evaluate prompt quality (golden-file tests)
-        continue-on-error: true
-        run: node tools/governance/eval-prompts.mjs backend,frontend,api-architect,qa-architect,devops
+        run: node tools/governance/eval-prompts.mjs backend,frontend,solution-architect,qa-architect,devops
 
       - name: Export governance history (optional)
         if: env.GOVERNANCE_HISTORY_ENDPOINT != ''

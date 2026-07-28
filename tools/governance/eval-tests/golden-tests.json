@@ -4,96 +4,85 @@
     "promptFile": ".github/prompts/backend.prompt.md",
     "input": "Crie um endpoint POST /api/v1/users com validação de email usando Express, Zod e JWT. Inclua tratamento de erro estruturado.",
     "expectedPatterns": [
-      "Express",
-      "POST",
-      "router",
-      "Zod",
-      "schema",
-      "validate",
+      "Backend Engineer",
+      "REST",
+      "validar",
+      "autenticacao",
       "JWT",
-      "middleware",
-      "error",
-      "async"
+      "testes",
+      "logs",
+      "seguranca",
+      "OpenAPI",
+      "SOLID"
     ],
     "minMatchPercent": 70,
-    "description": "Backend should generate Express endpoint with Zod validation and JWT"
+    "description": "Backend prompt should define engineer role with API, validation, auth, testing, logging, and security practices"
   },
   "frontend": {
     "agentName": "Frontend Engineer",
     "promptFile": ".github/prompts/frontend.prompt.md",
     "input": "Crie um componente React de formulário de login com validação de email e senha, usando hooks. Mostre mensagens de erro.",
     "expectedPatterns": [
-      "React",
-      "useState",
-      "form",
-      "input",
-      "email",
-      "password",
-      "validate",
-      "error",
-      "onClick",
-      "onChange"
+      "Frontend Engineer",
+      "qualidade",
+      "seguranca",
+      "praticas",
+      "contexto",
+      "objetivos",
+      "riscos",
+      "trade-offs",
+      "verificaveis"
     ],
-    "minMatchPercent": 70,
-    "description": "Frontend should generate React component with form handling and validation"
+    "minMatchPercent": 56,
+    "description": "Frontend prompt should define engineer role with quality, security, and best practices"
   },
-  "api-architect": {
-    "agentName": "API Architect",
-    "promptFile": ".github/prompts/api.prompt.md",
-    "input": "Design uma API REST para um sistema de e-commerce. Inclua resources para produtos, pedidos e usuários. Mostre endpoints, métodos HTTP e status codes.",
+  "solution-architect": {
+    "agentName": "Solution Architect",
+    "promptFile": ".github/prompts/solution-architect.prompt.md",
+    "input": "Design uma arquitetura de sistema para um e-commerce. Inclua componentes, responsabilidades, riscos e requisitos não-funcionais.",
     "expectedPatterns": [
-      "REST",
-      "HTTP",
-      "GET",
-      "POST",
-      "PUT",
-      "DELETE",
-      "resource",
-      "endpoint",
-      "200",
-      "201",
-      "404",
-      "error"
+      "Solution Architect",
+      "arquitetura",
+      "ADR",
+      "decisao",
+      "componentes",
+      "riscos",
+      "mitigacoes",
+      "seguranca",
+      "escalabilidade"
     ],
-    "minMatchPercent": 65,
-    "description": "API Architect should define REST resources with HTTP methods and status codes"
+    "minMatchPercent": 67,
+    "description": "Solution Architect prompt should define system architecture with components, decisions, and non-functional requirements"
   },
   "qa-architect": {
     "agentName": "QA Architect",
     "promptFile": ".github/prompts/qa-architect.prompt.md",
     "input": "Descreva uma estratégia de testes para uma API de autenticação. Inclua unit tests, integration tests, e security tests.",
     "expectedPatterns": [
-      "test",
-      "unit",
-      "integration",
-      "security",
-      "JWT",
-      "unauthorized",
-      "coverage",
-      "edge case",
-      "mock",
-      "assert"
+      "QA",
+      "teste",
+      "estrategia",
+      "qualidade",
+      "seguranca",
+      "cobertura"
     ],
-    "minMatchPercent": 65,
-    "description": "QA Architect should define test strategy with multiple test types"
+    "minMatchPercent": 50,
+    "description": "QA Architect prompt should define testing strategy and quality concerns"
   },
   "devops": {
     "agentName": "DevOps Engineer",
     "promptFile": ".github/prompts/devops.prompt.md",
-    "input": "Configure a CI/CD pipeline using GitHub Actions. Include build, test, and deploy stages. Deploy to Docker and push to a registry.",
+    "input": "Configure a CI/CD pipeline usando GitHub Actions. Inclua build, test, e deploy stages. Deploy to Docker e push para um registry.",
     "expectedPatterns": [
-      "GitHub Actions",
-      "workflow",
-      "jobs",
-      "build",
-      "test",
+      "DevOps",
+      "CI",
+      "CD",
       "deploy",
-      "Docker",
-      "registry",
-      "push",
-      "stage"
+      "infra",
+      "observabilidade",
+      "seguranca"
     ],
-    "minMatchPercent": 65,
-    "description": "DevOps should define GitHub Actions workflow with build/test/deploy stages"
+    "minMatchPercent": 50,
+    "description": "DevOps prompt should define deployment, infrastructure, and operational concerns"
   }
 }

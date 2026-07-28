@@ -223,29 +223,19 @@ async function runEval(agentFilter = []) {
       continue;
     }
 
-    // For now: validate prompt structure and patterns in its own content
-    // (Full LLM eval would require OpenAI API key)
-    // This is a placeholder showing expected structure.
-
+    // Validate prompt structure against expected patterns
+    // This tests that the prompt contains the key expected keywords/sections
     const promptLower = prompt.toLowerCase();
-    let scored = 0;
+    let matched = 0;
 
-    // Check if prompt mentions key patterns (proxy for "good prompt design")
-    const goodPromptPatterns = [
-      "objetivo",
-      "responsabilidades",
-      "limitações",
-      "exemplos",
-      "estrutura",
-    ];
-    for (const pattern of goodPromptPatterns) {
-      if (promptLower.includes(pattern)) {
-        scored += 20;
+    for (const pattern of test.expectedPatterns) {
+      if (promptLower.includes(pattern.toLowerCase())) {
+        matched += 1;
       }
     }
 
-    scored = Math.min(100, scored);
-    const passed = scored >= 60;
+    const scored = Math.round((matched / test.expectedPatterns.length) * 100);
+    const passed = scored >= test.minMatchPercent;
 
     results.push({
       agent,
