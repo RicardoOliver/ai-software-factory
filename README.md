@@ -170,8 +170,8 @@ ai-software-factory/
 | Metric | Value |
 |--------|-------|
 | **Consolidation** | 53 → 23 agents (-57% maintenance burden) |
-| **Quality Pass Rate** | ✅ 100% (23/23 agents pass golden-file tests) |
-| **Test Framework** | Pattern-based validation + LLM-ready architecture |
+| **Quality Pass Rate** | ✅ 100% (23/23 agents pass prompt structure validation) |
+| **Test Framework** | Pattern-based prompt validation (lexical) + LLM-ready architecture |
 | **Governance** | Inventory ✅, Parity ✅, Frontmatter ✅, Links ✅ |
 | **Strategic Tiers** | 6 (Strategy, Development, Quality, Infrastructure, Data&AI, Auxiliary) |
 

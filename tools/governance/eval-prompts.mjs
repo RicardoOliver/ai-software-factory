@@ -3,13 +3,19 @@ import path from "node:path";
 import { repoRoot } from "./common.mjs";
 
 /**
- * Prompt Evaluation Framework
+ * Prompt Structure Validation Framework
  *
- * Golden-file testing for agents: validates that prompts generate expected patterns
- * in output when run against an LLM.
+ * Pattern-based validation for agents: checks that prompt files contain expected
+ * keywords and structural elements (NOT semantic validation of LLM output).
+ *
+ * This validates prompt quality at the source level:
+ * - Prompt contains required terminology (e.g., 'JWT', 'validation', 'error handling')
+ * - Helps catch stale/incomplete prompts without running against LLM
+ * - FUTURE: Can be extended with actual LLM evaluation when needed
  *
  * Usage:
- *   OPENAI_API_KEY=sk-... node eval-prompts.mjs [agent1,agent2,...]
+ *   node eval-prompts.mjs [agent1,agent2,...]
+ *   OPENAI_API_KEY=sk-... node eval-prompts.mjs [...] (future: LLM-based extension)
  */
 
 function loadGoldenTests() {

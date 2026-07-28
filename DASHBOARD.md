@@ -10,7 +10,7 @@
 |----------|--------|-------|
 | **Consolidação de Agents** | ✅ Completa | 23/53 (57% redução) |
 | **Integração Copilot Chat** | ✅ Completa | 23 prompts |
-| **Qualidade Golden-File** | ✅ 100% | 23/23 agentes ✨ |
+| **Validação de Prompts** | ✅ 100% | 23/23 (pattern-based ✨) |
 | **Checklists Produção** | ✅ Completo | 7 (7 YAML) |
 | **Encoding UTF-8** | ✅ Limpo | 0 erros |
 | **Documentação** | ✅ Completa | README + CONTRIBUTING + AGENTS |
@@ -27,14 +27,14 @@ Updated at: 2026-07-28T02:15:00.000Z
 |-----|-------|
 | **Agents Consolidated** | 23 (53→23, 57% reduction) |
 | **Prompt Inventory** | 23/23 (100%) |
-| **Golden-File Quality** | ✅ 100% (23/23 agents pass) |
+| **Prompt Structure Validation** | ✅ 100% pass rate (pattern-based lexical validation) |
 | **Parity Coverage** | 23/23 (100%) |
 | **Frontmatter Valid** | 23/23 (100%) |
 | **Link Integrity** | All valid ✅ |
 | **Agent Tiers** | 6 strategic tiers (Strategy, Dev, Quality, Infra, Data&AI, Auxiliary) |
-| **Test Framework** | Pattern-based validation ready for LLM expansion |
+| **Test Framework** | Pattern-based prompt validation (checks for required keywords in source) |
 
-**Quality Baseline Established**: All 23 agents validated through `tools/governance/eval-prompts.mjs` golden-file testing framework.
+**Validation Note**: Current framework validates prompt file structure (contains expected terminology). Future enhancement: LLM-based semantic validation (actual output testing with OPENAI_API_KEY).
 
 <!-- governance-metrics:end -->
 

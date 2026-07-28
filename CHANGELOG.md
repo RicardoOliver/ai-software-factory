@@ -10,10 +10,11 @@ The format is based on Keep a Changelog and this project follows Semantic Versio
 
 #### ✨ Added
 
-- **Golden-File Testing Framework**: `tools/governance/eval-prompts.mjs`
-  - Pattern-based validation for all 23 agents
-  - Pluggable architecture for future LLM-based semantic validation
-  - **100% pass rate baseline** established (23/23 agents ✅)
+- **Prompt Structure Validation Framework**: `tools/governance/eval-prompts.mjs`
+  - Pattern-based validation for all 23 agents (checks prompt files contain expected keywords)
+  - NOT semantic validation (LLM output testing), just structural/lexical validation
+  - **100% pass rate** for prompt structure baseline (23/23 agents ✅)
+  - Architecture ready for future LLM-based semantic validation
 
 - **Agent Consolidation**: 53 → 23 agents (57% reduction)
   - 6 strategic tiers: Strategy, Development, Quality, Infrastructure, Data&AI, Auxiliary
