@@ -5,13 +5,21 @@ import { repoRoot } from "./common.mjs";
 
 const auditScript = path.join(repoRoot, "tools", "governance", "run-dependency-audit.mjs");
 const snapshotScript = path.join(repoRoot, "tools", "governance", "snapshot-governance-history.mjs");
-const summaryPath = path.join(repoRoot, "tools", "governance", "history", "governance-history-summary.json");
 const policyPath = path.join(repoRoot, "tools", "governance", "config", "decisions-capacity-policy.json");
+const tempHistoryDir = path.join(repoRoot, "tools", "governance", "history", "tmp-threshold-tests");
+const tempHistoryPath = path.join(tempHistoryDir, "governance-history.jsonl");
+const tempSummaryPath = path.join(tempHistoryDir, "governance-history-summary.json");
+const tempDecisionsPath = path.join(tempHistoryDir, "gate-promotion-decisions.jsonl");
+const tempDependencyReportPath = path.join(tempHistoryDir, "latest-dependency-report.json");
 
 function runScript(scriptPath, branch, envOverrides = {}) {
   const env = {
     ...process.env,
     GITHUB_REF_NAME: branch,
+    GOVERNANCE_PM_REPORT_PATH: tempDependencyReportPath,
+    GOVERNANCE_HISTORY_PATH: tempHistoryPath,
+    GOVERNANCE_HISTORY_SUMMARY_PATH: tempSummaryPath,
+    GOVERNANCE_DECISIONS_PATH: tempDecisionsPath,
     ...envOverrides,
   };
 
@@ -30,11 +38,11 @@ function runAuditAndSnapshot(branch, envOverrides = {}) {
   runScript(auditScript, branch, envOverrides);
   runScript(snapshotScript, branch, envOverrides);
 
-  if (!fs.existsSync(summaryPath)) {
+  if (!fs.existsSync(tempSummaryPath)) {
     throw new Error("governance-history-summary.json not generated");
   }
 
-  return JSON.parse(fs.readFileSync(summaryPath, "utf8"));
+  return JSON.parse(fs.readFileSync(tempSummaryPath, "utf8"));
 }
 
 function assertEqual(actual, expected, context) {
@@ -72,8 +80,16 @@ function testEnvOverridePrecedence() {
   assertEqual(cap.thresholdSources.critical, "env", "env critical source");
 }
 
-function restoreMainArtifacts() {
-  runAuditAndSnapshot("main");
+function ensureTempHistoryDir() {
+  if (!fs.existsSync(tempHistoryDir)) {
+    fs.mkdirSync(tempHistoryDir, { recursive: true });
+  }
+}
+
+function cleanupTempHistoryDir() {
+  if (fs.existsSync(tempHistoryDir)) {
+    fs.rmSync(tempHistoryDir, { recursive: true, force: true });
+  }
 }
 
 function main() {
@@ -117,10 +133,10 @@ function main() {
   };
 
   try {
+    ensureTempHistoryDir();
     fs.writeFileSync(policyPath, `${JSON.stringify(fixture, null, 2)}\n`, "utf8");
     testBranchThresholdsFromPolicy();
     testEnvOverridePrecedence();
-    restoreMainArtifacts();
     console.log("Decisions capacity threshold tests passed.");
   } finally {
     if (originalPolicy === null) {
@@ -131,7 +147,7 @@ function main() {
       fs.writeFileSync(policyPath, originalPolicy, "utf8");
     }
 
-    restoreMainArtifacts();
+    cleanupTempHistoryDir();
   }
 }
 

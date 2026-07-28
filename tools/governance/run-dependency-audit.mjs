@@ -472,6 +472,14 @@ function resolveHistoryPath() {
   return path.join(repoRoot, "tools", "governance", "history", "governance-history.jsonl");
 }
 
+function resolveReportPath() {
+  const envPath = String(process.env.GOVERNANCE_PM_REPORT_PATH || "").trim();
+  if (envPath) {
+    return path.resolve(envPath);
+  }
+  return path.join(repoRoot, "tools", "governance", "latest-dependency-report.json");
+}
+
 function readHistoryEntries(historyPath) {
   if (!fs.existsSync(historyPath)) {
     return [];
@@ -863,7 +871,11 @@ function main() {
     failedByTrendGatesEnforced,
   };
 
-  const reportPath = path.join(repoRoot, "tools", "governance", "latest-dependency-report.json");
+  const reportPath = resolveReportPath();
+  const reportDir = path.dirname(reportPath);
+  if (!fs.existsSync(reportDir)) {
+    fs.mkdirSync(reportDir, { recursive: true });
+  }
   fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
 
   console.log("Dependency audit summary");

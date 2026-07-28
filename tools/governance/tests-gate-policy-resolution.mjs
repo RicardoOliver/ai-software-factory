@@ -4,12 +4,19 @@ import path from "node:path";
 import { repoRoot } from "./common.mjs";
 
 const auditScript = path.join(repoRoot, "tools", "governance", "run-dependency-audit.mjs");
-const reportPath = path.join(repoRoot, "tools", "governance", "latest-dependency-report.json");
+const tempReportPath = path.join(
+  repoRoot,
+  "tools",
+  "governance",
+  "history",
+  "tmp-gate-policy-resolution-report.json",
+);
 
 function runAudit(branch, envOverrides = {}, options = {}) {
   const env = {
     ...process.env,
     GITHUB_REF_NAME: branch,
+    GOVERNANCE_PM_REPORT_PATH: tempReportPath,
     ...envOverrides,
   };
 
@@ -24,13 +31,13 @@ function runAudit(branch, envOverrides = {}, options = {}) {
     throw new Error(`Dependency audit failed for branch ${branch}: ${err}`);
   }
 
-  if (!fs.existsSync(reportPath)) {
+  if (!fs.existsSync(tempReportPath)) {
     throw new Error("latest-dependency-report.json not generated");
   }
 
   return {
     status: result.status ?? 1,
-    report: JSON.parse(fs.readFileSync(reportPath, "utf8")),
+    report: JSON.parse(fs.readFileSync(tempReportPath, "utf8")),
   };
 }
 
@@ -165,14 +172,20 @@ function restoreMainArtifacts() {
 }
 
 function main() {
-  testMainPolicyFromFile();
-  testDevelopPolicyFromFile();
-  testEnvOverridePrecedence();
-  testObserveModeDoesNotBlock();
-  testEnforceModeBlocksOnGateFailure();
-  testObservePromotionRecommendation();
-  restoreMainArtifacts();
-  console.log("Gate policy resolution tests passed.");
+  try {
+    testMainPolicyFromFile();
+    testDevelopPolicyFromFile();
+    testEnvOverridePrecedence();
+    testObserveModeDoesNotBlock();
+    testEnforceModeBlocksOnGateFailure();
+    testObservePromotionRecommendation();
+    restoreMainArtifacts();
+    console.log("Gate policy resolution tests passed.");
+  } finally {
+    if (fs.existsSync(tempReportPath)) {
+      fs.unlinkSync(tempReportPath);
+    }
+  }
 }
 
 main();

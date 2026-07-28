@@ -481,10 +481,14 @@ function main() {
   }
 
   const dep = readIfExists(dependencyPath);
-  const historyDir = path.join(repoRoot, "tools", "governance", "history");
-  const historyPath = path.join(historyDir, "governance-history.jsonl");
-  const summaryPath = path.join(historyDir, "governance-history-summary.json");
-  const decisionsPath = path.join(historyDir, "gate-promotion-decisions.jsonl");
+  const defaultHistoryDir = path.join(repoRoot, "tools", "governance", "history");
+  const historyPath =
+    process.env.GOVERNANCE_HISTORY_PATH || path.join(defaultHistoryDir, "governance-history.jsonl");
+  const summaryPath =
+    process.env.GOVERNANCE_HISTORY_SUMMARY_PATH ||
+    path.join(defaultHistoryDir, "governance-history-summary.json");
+  const decisionsPath =
+    process.env.GOVERNANCE_DECISIONS_PATH || path.join(defaultHistoryDir, "gate-promotion-decisions.jsonl");
   const maxEntries = Number(process.env.GOVERNANCE_HISTORY_MAX_ENTRIES || 5000);
   const keepEntries = Number(process.env.GOVERNANCE_HISTORY_KEEP_ENTRIES || 4000);
   const archiveMaxDays = Number(process.env.GOVERNANCE_HISTORY_ARCHIVE_MAX_DAYS || 30);
@@ -498,8 +502,15 @@ function main() {
   const branch = resolveBranch();
   const decisionsCapacityThresholds = resolveDecisionsCapacityThresholds(branch);
 
-  if (!fs.existsSync(historyDir)) {
-    fs.mkdirSync(historyDir, { recursive: true });
+  const requiredDirs = new Set([
+    path.dirname(historyPath),
+    path.dirname(summaryPath),
+    path.dirname(decisionsPath),
+  ]);
+  for (const dirPath of requiredDirs) {
+    if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath, { recursive: true });
+    }
   }
 
   applyRetentionPolicy(historyPath, {
