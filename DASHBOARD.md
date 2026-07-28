@@ -22,7 +22,7 @@
 <!-- governance-metrics:start -->
 ## Governance KPIs (Auto)
 
-Updated at: 2026-07-28T01:11:48.865Z
+Updated at: 2026-07-28T01:30:29.164Z
 
 | KPI | Value |
 |-----|-------|
