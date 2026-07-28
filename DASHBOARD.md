@@ -21,7 +21,7 @@
 <!-- governance-metrics:start -->
 ## Governance KPIs (Auto)
 
-Updated at: 2026-07-28T03:16:58.119Z
+Updated at: 2026-07-28T03:20:03.999Z
 
 | KPI | Value |
 |-----|-------|
@@ -29,7 +29,7 @@ Updated at: 2026-07-28T03:16:58.119Z
 | Prompt inventory | 23 |
 | Checklists (md/yaml) | 7/6 |
 | Parity coverage | 23/23 (100%) |
-| Dependency policy | threshold=high, policy=PASS, high=0, critical=0, domains=4 |
+| Dependency policy | threshold=critical, policy=PASS, high=0, critical=0, domains=4 |
 | Dependency managers | npm:pass=1,fail=0,skip=1,execErr=0 | pnpm:pass=1,fail=0,skip=0,execErr=0 | yarn:pass=1,fail=0,skip=0,execErr=0 |
 | Last 7 snapshots pass rate | 97.96% (48/49) |
 | Manager reliability (7d) | npm:100% | pnpm:100% | yarn:100% |
