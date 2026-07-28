@@ -1,6 +1,6 @@
 # Governance Report
 
-Generated at: 2026-07-28T01:14:38.346Z
+Generated at: 2026-07-28T02:34:33.786Z
 Overall: PASSED
 
 | Check | Status | Exit Code |

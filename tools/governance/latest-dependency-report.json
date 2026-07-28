@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-28T01:11:47.669Z",
-  "branch": "main",
-  "defaultThreshold": "critical",
+  "generatedAt": "2026-07-28T01:39:41.852Z",
+  "branch": "develop",
+  "defaultThreshold": "high",
   "vulnerabilities": {
     "info": 0,
     "low": 0,
@@ -15,7 +15,7 @@
       "domain": "backend-api",
       "path": "backend-api",
       "packageManager": "npm",
-      "threshold": "critical",
+      "threshold": "high",
       "auditExitCode": 0,
       "npmExitCode": 0,
       "auditCommand": "npm",
@@ -84,7 +84,7 @@
       "failedByPolicy": false,
       "failedByExecution": false,
       "skipped": false,
-      "stderr": "(node:16104) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\n(Use `node --trace-deprecation ...` to show where the warning was created)",
+      "stderr": "(node:4476) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\n(Use `node --trace-deprecation ...` to show where the warning was created)",
       "executionError": null
     },
     {
@@ -169,50 +169,34 @@
   "packageManagerGateInputs": {
     "source": {
       "policyFile": "tools/governance/config/package-manager-gates.json",
-      "branch": "main",
+      "branch": "develop",
       "gateModeFrom": "branch",
       "promoteAfterFrom": "branch"
     },
-    "gateMode": "enforce",
-    "promoteAfterConsecutivePasses": 1,
-    "minExecutedByManager": {
-      "npm": 1,
-      "pnpm": 1,
-      "yarn": 1
-    },
-    "maxExecErrorsByManager": {
-      "npm": 0,
-      "pnpm": 0,
-      "yarn": 0
-    },
+    "gateMode": "observe",
+    "promoteAfterConsecutivePasses": 4,
+    "minExecutedByManager": {},
+    "maxExecErrorsByManager": {},
     "maxDropByManager": {
+      "npm": 4,
+      "pnpm": 4,
+      "yarn": 4
+    },
+    "minTrendRunsByManager": {
       "npm": 2,
       "pnpm": 2,
       "yarn": 2
-    },
-    "minTrendRunsByManager": {
-      "npm": 5,
-      "pnpm": 5,
-      "yarn": 5
     }
   },
-  "packageManagerGateMode": "enforce",
-  "gatesEnforced": true,
+  "packageManagerGateMode": "observe",
+  "gatesEnforced": false,
   "packageManagerGates": {
     "config": {
-      "minExecutedByManager": {
-        "npm": 1,
-        "pnpm": 1,
-        "yarn": 1
-      },
-      "maxExecErrorsByManager": {
-        "npm": 0,
-        "pnpm": 0,
-        "yarn": 0
-      },
+      "minExecutedByManager": {},
+      "maxExecErrorsByManager": {},
       "source": {
         "policyFile": "tools/governance/config/package-manager-gates.json",
-        "branch": "main",
+        "branch": "develop",
         "gateModeFrom": "branch",
         "promoteAfterFrom": "branch"
       }
@@ -223,18 +207,18 @@
   "packageManagerTrendGates": {
     "config": {
       "maxDropByManager": {
+        "npm": 4,
+        "pnpm": 4,
+        "yarn": 4
+      },
+      "minTrendRunsByManager": {
         "npm": 2,
         "pnpm": 2,
         "yarn": 2
       },
-      "minTrendRunsByManager": {
-        "npm": 5,
-        "pnpm": 5,
-        "yarn": 5
-      },
       "source": {
         "policyFile": "tools/governance/config/package-manager-gates.json",
-        "branch": "main",
+        "branch": "develop",
         "gateModeFrom": "branch",
         "promoteAfterFrom": "branch"
       }
@@ -246,11 +230,11 @@
         "reliability30d": 100,
         "delta": 0,
         "drop": 0,
-        "runs7": 36,
-        "runs30": 36,
-        "minRuns": 5,
+        "runs7": 39,
+        "runs30": 39,
+        "minRuns": 2,
         "gateApplied": true,
-        "maxDrop": 2,
+        "maxDrop": 4,
         "gateStatus": "PASS",
         "reason": null
       },
@@ -260,11 +244,11 @@
         "reliability30d": 100,
         "delta": 0,
         "drop": 0,
-        "runs7": 36,
-        "runs30": 36,
-        "minRuns": 5,
+        "runs7": 39,
+        "runs30": 39,
+        "minRuns": 2,
         "gateApplied": true,
-        "maxDrop": 2,
+        "maxDrop": 4,
         "gateStatus": "PASS",
         "reason": null
       },
@@ -274,11 +258,11 @@
         "reliability30d": 100,
         "delta": 0,
         "drop": 0,
-        "runs7": 36,
-        "runs30": 36,
-        "minRuns": 5,
+        "runs7": 39,
+        "runs30": 39,
+        "minRuns": 2,
         "gateApplied": true,
-        "maxDrop": 2,
+        "maxDrop": 4,
         "gateStatus": "PASS",
         "reason": null
       }
@@ -287,14 +271,14 @@
     "failed": false
   },
   "gatePromotion": {
-    "branch": "main",
-    "gateMode": "enforce",
-    "promoteAfterConsecutivePasses": 1,
-    "historicalConsecutiveObservePasses": 0,
-    "projectedConsecutiveObservePasses": 0,
-    "eligibleForEnforcePromotion": false,
-    "recommendation": "not-applicable",
-    "reason": "branch already in enforce mode"
+    "branch": "develop",
+    "gateMode": "observe",
+    "promoteAfterConsecutivePasses": 4,
+    "historicalConsecutiveObservePasses": 4,
+    "projectedConsecutiveObservePasses": 5,
+    "eligibleForEnforcePromotion": true,
+    "recommendation": "promote-to-enforce",
+    "reason": "streak reached 5/4"
   },
   "failedByExecution": false,
   "failedByPolicy": false,

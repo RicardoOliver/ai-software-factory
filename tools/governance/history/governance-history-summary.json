@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-28T01:11:48.062Z",
+  "generatedAt": "2026-07-28T01:35:28.778Z",
   "windows": {
     "last7Days": "timestamp-based",
     "last30Days": "timestamp-based"
@@ -21,9 +21,9 @@
   "decisionsRetentionUsage": {
     "fileCount": 1,
     "archiveCount": 0,
-    "mainBytes": 506,
+    "mainBytes": 508,
     "archivesBytes": 0,
-    "totalBytes": 506
+    "totalBytes": 508
   },
   "decisionsRetentionCapacity": {
     "maxBytes": 5242880,
@@ -43,29 +43,29 @@
     }
   },
   "allTime": {
-    "total": 48,
-    "passed": 47,
-    "passRate": 97.92
+    "total": 49,
+    "passed": 48,
+    "passRate": 97.96
   },
   "last7": {
-    "total": 48,
-    "passed": 47,
-    "passRate": 97.92
+    "total": 49,
+    "passed": 48,
+    "passRate": 97.96
   },
   "last30": {
-    "total": 48,
-    "passed": 47,
-    "passRate": 97.92
+    "total": 49,
+    "passed": 48,
+    "passRate": 97.96
   },
   "packageManagers": {
     "allTime": [
       {
         "packageManager": "npm",
-        "runs": 38,
-        "domains": 76,
-        "passed": 38,
+        "runs": 39,
+        "domains": 78,
+        "passed": 39,
         "failed": 0,
-        "skipped": 38,
+        "skipped": 39,
         "executionErrors": 0,
         "vulnerabilities": {
           "info": 0,
@@ -79,9 +79,9 @@
       },
       {
         "packageManager": "pnpm",
-        "runs": 38,
-        "domains": 38,
-        "passed": 38,
+        "runs": 39,
+        "domains": 39,
+        "passed": 39,
         "failed": 0,
         "skipped": 0,
         "executionErrors": 0,
@@ -97,9 +97,9 @@
       },
       {
         "packageManager": "yarn",
-        "runs": 38,
-        "domains": 38,
-        "passed": 38,
+        "runs": 39,
+        "domains": 39,
+        "passed": 39,
         "failed": 0,
         "skipped": 0,
         "executionErrors": 0,
@@ -117,11 +117,11 @@
     "last7": [
       {
         "packageManager": "npm",
-        "runs": 38,
-        "domains": 76,
-        "passed": 38,
+        "runs": 39,
+        "domains": 78,
+        "passed": 39,
         "failed": 0,
-        "skipped": 38,
+        "skipped": 39,
         "executionErrors": 0,
         "vulnerabilities": {
           "info": 0,
@@ -135,9 +135,9 @@
       },
       {
         "packageManager": "pnpm",
-        "runs": 38,
-        "domains": 38,
-        "passed": 38,
+        "runs": 39,
+        "domains": 39,
+        "passed": 39,
         "failed": 0,
         "skipped": 0,
         "executionErrors": 0,
@@ -153,9 +153,9 @@
       },
       {
         "packageManager": "yarn",
-        "runs": 38,
-        "domains": 38,
-        "passed": 38,
+        "runs": 39,
+        "domains": 39,
+        "passed": 39,
         "failed": 0,
         "skipped": 0,
         "executionErrors": 0,
@@ -173,11 +173,11 @@
     "last30": [
       {
         "packageManager": "npm",
-        "runs": 38,
-        "domains": 76,
-        "passed": 38,
+        "runs": 39,
+        "domains": 78,
+        "passed": 39,
         "failed": 0,
-        "skipped": 38,
+        "skipped": 39,
         "executionErrors": 0,
         "vulnerabilities": {
           "info": 0,
@@ -191,9 +191,9 @@
       },
       {
         "packageManager": "pnpm",
-        "runs": 38,
-        "domains": 38,
-        "passed": 38,
+        "runs": 39,
+        "domains": 39,
+        "passed": 39,
         "failed": 0,
         "skipped": 0,
         "executionErrors": 0,
@@ -209,9 +209,9 @@
       },
       {
         "packageManager": "yarn",
-        "runs": 38,
-        "domains": 38,
-        "passed": 38,
+        "runs": 39,
+        "domains": 39,
+        "passed": 39,
         "failed": 0,
         "skipped": 0,
         "executionErrors": 0,
@@ -262,7 +262,7 @@
     }
   },
   "latest": {
-    "timestamp": "2026-07-28T01:11:48.039Z",
+    "timestamp": "2026-07-28T01:35:28.735Z",
     "governanceFailed": false,
     "governanceChecks": [
       {

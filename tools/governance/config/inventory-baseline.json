@@ -1,6 +1,6 @@
 {
-  "agents": 62,
-  "prompts": 60,
+  "agents": 23,
+  "prompts": 23,
   "githubAgents": 50,
   "checklistsMarkdown": 7,
   "checklistsYaml": 6,

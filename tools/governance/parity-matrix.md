@@ -1,59 +1,29 @@
 # Parity Matrix
 
-Generated on: 2026-07-28T01:14:37.904Z
+Generated on: 2026-07-28T02:34:33.581Z
 
 | Agent | Prompt | Status |
 |-------|--------|--------|
-| accessibility.md | accessibility.prompt.md | OK |
 | ai-agent-orchestrator.md | ai-agent-orchestrator.prompt.md | OK |
-| ai-engineer.md | ai-engineer.prompt.md | OK |
 | api.md | api.prompt.md | OK |
-| aws-architect.md | aws-architect.prompt.md | OK |
-| azure-architect.md | azure-architect.prompt.md | OK |
 | backend.md | backend.prompt.md | OK |
-| bug-investigator.md | bug-investigator.prompt.md | OK |
-| business-analyst.md | business-analyst.prompt.md | OK |
-| code-reviewer.md | code-reviewer.prompt.md | OK |
-| contract-testing.md | contract-testing.prompt.md | OK |
-| cypress.md | cypress.prompt.md | OK |
+| chief-architect.md | chief-architect.prompt.md | OK |
+| cloud-architect.md | cloud-architect.prompt.md | OK |
 | data-engineer.md | data-engineer.prompt.md | OK |
-| database-architect.md | database-architect.prompt.md | OK |
-| desktop-engineer.md | desktop-engineer.prompt.md | OK |
+| database-specialist.md | database-specialist.prompt.md | OK |
 | devops.md | devops.prompt.md | OK |
-| devsecops-advanced.md | - | EXEMPT |
-| devsecops-engineer.md | devsecops-engineer.prompt.md | OK |
-| docker.md | docker.prompt.md | OK |
-| documentation.md | documentation.prompt.md | OK |
-| flaky-test-detective.md | flaky-test-detective.prompt.md | OK |
+| documentation-engineer.md | documentation-engineer.prompt.md | OK |
 | frontend.md | frontend.prompt.md | OK |
-| frontend-architect.md | frontend-architect.prompt.md | OK |
-| github-actions.md | github-actions.prompt.md | OK |
-| graphql-engineer.md | graphql-engineer.prompt.md | OK |
-| incident-investigator.md | incident-investigator.prompt.md | OK |
-| kubernetes.md | kubernetes.prompt.md | OK |
-| logging-engineer.md | logging-engineer.prompt.md | OK |
-| microservices-architect.md | microservices-architect.prompt.md | OK |
+| full-stack.md | full-stack.prompt.md | OK |
+| kubernetes-specialist.md | kubernetes-specialist.prompt.md | OK |
 | ml-engineer.md | ml-engineer.prompt.md | OK |
 | mobile.md | mobile.prompt.md | OK |
-| mongodb.md | mongodb.prompt.md | OK |
-| monitoring.md | monitoring.prompt.md | OK |
-| observability-engineer.md | observability-engineer.prompt.md | OK |
-| opentelemetry.md | opentelemetry.prompt.md | OK |
-| orchestrator.md | orchestrator.prompt.md | OK |
+| monitoring-engineer.md | monitoring-engineer.prompt.md | OK |
 | performance.md | performance.prompt.md | OK |
-| platform-engineer.md | platform-engineer.prompt.md | OK |
-| platform-engineer-advanced.md | - | EXEMPT |
-| playwright.md | playwright.prompt.md | OK |
-| postgresql.md | postgresql.prompt.md | OK |
-| pr-reviewer.md | pr-reviewer.prompt.md | OK |
 | product-owner.md | product-owner.prompt.md | OK |
 | qa-architect.md | qa-architect.prompt.md | OK |
-| redis.md | redis.prompt.md | OK |
 | release.md | release.prompt.md | OK |
-| sdet.md | sdet.prompt.md | OK |
-| security.md | security.prompt.md | OK |
-| selenium.md | selenium.prompt.md | OK |
+| security-auditor.md | security-auditor.prompt.md | OK |
 | solution-architect.md | solution-architect.prompt.md | OK |
-| sql-server.md | sql-server.prompt.md | OK |
-| technical-writer.md | technical-writer.prompt.md | OK |
-| test-data.md | test-data.prompt.md | OK |
+| tech-lead.md | tech-lead.prompt.md | OK |
+| test-automation-engineer.md | test-automation-engineer.prompt.md | OK |
