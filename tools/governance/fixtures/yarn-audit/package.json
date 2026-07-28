@@ -1,0 +1,6 @@
+{
+  "name": "governance-yarn-audit-fixture",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Fixture domain for governance yarn dependency audit coverage"
+}

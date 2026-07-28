@@ -1,0 +1,305 @@
+{
+  "generatedAt": "2026-07-28T01:11:47.669Z",
+  "branch": "main",
+  "defaultThreshold": "critical",
+  "vulnerabilities": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "domains": [
+    {
+      "domain": "backend-api",
+      "path": "backend-api",
+      "packageManager": "npm",
+      "threshold": "critical",
+      "auditExitCode": 0,
+      "npmExitCode": 0,
+      "auditCommand": "npm",
+      "auditArgs": [
+        "audit",
+        "--omit=dev",
+        "--package-lock-only",
+        "--json"
+      ],
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "failedByPolicy": false,
+      "failedByExecution": false,
+      "skipped": false,
+      "stderr": "",
+      "executionError": null
+    },
+    {
+      "domain": "workspace-root",
+      "path": ".",
+      "packageManager": "npm",
+      "threshold": "high",
+      "auditExitCode": 0,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "failedByPolicy": false,
+      "failedByExecution": false,
+      "skipped": true,
+      "skipReason": "optional domain without package-lock.json",
+      "stderr": "",
+      "executionError": null
+    },
+    {
+      "domain": "fixture-pnpm-audit",
+      "path": "tools/governance/fixtures/pnpm-audit",
+      "packageManager": "pnpm",
+      "threshold": "critical",
+      "auditExitCode": 0,
+      "npmExitCode": null,
+      "auditCommand": "pnpm",
+      "auditArgs": [
+        "audit",
+        "--prod",
+        "--json"
+      ],
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "failedByPolicy": false,
+      "failedByExecution": false,
+      "skipped": false,
+      "stderr": "(node:16104) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\n(Use `node --trace-deprecation ...` to show where the warning was created)",
+      "executionError": null
+    },
+    {
+      "domain": "fixture-yarn-audit",
+      "path": "tools/governance/fixtures/yarn-audit",
+      "packageManager": "yarn",
+      "threshold": "critical",
+      "auditExitCode": 0,
+      "npmExitCode": null,
+      "auditCommand": "yarn",
+      "auditArgs": [
+        "audit",
+        "--groups",
+        "dependencies",
+        "--json"
+      ],
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "failedByPolicy": false,
+      "failedByExecution": false,
+      "skipped": false,
+      "stderr": "{\"type\":\"warning\",\"data\":\"..\\\\..\\\\..\\\\..\\\\..\\\\package.json: No license field\"}",
+      "executionError": null
+    }
+  ],
+  "packageManagers": [
+    {
+      "packageManager": "npm",
+      "domains": 2,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 1,
+      "executionErrors": 0,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      }
+    },
+    {
+      "packageManager": "pnpm",
+      "domains": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "executionErrors": 0,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      }
+    },
+    {
+      "packageManager": "yarn",
+      "domains": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "executionErrors": 0,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      }
+    }
+  ],
+  "packageManagerGateInputs": {
+    "source": {
+      "policyFile": "tools/governance/config/package-manager-gates.json",
+      "branch": "main",
+      "gateModeFrom": "branch",
+      "promoteAfterFrom": "branch"
+    },
+    "gateMode": "enforce",
+    "promoteAfterConsecutivePasses": 1,
+    "minExecutedByManager": {
+      "npm": 1,
+      "pnpm": 1,
+      "yarn": 1
+    },
+    "maxExecErrorsByManager": {
+      "npm": 0,
+      "pnpm": 0,
+      "yarn": 0
+    },
+    "maxDropByManager": {
+      "npm": 2,
+      "pnpm": 2,
+      "yarn": 2
+    },
+    "minTrendRunsByManager": {
+      "npm": 5,
+      "pnpm": 5,
+      "yarn": 5
+    }
+  },
+  "packageManagerGateMode": "enforce",
+  "gatesEnforced": true,
+  "packageManagerGates": {
+    "config": {
+      "minExecutedByManager": {
+        "npm": 1,
+        "pnpm": 1,
+        "yarn": 1
+      },
+      "maxExecErrorsByManager": {
+        "npm": 0,
+        "pnpm": 0,
+        "yarn": 0
+      },
+      "source": {
+        "policyFile": "tools/governance/config/package-manager-gates.json",
+        "branch": "main",
+        "gateModeFrom": "branch",
+        "promoteAfterFrom": "branch"
+      }
+    },
+    "failures": [],
+    "failed": false
+  },
+  "packageManagerTrendGates": {
+    "config": {
+      "maxDropByManager": {
+        "npm": 2,
+        "pnpm": 2,
+        "yarn": 2
+      },
+      "minTrendRunsByManager": {
+        "npm": 5,
+        "pnpm": 5,
+        "yarn": 5
+      },
+      "source": {
+        "policyFile": "tools/governance/config/package-manager-gates.json",
+        "branch": "main",
+        "gateModeFrom": "branch",
+        "promoteAfterFrom": "branch"
+      }
+    },
+    "managers": [
+      {
+        "packageManager": "npm",
+        "reliability7d": 100,
+        "reliability30d": 100,
+        "delta": 0,
+        "drop": 0,
+        "runs7": 36,
+        "runs30": 36,
+        "minRuns": 5,
+        "gateApplied": true,
+        "maxDrop": 2,
+        "gateStatus": "PASS",
+        "reason": null
+      },
+      {
+        "packageManager": "pnpm",
+        "reliability7d": 100,
+        "reliability30d": 100,
+        "delta": 0,
+        "drop": 0,
+        "runs7": 36,
+        "runs30": 36,
+        "minRuns": 5,
+        "gateApplied": true,
+        "maxDrop": 2,
+        "gateStatus": "PASS",
+        "reason": null
+      },
+      {
+        "packageManager": "yarn",
+        "reliability7d": 100,
+        "reliability30d": 100,
+        "delta": 0,
+        "drop": 0,
+        "runs7": 36,
+        "runs30": 36,
+        "minRuns": 5,
+        "gateApplied": true,
+        "maxDrop": 2,
+        "gateStatus": "PASS",
+        "reason": null
+      }
+    ],
+    "failures": [],
+    "failed": false
+  },
+  "gatePromotion": {
+    "branch": "main",
+    "gateMode": "enforce",
+    "promoteAfterConsecutivePasses": 1,
+    "historicalConsecutiveObservePasses": 0,
+    "projectedConsecutiveObservePasses": 0,
+    "eligibleForEnforcePromotion": false,
+    "recommendation": "not-applicable",
+    "reason": "branch already in enforce mode"
+  },
+  "failedByExecution": false,
+  "failedByPolicy": false,
+  "failedByManagerGates": false,
+  "failedByManagerGatesEnforced": false,
+  "failedByTrendGates": false,
+  "failedByTrendGatesEnforced": false
+}

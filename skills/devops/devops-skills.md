@@ -141,3 +141,50 @@ Compartilhados:
 env:
   DATABASE_URL: ${{ secrets[format('{0}_DATABASE_URL', env.ENVIRONMENT)] }}
 ```
+
+---
+
+## Skill: Pipeline de Governança de Conteúdo
+
+```yaml
+# .github/workflows/governance-quality.yml
+name: Governance Quality
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node tools/governance/run-governance.mjs
+```
+
+Checklist operacional:
+- [ ] Baseline de inventario versionado em `tools/governance/config/inventory-baseline.json`
+- [ ] Excecoes de paridade explicitas em `tools/governance/config/parity-allowlist.json`
+- [ ] Matriz de paridade gerada em `tools/governance/parity-matrix.md`
+- [ ] Falha do pipeline bloqueia merge em PR
+- [ ] Security audit de dependencias (alto risco) executado em CI
+- [ ] Baseline por dominio definido em `dependency-severity-baseline.json`
+- [ ] Snapshot historico com tendencia temporal real (7d/30d) atualizado
+- [ ] Export externo configurado com timeout/retry quando habilitado
+- [ ] Export com idempotency key e assinatura HMAC quando aplicavel
+- [ ] Relatorio de descoberta de novos dominios auditaveis revisado
+- [ ] Teste dry-run de contrato de export passando no CI
+- [ ] Retencao e compressao de historico configuradas por policy
+- [ ] Dominios fixture pnpm/yarn ativos para validar audit multi-manager de forma continua
+- [ ] Teste HTTP de export valida timeout com retry e contrato ACK
+- [ ] Workflows instalam pnpm/yarn em versao fixada para reduzir variacao entre runners
+- [ ] KPI por package manager publicado em dashboard e comentario de PR
+- [ ] Gate por package manager configurado com minimo de execucao e teto de erros
+- [ ] Tendencia de confiabilidade por manager (7d/30d) revisada em rotina operacional
+- [ ] Gate de regressao por manager configurado com delta maximo aceitavel (7d vs 30d)
+- [ ] Policy de gates por branch definida e revisada em cada ciclo de release

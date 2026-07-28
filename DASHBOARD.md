@@ -8,14 +8,34 @@
 
 | Dimensão | Status | Score |
 |----------|--------|-------|
-| **Cobertura de Agents** | ✅ Completa | 52/52 |
+| **Cobertura de Agents** | ✅ Completa | 53/53 |
 | **Integração Copilot Chat** | ✅ Completa | 51 prompts |
 | **Checklists Produção** | ✅ Completo | 6 (+YAML) |
 | **Encoding UTF-8** | ✅ Limpo | 0 erros |
 | **Documentação** | ✅ Completa | USAGE + CONTRIBUTING + README |
 | **Inovação IA** | ✅ Avançado | Multi-agent, RAG, Guardrails |
+| **Governança Executável** | ✅ Ativa | Inventory + Parity + Links + Frontmatter |
 
 ---
+
+
+<!-- governance-metrics:start -->
+## Governance KPIs (Auto)
+
+Updated at: 2026-07-28T01:11:48.865Z
+
+| KPI | Value |
+|-----|-------|
+| Agents inventory | 53 |
+| Prompt inventory | 51 |
+| Checklists (md/yaml) | 7/6 |
+| Parity coverage | 53/53 (100%) |
+| Dependency policy | threshold=critical, policy=PASS, high=0, critical=0, domains=4 |
+| Dependency managers | npm:pass=1,fail=0,skip=1,execErr=0 | pnpm:pass=1,fail=0,skip=0,execErr=0 | yarn:pass=1,fail=0,skip=0,execErr=0 |
+| Last 7 snapshots pass rate | 97.92% (47/48) |
+| Manager reliability (7d) | npm:100% | pnpm:100% | yarn:100% |
+
+<!-- governance-metrics:end -->
 
 ## 🤖 Catálogo de Agents por Domínio
 
@@ -182,6 +202,12 @@
 - ✅ 51 prompt files para invocação direta via `/`
 - ✅ Todos os prompts com YAML frontmatter válido
 - ✅ Placeholder `$input` em todos os prompts
+
+### Governança Automatizada (NOVO)
+- ✅ Pipeline em `.github/workflows/governance-quality.yml`
+- ✅ Suite local em `tools/governance/run-governance.mjs`
+- ✅ Matriz de paridade gerada em `tools/governance/parity-matrix.md`
+- ✅ Baselines versionados em `tools/governance/config/`
 
 ---
 

@@ -1,0 +1,7 @@
+{
+  "name": "governance-pnpm-audit-fixture",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Fixture domain for governance pnpm dependency audit coverage",
+  "packageManager": "pnpm@10.10.0"
+}

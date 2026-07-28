@@ -47,6 +47,7 @@ Sempre aplicar nesta ordem:
 - Quebra testes existentes sem justificativa
 - Tem código que expõe dados sensíveis em logs
 - Tem SQL Injection ou XSS não mitigados
+- Falha em qualquer validação de governança (`tools/governance/run-governance.mjs`)
 
 ### Um deploy nunca deve acontecer se:
 - CI/CD está falhando

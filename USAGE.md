@@ -24,6 +24,27 @@ code "C:\Users\Ricardo\ai-software-factory\ai-software-factory.code-workspace"
 
 ---
 
+## 🧭 Executar Governança de Qualidade
+
+Guia detalhado para perfis tecnicos e leigos:
+- `tools/governance/GUIA-USO-GOVERNANCA.md`
+
+Use esta suite antes de abrir PRs estruturais (novos agents, prompts, checklists e refactors de docs).
+
+```bash
+node tools/governance/run-governance.mjs
+```
+
+Checks incluidos:
+- Inventario baseline
+- Frontmatter em prompts e templates de agents
+- Paridade agent -> prompt com allowlist
+- Links internos da documentacao
+
+Se algum check falhar, corrija e execute novamente antes de commitar.
+
+---
+
 ## ⚙️ Configuração de Workspace (Múltiplos Projetos)
 
 ### ❓ Preciso Copiar o ai-software-factory em Cada Projeto?

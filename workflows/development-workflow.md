@@ -144,3 +144,19 @@ Checklist de Release:
 [ ] Equipe de suporte informada
 [ ] Comunicado para stakeholders (se impacto visível)
 ```
+
+---
+
+## Workflow 6: Governança de Conteúdo e Catálogo
+
+```
+1. Mudança proposta em agents/prompts/checklists/docs
+2. Executar suite local: node tools/governance/run-governance.mjs
+3. Corrigir divergências detectadas (inventário, paridade, links, frontmatter)
+4. Commit com justificativa da mudança estrutural
+5. PR com evidência da execução dos checks
+6. Workflow CI `.github/workflows/governance-quality.yml` deve passar
+7. Aprovação final somente com governança verde
+```
+
+**Objetivo:** evitar drift estrutural e manter consistência entre catálogo, prompts e documentação.

@@ -1,0 +1,2 @@
+{"timestamp":"2026-07-28T00:47:30.507Z","branch":"develop","decisionType":"promotion","fromMode":"observe","toMode":"enforce","approvedBy":"governance-bot","runSource":"local","commitSha":null,"reason":"auto-detected gate mode transition observe->enforce"}
+{"timestamp":"2026-07-28T01:08:58.860Z","branch":"develop","decisionType":"rollback","fromMode":"enforce","toMode":"observe","approvedBy":"unknown","runSource":"local","commitSha":null,"reason":"auto-detected gate mode transition enforce->observe"}

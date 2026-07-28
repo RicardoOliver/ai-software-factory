@@ -1,0 +1,36 @@
+{
+  "default": {
+    "failOnCritical": false,
+    "capacityThresholds": {
+      "warn": 70,
+      "high": 85,
+      "critical": 95
+    }
+  },
+  "branches": {
+    "main": {
+      "failOnCritical": true,
+      "capacityThresholds": {
+        "warn": 70,
+        "high": 85,
+        "critical": 95
+      }
+    },
+    "staging": {
+      "failOnCritical": false,
+      "capacityThresholds": {
+        "warn": 75,
+        "high": 88,
+        "critical": 96
+      }
+    },
+    "develop": {
+      "failOnCritical": false,
+      "capacityThresholds": {
+        "warn": 80,
+        "high": 90,
+        "critical": 97
+      }
+    }
+  }
+}

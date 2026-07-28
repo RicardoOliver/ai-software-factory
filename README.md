@@ -255,6 +255,32 @@ Cada checklist vem em **2 formatos**:
 
 ---
 
+## 🧭 Governance Automation (NOVO)
+
+O projeto agora possui uma esteira executavel de governanca para evitar drift entre catalogo e repositorio.
+
+### O que valida
+- Inventario baseline (agents, prompts, checklists, skills e workflows)
+- Frontmatter obrigatorio para prompts e templates de agents
+- Paridade agent -> prompt com allowlist explicita
+- Integridade de links internos da documentacao
+
+### Execucao local
+```bash
+node tools/governance/run-governance.mjs
+```
+
+### CI automatizado
+- Workflow: `.github/workflows/governance-quality.yml`
+- Artefatos de governanca: `tools/governance/`
+
+Para detalhes de arquitetura e evolucao, consulte:
+- `knowledge/governance-architecture.md`
+- `ROADMAP.md`
+- `knowledge/mcp-governance.md`
+
+---
+
 ## 🔒 Segurança
 
 ✅ `.gitignore` protege:

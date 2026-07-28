@@ -1,0 +1,37 @@
+{
+  "default": "critical",
+  "branches": {
+    "main": "critical",
+    "develop": "high",
+    "staging": "high"
+  },
+  "domains": {
+    "backend-api": {
+      "path": "backend-api",
+      "packageManager": "npm",
+      "default": "critical",
+      "branches": {
+        "develop": "high",
+        "staging": "high"
+      }
+    },
+    "workspace-root": {
+      "path": ".",
+      "packageManager": "npm",
+      "optional": true,
+      "default": "high"
+    },
+    "fixture-pnpm-audit": {
+      "path": "tools/governance/fixtures/pnpm-audit",
+      "packageManager": "pnpm",
+      "optional": true,
+      "default": "critical"
+    },
+    "fixture-yarn-audit": {
+      "path": "tools/governance/fixtures/yarn-audit",
+      "packageManager": "yarn",
+      "optional": true,
+      "default": "critical"
+    }
+  }
+}

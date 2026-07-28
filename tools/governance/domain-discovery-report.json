@@ -1,0 +1,40 @@
+{
+  "generatedAt": "2026-07-28T00:10:29.703Z",
+  "discovered": [
+    {
+      "path": "backend-api",
+      "lockfiles": [
+        "package-lock.json"
+      ],
+      "packageManagers": [
+        "npm"
+      ]
+    },
+    {
+      "path": "tools/governance/fixtures/pnpm-audit",
+      "lockfiles": [
+        "pnpm-lock.yaml"
+      ],
+      "packageManagers": [
+        "pnpm"
+      ]
+    },
+    {
+      "path": "tools/governance/fixtures/yarn-audit",
+      "lockfiles": [
+        "yarn.lock"
+      ],
+      "packageManagers": [
+        "yarn"
+      ]
+    }
+  ],
+  "knownDomainPaths": [
+    "backend-api",
+    ".",
+    "tools/governance/fixtures/pnpm-audit",
+    "tools/governance/fixtures/yarn-audit"
+  ],
+  "candidates": [],
+  "suggestedDomains": []
+}

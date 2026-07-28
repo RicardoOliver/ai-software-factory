@@ -1,0 +1,64 @@
+{
+  "default": {
+    "gateMode": "observe",
+    "promoteAfterConsecutivePasses": 5,
+    "minExecutedByManager": {},
+    "maxExecErrorsByManager": {},
+    "maxReliabilityDropPpByManager": {},
+    "minTrendRunsByManager": {}
+  },
+  "branches": {
+    "main": {
+      "gateMode": "enforce",
+      "promoteAfterConsecutivePasses": 1,
+      "minExecutedByManager": {
+        "npm": 1,
+        "pnpm": 1,
+        "yarn": 1
+      },
+      "maxExecErrorsByManager": {
+        "npm": 0,
+        "pnpm": 0,
+        "yarn": 0
+      },
+      "maxReliabilityDropPpByManager": {
+        "npm": 2,
+        "pnpm": 2,
+        "yarn": 2
+      },
+      "minTrendRunsByManager": {
+        "npm": 5,
+        "pnpm": 5,
+        "yarn": 5
+      }
+    },
+    "staging": {
+      "gateMode": "observe",
+      "promoteAfterConsecutivePasses": 5,
+      "maxReliabilityDropPpByManager": {
+        "npm": 3,
+        "pnpm": 3,
+        "yarn": 3
+      },
+      "minTrendRunsByManager": {
+        "npm": 3,
+        "pnpm": 3,
+        "yarn": 3
+      }
+    },
+    "develop": {
+      "gateMode": "observe",
+      "promoteAfterConsecutivePasses": 4,
+      "maxReliabilityDropPpByManager": {
+        "npm": 4,
+        "pnpm": 4,
+        "yarn": 4
+      },
+      "minTrendRunsByManager": {
+        "npm": 2,
+        "pnpm": 2,
+        "yarn": 2
+      }
+    }
+  }
+}

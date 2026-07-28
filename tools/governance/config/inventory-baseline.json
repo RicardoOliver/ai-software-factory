@@ -1,0 +1,9 @@
+{
+  "agents": 53,
+  "prompts": 51,
+  "githubAgents": 50,
+  "checklistsMarkdown": 7,
+  "checklistsYaml": 6,
+  "skills": 6,
+  "workflows": 1
+}

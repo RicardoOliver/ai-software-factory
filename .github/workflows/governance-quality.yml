@@ -1,0 +1,155 @@
+name: Governance Quality
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup package managers for multi-domain audit
+        run: npm install -g pnpm@10.10.0 yarn@1.22.19
+
+      - name: Run governance checks
+        run: node tools/governance/run-governance.mjs
+
+      - name: Run dependency audit baseline
+        env:
+          GOVERNANCE_PM_GATE_MODE: ${{ vars.GOVERNANCE_PM_GATE_MODE || '' }}
+          GOVERNANCE_PM_PROMOTE_AFTER_RUNS: ${{ vars.GOVERNANCE_PM_PROMOTE_AFTER_RUNS || '' }}
+          GOVERNANCE_PM_MIN_EXECUTED: ${{ vars.GOVERNANCE_PM_MIN_EXECUTED || '' }}
+          GOVERNANCE_PM_MAX_EXEC_ERRORS: ${{ vars.GOVERNANCE_PM_MAX_EXEC_ERRORS || '' }}
+          GOVERNANCE_PM_MAX_RELIABILITY_DROP_PP: ${{ vars.GOVERNANCE_PM_MAX_RELIABILITY_DROP_PP || '' }}
+          GOVERNANCE_PM_MIN_TREND_RUNS: ${{ vars.GOVERNANCE_PM_MIN_TREND_RUNS || '' }}
+        run: node tools/governance/run-dependency-audit.mjs
+
+      - name: Validate gate policy resolution
+        run: node tools/governance/tests-gate-policy-resolution.mjs
+
+      - name: Validate decisions capacity policy
+        run: node tools/governance/tests-decisions-capacity-policy.mjs
+
+      - name: Validate decisions capacity thresholds
+        run: node tools/governance/tests-decisions-capacity-thresholds.mjs
+
+      - name: Scan dependency audit domains
+        run: node tools/governance/scan-audit-domains.mjs
+
+      - name: Snapshot governance history
+        env:
+          GOVERNANCE_HISTORY_MAX_ENTRIES: ${{ vars.GOVERNANCE_HISTORY_MAX_ENTRIES || '5000' }}
+          GOVERNANCE_HISTORY_KEEP_ENTRIES: ${{ vars.GOVERNANCE_HISTORY_KEEP_ENTRIES || '4000' }}
+          GOVERNANCE_HISTORY_ARCHIVE_MAX_DAYS: ${{ vars.GOVERNANCE_HISTORY_ARCHIVE_MAX_DAYS || '30' }}
+          GOVERNANCE_HISTORY_MAX_BYTES: ${{ vars.GOVERNANCE_HISTORY_MAX_BYTES || '20971520' }}
+          GOVERNANCE_HISTORY_MIN_KEEP_ENTRIES: ${{ vars.GOVERNANCE_HISTORY_MIN_KEEP_ENTRIES || '1000' }}
+          GOVERNANCE_DECISIONS_MAX_ENTRIES: ${{ vars.GOVERNANCE_DECISIONS_MAX_ENTRIES || '2000' }}
+          GOVERNANCE_DECISIONS_KEEP_ENTRIES: ${{ vars.GOVERNANCE_DECISIONS_KEEP_ENTRIES || '1500' }}
+          GOVERNANCE_DECISIONS_ARCHIVE_MAX_DAYS: ${{ vars.GOVERNANCE_DECISIONS_ARCHIVE_MAX_DAYS || '90' }}
+          GOVERNANCE_DECISIONS_MAX_BYTES: ${{ vars.GOVERNANCE_DECISIONS_MAX_BYTES || '5242880' }}
+          GOVERNANCE_DECISIONS_MIN_KEEP_ENTRIES: ${{ vars.GOVERNANCE_DECISIONS_MIN_KEEP_ENTRIES || '500' }}
+          GOVERNANCE_DECISIONS_CAPACITY_WARN_PERCENT: ${{ vars.GOVERNANCE_DECISIONS_CAPACITY_WARN_PERCENT || '70' }}
+          GOVERNANCE_DECISIONS_CAPACITY_HIGH_PERCENT: ${{ vars.GOVERNANCE_DECISIONS_CAPACITY_HIGH_PERCENT || '85' }}
+          GOVERNANCE_DECISIONS_CAPACITY_CRITICAL_PERCENT: ${{ vars.GOVERNANCE_DECISIONS_CAPACITY_CRITICAL_PERCENT || '95' }}
+        run: node tools/governance/snapshot-governance-history.mjs
+
+      - name: Check decision log capacity
+        env:
+          GOVERNANCE_DECISIONS_CAPACITY_FAIL_ON_CRITICAL: ${{ vars.GOVERNANCE_DECISIONS_CAPACITY_FAIL_ON_CRITICAL || 'false' }}
+        run: node tools/governance/check-decisions-capacity.mjs
+
+      - name: Evaluate threshold readiness
+        env:
+          GOVERNANCE_READINESS_MIN_RUNS: ${{ vars.GOVERNANCE_READINESS_MIN_RUNS || '5' }}
+          GOVERNANCE_READINESS_MIN_PASS_RATE: ${{ vars.GOVERNANCE_READINESS_MIN_PASS_RATE || '95' }}
+          GOVERNANCE_READINESS_MAX_MANAGER_DELTA_PP: ${{ vars.GOVERNANCE_READINESS_MAX_MANAGER_DELTA_PP || '2' }}
+        run: node tools/governance/evaluate-threshold-readiness.mjs
+
+      - name: Validate export contract (dry-run)
+        run: node tools/governance/tests-export-contract.mjs
+
+      - name: Validate export HTTP integration
+        run: node tools/governance/tests-export-http-integration.mjs
+
+      - name: Export governance history (optional)
+        if: env.GOVERNANCE_HISTORY_ENDPOINT != ''
+        env:
+          GOVERNANCE_HISTORY_ENDPOINT: ${{ secrets.GOVERNANCE_HISTORY_ENDPOINT }}
+          GOVERNANCE_HISTORY_API_KEY: ${{ secrets.GOVERNANCE_HISTORY_API_KEY }}
+          GOVERNANCE_HISTORY_SIGNING_SECRET: ${{ secrets.GOVERNANCE_HISTORY_SIGNING_SECRET }}
+          GOVERNANCE_EXPORT_EXPECT_ACK: ${{ vars.GOVERNANCE_EXPORT_EXPECT_ACK || 'false' }}
+          GOVERNANCE_EXPORT_TIMEOUT_MS: ${{ vars.GOVERNANCE_EXPORT_TIMEOUT_MS || '8000' }}
+          GOVERNANCE_EXPORT_RETRIES: ${{ vars.GOVERNANCE_EXPORT_RETRIES || '2' }}
+          GOVERNANCE_EXPORT_BACKOFF_BASE_MS: ${{ vars.GOVERNANCE_EXPORT_BACKOFF_BASE_MS || '1000' }}
+          GOVERNANCE_EXPORT_BACKOFF_MAX_MS: ${{ vars.GOVERNANCE_EXPORT_BACKOFF_MAX_MS || '8000' }}
+        run: node tools/governance/export-governance-history.mjs
+
+      - name: Sync governance metrics in dashboard
+        run: node tools/governance/sync-dashboard-governance.mjs
+
+      - name: Verify dashboard metrics are committed
+        run: |
+          if ! git diff --quiet -- DASHBOARD.md; then
+            echo "::error::DASHBOARD.md is out of sync. Run node tools/governance/sync-dashboard-governance.mjs and commit the changes."
+            git --no-pager diff -- DASHBOARD.md
+            exit 1
+          fi
+
+      - name: Build PR governance comment payload
+        if: github.event_name == 'pull_request'
+        run: node tools/governance/build-pr-comment.mjs
+
+      - name: Publish PR governance comment
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- governance-quality-report -->';
+            const body = fs.readFileSync('tools/governance/latest-pr-comment.md', 'utf8');
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find((c) => c.body && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+      - name: Upload governance artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: governance-artifacts
+          path: |
+            tools/governance/latest-report.json
+            tools/governance/latest-report.md
+            tools/governance/latest-dependency-report.json
+            tools/governance/latest-pr-comment.md
+            tools/governance/latest-threshold-readiness.json
+            tools/governance/history/governance-history-summary.json
+            tools/governance/history/gate-promotion-decisions.jsonl
+            tools/governance/domain-discovery-report.json

@@ -1,0 +1,359 @@
+{
+  "generatedAt": "2026-07-28T01:11:48.062Z",
+  "windows": {
+    "last7Days": "timestamp-based",
+    "last30Days": "timestamp-based"
+  },
+  "retention": {
+    "maxEntries": 5000,
+    "keepEntries": 4000,
+    "archiveMaxDays": 30,
+    "maxBytes": 20971520,
+    "minKeepEntries": 1000
+  },
+  "decisionsRetention": {
+    "maxEntries": 2000,
+    "keepEntries": 1500,
+    "archiveMaxDays": 90,
+    "maxBytes": 5242880,
+    "minKeepEntries": 500
+  },
+  "decisionsRetentionUsage": {
+    "fileCount": 1,
+    "archiveCount": 0,
+    "mainBytes": 506,
+    "archivesBytes": 0,
+    "totalBytes": 506
+  },
+  "decisionsRetentionCapacity": {
+    "maxBytes": 5242880,
+    "usagePercent": 0.01,
+    "level": "ok",
+    "exceededThresholds": [],
+    "thresholds": {
+      "warn": 70,
+      "high": 85,
+      "critical": 95
+    },
+    "branch": "main",
+    "thresholdSources": {
+      "warn": "branch-policy",
+      "high": "branch-policy",
+      "critical": "branch-policy"
+    }
+  },
+  "allTime": {
+    "total": 48,
+    "passed": 47,
+    "passRate": 97.92
+  },
+  "last7": {
+    "total": 48,
+    "passed": 47,
+    "passRate": 97.92
+  },
+  "last30": {
+    "total": 48,
+    "passed": 47,
+    "passRate": 97.92
+  },
+  "packageManagers": {
+    "allTime": [
+      {
+        "packageManager": "npm",
+        "runs": 38,
+        "domains": 76,
+        "passed": 38,
+        "failed": 0,
+        "skipped": 38,
+        "executionErrors": 0,
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        },
+        "reliabilityScore": 100
+      },
+      {
+        "packageManager": "pnpm",
+        "runs": 38,
+        "domains": 38,
+        "passed": 38,
+        "failed": 0,
+        "skipped": 0,
+        "executionErrors": 0,
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        },
+        "reliabilityScore": 100
+      },
+      {
+        "packageManager": "yarn",
+        "runs": 38,
+        "domains": 38,
+        "passed": 38,
+        "failed": 0,
+        "skipped": 0,
+        "executionErrors": 0,
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        },
+        "reliabilityScore": 100
+      }
+    ],
+    "last7": [
+      {
+        "packageManager": "npm",
+        "runs": 38,
+        "domains": 76,
+        "passed": 38,
+        "failed": 0,
+        "skipped": 38,
+        "executionErrors": 0,
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        },
+        "reliabilityScore": 100
+      },
+      {
+        "packageManager": "pnpm",
+        "runs": 38,
+        "domains": 38,
+        "passed": 38,
+        "failed": 0,
+        "skipped": 0,
+        "executionErrors": 0,
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        },
+        "reliabilityScore": 100
+      },
+      {
+        "packageManager": "yarn",
+        "runs": 38,
+        "domains": 38,
+        "passed": 38,
+        "failed": 0,
+        "skipped": 0,
+        "executionErrors": 0,
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        },
+        "reliabilityScore": 100
+      }
+    ],
+    "last30": [
+      {
+        "packageManager": "npm",
+        "runs": 38,
+        "domains": 76,
+        "passed": 38,
+        "failed": 0,
+        "skipped": 38,
+        "executionErrors": 0,
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        },
+        "reliabilityScore": 100
+      },
+      {
+        "packageManager": "pnpm",
+        "runs": 38,
+        "domains": 38,
+        "passed": 38,
+        "failed": 0,
+        "skipped": 0,
+        "executionErrors": 0,
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        },
+        "reliabilityScore": 100
+      },
+      {
+        "packageManager": "yarn",
+        "runs": 38,
+        "domains": 38,
+        "passed": 38,
+        "failed": 0,
+        "skipped": 0,
+        "executionErrors": 0,
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        },
+        "reliabilityScore": 100
+      }
+    ]
+  },
+  "gateModeDecisions": {
+    "allTime": {
+      "total": 2,
+      "promotions": 1,
+      "rollbacks": 1,
+      "latest": {
+        "timestamp": "2026-07-28T01:08:58.860Z",
+        "branch": "develop",
+        "decisionType": "rollback",
+        "fromMode": "enforce",
+        "toMode": "observe",
+        "approvedBy": "unknown",
+        "runSource": "local",
+        "commitSha": null,
+        "reason": "auto-detected gate mode transition enforce->observe"
+      }
+    },
+    "last30": {
+      "total": 2,
+      "promotions": 1,
+      "rollbacks": 1,
+      "latest": {
+        "timestamp": "2026-07-28T01:08:58.860Z",
+        "branch": "develop",
+        "decisionType": "rollback",
+        "fromMode": "enforce",
+        "toMode": "observe",
+        "approvedBy": "unknown",
+        "runSource": "local",
+        "commitSha": null,
+        "reason": "auto-detected gate mode transition enforce->observe"
+      }
+    }
+  },
+  "latest": {
+    "timestamp": "2026-07-28T01:11:48.039Z",
+    "governanceFailed": false,
+    "governanceChecks": [
+      {
+        "name": "check-inventory.mjs",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "name": "check-frontmatter.mjs",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "name": "check-parity.mjs",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "name": "check-links.mjs",
+        "status": "PASS",
+        "exitCode": 0
+      }
+    ],
+    "dependencyBranch": "main",
+    "dependencyGateMode": "enforce",
+    "dependencyFailed": false,
+    "dependencyFailedByManagerGates": false,
+    "dependencyFailedByTrendGates": false,
+    "dependencyAuditExecutionFailed": false,
+    "dependencyGatePromotionEligible": false,
+    "dependencyConsecutiveObservePasses": 0,
+    "dependencyPromoteAfterConsecutivePasses": 1,
+    "dependencyThreshold": null,
+    "dependencyVulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "dependencyPackageManagers": [
+      {
+        "packageManager": "npm",
+        "domains": 2,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 1,
+        "executionErrors": 0,
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        }
+      },
+      {
+        "packageManager": "pnpm",
+        "domains": 1,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "executionErrors": 0,
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        }
+      },
+      {
+        "packageManager": "yarn",
+        "domains": 1,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "executionErrors": 0,
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        }
+      }
+    ]
+  },
+  "latestDecision": null
+}

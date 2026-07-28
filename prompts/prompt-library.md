@@ -226,3 +226,225 @@ Incluir:
 - Variáveis de ambiente via .env
 - Hot-reload para desenvolvimento
 ```
+
+---
+
+## Governança
+
+Prompt principal desta linha:
+- `prompts/principal-conselho-permanente-engenharia.md`
+
+### Auditar Governança do Repositório
+```
+Execute uma auditoria de governanca no repositorio com foco em:
+1. Divergencias de inventario (agents/prompts/checklists/skills/workflows)
+2. Paridade agent -> prompt e excecoes nao justificadas
+3. Integridade de links da documentacao principal
+4. Frontmatter obrigatorio ausente em prompts/templates
+
+No final:
+- liste falhas bloqueantes
+- proponha correcoes com menor risco primeiro
+- apresente diff sugerido por arquivo
+```
+
+### Atualizar Baseline de Inventário
+```
+Analise o estado atual do repositorio e atualize o baseline de inventario.
+
+Regras:
+- nao mudar baseline sem justificar cada diferenca
+- se houver alteracao estrutural, atualizar dashboard e readme
+- gerar resumo com antes/depois
+
+Arquivo-alvo: tools/governance/config/inventory-baseline.json
+```
+
+### Revisar Baseline de Dependencias por Branch
+```
+Revise a policy de severidade por branch e proponha ajustes com foco em risco.
+
+Entradas:
+- tools/governance/config/dependency-severity-baseline.json
+- ultimo relatorio: tools/governance/latest-dependency-report.json
+
+Saida esperada:
+1. Risco atual por branch
+2. Se a severidade minima esta adequada
+3. Impacto de apertar/afrouxar threshold
+4. Plano de rollout seguro por ambiente
+```
+
+### Analisar Tendencia de Governanca (7d/30d)
+```
+Use os artefatos de historico para diagnosticar degradacao de qualidade:
+
+Entradas:
+- tools/governance/history/governance-history-summary.json
+- tools/governance/latest-report.json
+- tools/governance/latest-dependency-report.json
+
+Saida esperada:
+1. Diagnostico de tendencia 7d e 30d
+2. Principais causas de falha recorrente
+3. Acoes corretivas de baixo risco
+4. Ajustes recomendados no baseline por dominio
+```
+
+### Ajustar Resiliencia de Export Externo
+```
+Revise configuracao de export externo de historico de governanca e proponha tuning.
+
+Parametros:
+- GOVERNANCE_EXPORT_TIMEOUT_MS
+- GOVERNANCE_EXPORT_RETRIES
+
+Saida esperada:
+1. Timeout recomendado por ambiente
+2. Numero de retries por criticidade
+3. Trade-off entre latencia e confiabilidade
+4. Plano de rollout sem impacto no pipeline principal
+```
+
+### Revisar Descoberta de Dominios Auditaveis
+```
+Use o relatorio de descoberta para propor onboarding de novos dominios de dependency audit.
+
+Entradas:
+- tools/governance/domain-discovery-report.json
+- tools/governance/config/dependency-severity-baseline.json
+
+Saida esperada:
+1. Dominios candidatos priorizados por risco
+2. Sugestao de threshold inicial por branch
+3. Plano incremental de ativacao sem falso positivo
+4. Checklist de validacao para promover de opcional para obrigatorio
+```
+
+### Validar Cobertura Multi-Manager com Dominios Fixture
+```
+Revise se os dominios fixture de dependency audit estao cobrindo package managers secundarios.
+
+Entradas:
+- tools/governance/config/dependency-severity-baseline.json
+- tools/governance/latest-dependency-report.json
+
+Saida esperada:
+1. Status de execucao por package manager (npm, pnpm, yarn)
+2. Falhas de execucao por toolchain ausente ou lockfile invalido
+3. Recomendacoes de hardening no workflow para previsibilidade
+4. Criterios para converter fixture opcional em dominio obrigatorio
+```
+
+### Revisar KPI de Saude por Package Manager
+```
+Analise os KPIs de package manager no dashboard e comentario de PR para detectar regressao.
+
+Entradas:
+- tools/governance/latest-dependency-report.json
+- tools/governance/latest-pr-comment.md
+- DASHBOARD.md
+
+Saida esperada:
+1. Managers com queda de cobertura (pass/skip/erro)
+2. Causas provaveis (lockfile, toolchain, workflow)
+3. Acoes corretivas de menor risco
+4. Gate recomendado para evitar recorrencia
+```
+
+### Calibrar Gates por Package Manager
+```
+Proponha valores seguros para gates por package manager no pipeline de governanca.
+
+Entradas:
+- tools/governance/latest-dependency-report.json
+- tools/governance/history/governance-history-summary.json
+- ambiente alvo (dev/staging/main)
+
+Parametros de saida:
+- GOVERNANCE_PM_MIN_EXECUTED
+- GOVERNANCE_PM_MAX_EXEC_ERRORS
+
+Saida esperada:
+1. Valores recomendados por ambiente
+2. Justificativa por manager (npm/pnpm/yarn)
+3. Risco de falso positivo por configuracao
+4. Plano de rollout incremental com rollback
+```
+
+### Calibrar Gate de Regressao de Confiabilidade
+```
+Defina limiares de regressao por package manager comparando confiabilidade 7d vs 30d.
+
+Entradas:
+- tools/governance/history/governance-history-summary.json
+- tools/governance/latest-dependency-report.json
+
+Parametros de saida:
+- GOVERNANCE_PM_MAX_RELIABILITY_DROP_PP
+- GOVERNANCE_PM_MIN_TREND_RUNS
+
+Saida esperada:
+1. Limiar de queda (pp) por manager e justificativa
+2. Minimo de runs por janela para evitar ruido
+3. Plano de ativacao por ambiente
+4. Criterios objetivos de rollback
+```
+
+### Revisar Policy de Gates por Branch
+```
+Revise e proponha ajustes para a policy versionada de gates por branch.
+
+Entradas:
+- tools/governance/config/package-manager-gates.json
+- tools/governance/latest-dependency-report.json
+
+Saida esperada:
+1. Divergencias entre develop/staging/main
+2. Ajuste de rigor por ambiente
+3. Riscos de falso positivo e falso negativo
+4. Proposta final com justificativa tecnica
+```
+
+### Validar Export Assinado e Idempotente
+```
+Revise o fluxo de export de historico para garantir:
+1. Idempotency key consistente por payload
+2. Assinatura HMAC valida
+3. Timeout e retries adequados por ambiente
+4. Tratamento de falhas sem quebrar governanca local
+```
+
+### Validar Contrato de ACK do Endpoint
+```
+Avalie se o endpoint de persistencia externa atende o contrato esperado.
+
+Regras de contrato (quando EXPECT_ACK=true):
+- HTTP 2xx
+- Content-Type: application/json
+- body.accepted = true
+- body.requestId = string nao vazia
+
+Saida esperada:
+1. Diagnostico de conformidade
+2. Campos faltantes/inconsistentes
+3. Plano de adequacao sem downtime
+4. Testes de contrato recomendados
+```
+
+### Testar Resiliencia de Timeout e Retry no Export
+```
+Avalie se o fluxo de export externo se recupera de timeout sem gerar inconsistencias.
+
+Parametros:
+- GOVERNANCE_EXPORT_TIMEOUT_MS
+- GOVERNANCE_EXPORT_RETRIES
+- GOVERNANCE_EXPORT_BACKOFF_BASE_MS
+- GOVERNANCE_EXPORT_BACKOFF_MAX_MS
+
+Saida esperada:
+1. Cenarios de timeout que devem acionar retry
+2. Tuning de backoff por ambiente
+3. Evidencias de idempotencia em repeticao de tentativa
+4. Criterio de rollback da configuracao em caso de degradacao
+```

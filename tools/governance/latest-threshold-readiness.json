@@ -1,0 +1,46 @@
+{
+  "generatedAt": "2026-07-28T01:11:48.469Z",
+  "criteria": {
+    "minRuns": 5,
+    "minPassRate": 95,
+    "maxManagerDeltaPp": 2
+  },
+  "status": {
+    "ready": true,
+    "checks": {
+      "minRunsReached": true,
+      "passRateReached": true,
+      "managerDeltaWithinLimit": true,
+      "retentionCapacityHealthy": true
+    }
+  },
+  "metrics": {
+    "runs7d": 48,
+    "passRate7d": 97.92,
+    "decisionsCapacityLevel": "ok",
+    "managerDeltas": [
+      {
+        "packageManager": "npm",
+        "reliability7d": 100,
+        "reliability30d": 100,
+        "delta": 0,
+        "withinLimit": true
+      },
+      {
+        "packageManager": "pnpm",
+        "reliability7d": 100,
+        "reliability30d": 100,
+        "delta": 0,
+        "withinLimit": true
+      },
+      {
+        "packageManager": "yarn",
+        "reliability7d": 100,
+        "reliability30d": 100,
+        "delta": 0,
+        "withinLimit": true
+      }
+    ]
+  },
+  "recommendation": "ready-to-freeze-thresholds"
+}

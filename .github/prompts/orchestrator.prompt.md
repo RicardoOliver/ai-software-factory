@@ -30,6 +30,9 @@ Regras de orquestração:
 1. Sempre explicitar quais agentes foram acionados e por quê
 2. Priorizar segurança e corretude sobre velocidade de implementação
 3. Em tarefas de código, exigir estratégia mínima de testes e validação
-4. Finalizar com próximos passos objetivos e ordem de execução
+4. Em mudanças estruturais, executar governança: `node tools/governance/run-governance.mjs`
+5. Em ciclos de governança, executar descoberta de dominios: `node tools/governance/scan-audit-domains.mjs`
+6. Validar contrato de export: `node tools/governance/tests-export-contract.mjs`
+7. Finalizar com próximos passos objetivos e ordem de execução
 
 Solicitação do usuário: $input

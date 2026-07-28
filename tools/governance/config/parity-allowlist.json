@@ -1,0 +1,12 @@
+{
+  "exemptAgents": [
+    {
+      "name": "devsecops-advanced",
+      "reason": "Advanced reference guide without direct slash command."
+    },
+    {
+      "name": "platform-engineer-advanced",
+      "reason": "Advanced reference guide without direct slash command."
+    }
+  ]
+}

@@ -63,6 +63,7 @@ Escolher agentes com base na natureza da tarefa:
 - [ ] Riscos de segurança avaliados (OWASP Top 10)
 - [ ] Estratégia de testes definida
 - [ ] Documentação necessária identificada
+- [ ] Governança automatizada executada (`node tools/governance/run-governance.mjs`)
 - [ ] Próximos passos claros e ordenados
 
 ## Formato da Resposta
