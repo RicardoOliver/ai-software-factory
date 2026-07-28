@@ -1,33 +1,60 @@
 ﻿# 🤝 Guia de Contribuição
 
-Obrigado por querer contribuir ao **AI Software Factory**! Este guia explica como adicionar novos agents, checklists e melhorias.
+Obrigado por querer contribuir ao **AI Software Factory v2.0.0**! Este guia explica como trabalhar com os 23 agents consolidados, adicionar melhorias, e manter a qualidade.
 
 ---
 
 ## 📋 Tipos de Contribuição
 
-- 🤖 **Novo Agent** — Especialista para novo domínio
+- 🔧 **Agent Improvement** — Aprimoramento em agent existente (23 consolidados)
 - ✅ **Novo Checklist** — Lista de verificação para novo processo
 - 🐛 **Bug Fix** — Correção em agent/checklist existente
 - 📚 **Documentação** — Melhorias na documentação
-- ✨ **Enhancement** — Melhoria em agent/checklist existente
+- ✨ **Enhancement** — Melhoria em responsabilidades de um agent
+- 🎯 **Quality** — Melhorias no framework de testes (golden-file)
 
 ---
 
-## 🚀 Como Criar um Novo Agent
+## ⚠️ Antes de Começar
 
-### Passo 1: Planejar
+A arquitetura v2.0.0 consolidou 53 → 23 agents em 6 tiers estratégicos. **Não crie novos agents** sem validar se a funcionalidade já existe. Verifique:
 
-Defina claramente:
-- **Nome**: Nome único e descritivo
-- **Domínio**: Em qual das 7 categorias se encaixa?
-- **Responsabilidades**: 5-10 atividades principais
-- **Entradas**: Quais informações o agent recebe?
-- **Saídas**: Qual expertise ele fornece?
+- [DASHBOARD.md](DASHBOARD.md) — Catálogo de 23 agents por tier
+- [agents/](agents/) — Responsabilidades de cada agent existente
+- [ANALYSIS_AGENT_CONSOLIDATION.md](ANALYSIS_AGENT_CONSOLIDATION.md) — Rationale da consolidação
 
-### Passo 2: Criar o Arquivo do Agent
+---
 
-Crie `agents/seu-agent.md` seguindo este template:
+## 🚀 Como Contribuir com um Agent
+
+### Passo 1: Escolher um Agent Existente
+
+Ao invés de criar um novo, considere aprimorar um dos 23 consolidados:
+
+**Tier 1: Strategy** → solution-architect, tech-lead, chief-architect, product-owner  
+**Tier 2: Development** → backend, frontend, mobile, full-stack, api, database-specialist  
+**Tier 3: Quality** → qa-architect, test-automation-engineer, security-auditor, performance  
+**Tier 4: Infrastructure** → devops, cloud-architect, kubernetes-specialist, monitoring-engineer  
+**Tier 5: Data & AI** → data-engineer, ml-engineer, ai-agent-orchestrator  
+**Tier 6: Auxiliary** → documentation-engineer, release  
+
+### Passo 2: Melhorias Permitidas
+
+Você pode:
+- ✅ Aprimorar as responsabilidades de um agent existente
+- ✅ Adicionar novos exemplos ou padrões
+- ✅ Corrigir bugs ou imprecisões
+- ✅ Melhorar a documentação
+- ✅ Expandir o knowledge/rules relacionados
+
+Você NÃO pode:
+- ❌ Criar um novo agent (consolidação é final)
+- ❌ Remover responsabilidades sem validação
+- ❌ Alterar a estructura de 6 tiers
+
+### Passo 3: Editar o Agent
+
+Edite `agents/seu-agent.md` mantendo a estrutura existente:
 
 ```markdown
 # 🎯 Nome do Agent

@@ -1,6 +1,6 @@
-﻿# 📖 Como Usar — AI Software Factory
+﻿# 📖 Como Usar — AI Software Factory v2.0.0
 
-Guia completo para utilizar os **53 agents especializados** (incluindo sistemas multi-agente com LangGraph, CrewAI e AutoGen), 6 checklists de produção e integração com VS Code Copilot Chat.
+Guia completo para utilizar os **23 agents consolidados** (organizados em 6 tiers estratégicos com qualidade validada 100%), 6+ checklists de produção e integração com VS Code Copilot Chat.
 
 ---
 
