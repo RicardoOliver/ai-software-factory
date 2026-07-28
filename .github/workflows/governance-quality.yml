@@ -46,6 +46,17 @@ jobs:
       - name: Scan dependency audit domains
         run: node tools/governance/scan-audit-domains.mjs
 
+      - name: Sync governance metrics in dashboard
+        run: node tools/governance/sync-dashboard-governance.mjs
+
+      - name: Verify dashboard metrics are committed
+        run: |
+          if ! git diff --quiet -- DASHBOARD.md; then
+            echo "::error::DASHBOARD.md is out of sync. Run node tools/governance/sync-dashboard-governance.mjs and commit the changes."
+            git --no-pager diff -- DASHBOARD.md
+            exit 1
+          fi
+
       - name: Snapshot governance history
         env:
           GOVERNANCE_HISTORY_MAX_ENTRIES: ${{ vars.GOVERNANCE_HISTORY_MAX_ENTRIES || '5000' }}
@@ -93,17 +104,6 @@ jobs:
           GOVERNANCE_EXPORT_BACKOFF_BASE_MS: ${{ vars.GOVERNANCE_EXPORT_BACKOFF_BASE_MS || '1000' }}
           GOVERNANCE_EXPORT_BACKOFF_MAX_MS: ${{ vars.GOVERNANCE_EXPORT_BACKOFF_MAX_MS || '8000' }}
         run: node tools/governance/export-governance-history.mjs
-
-      - name: Sync governance metrics in dashboard
-        run: node tools/governance/sync-dashboard-governance.mjs
-
-      - name: Verify dashboard metrics are committed
-        run: |
-          if ! git diff --quiet -- DASHBOARD.md; then
-            echo "::error::DASHBOARD.md is out of sync. Run node tools/governance/sync-dashboard-governance.mjs and commit the changes."
-            git --no-pager diff -- DASHBOARD.md
-            exit 1
-          fi
 
       - name: Build PR governance comment payload
         if: github.event_name == 'pull_request'

@@ -114,6 +114,10 @@ function buildBlock() {
   return lines.join("\n");
 }
 
+function normalizeBlockForComparison(block) {
+  return block.replace(/^Updated at:\s.*$/m, "Updated at: <stable>");
+}
+
 function main() {
   const dashboardPath = path.join(repoRoot, "DASHBOARD.md");
   const original = fs.readFileSync(dashboardPath, "utf8");
@@ -126,9 +130,16 @@ function main() {
   let next;
 
   if (hasMarkers) {
+    const existingMatch = original.match(/<!-- governance-metrics:start -->[\s\S]*?<!-- governance-metrics:end -->/);
+    const existingBlock = existingMatch ? existingMatch[0] : null;
+    const blockToApply =
+      existingBlock && normalizeBlockForComparison(existingBlock) === normalizeBlockForComparison(block)
+        ? existingBlock
+        : block;
+
     next = original.replace(
       /<!-- governance-metrics:start -->[\s\S]*?<!-- governance-metrics:end -->/,
-      block,
+      blockToApply,
     );
   } else {
     const anchorRegex = /\n##\s+🤖\s+Catálogo de Agents por Domínio/;
