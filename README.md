@@ -27,7 +27,7 @@ Uma **fábrica completa de inteligência artificial** com **53 agents especializ
 
 ### 1. Clonar o Repositório
 ```bash
-git clone https://github.com/seu-usuario/ai-software-factory.git
+git clone https://github.com/RicardoOliver/ai-software-factory.git
 cd ai-software-factory
 ```
 
@@ -56,36 +56,79 @@ Pronto! ✅ Use `/` + nome do agent para acessar **53 especialistas**
 
 ---
 
-## 📁 Estrutura do Projeto
+## � Prova de Conceito Real
+
+**Não é teórico.** O projeto inclui `backend-api/` — um API REST funcional gerado pelos agents `/backend`:
+
+```bash
+cd backend-api
+npm install
+npm run dev
+# Abra http://localhost:3000/docs para OpenAPI
+```
+
+✅ **Stack real**: Node.js + Express + TypeScript + Zod + JWT + Pino + Jest + Supertest + Coverage
+✅ **Endpoints funcionales**: Auth (register/login), usuários, admin stats com RBAC  
+✅ **Pronto para usar**: `npm test`, `npm run test:coverage`, Swagger UI
+
+Isso **prova que os agents geram código de produção**, não abstrações vazias. Todos os exemplos no README podem ser reproduzidos nesse projeto.
+
+---
+
+## �📁 Estrutura do Projeto
 
 ```
 ai-software-factory/
-├── agents/                      # 53 agents especializados
-│   ├── backend.md
-│   ├── ai-agent-orchestrator.md  ← NOVO: LangGraph, CrewAI, AutoGen
-│   ├── devsecops-advanced.md     ← NOVO: SBOM, Sigstore, Threat Modeling IA
-│   ├── platform-engineer-advanced.md ← NOVO: SLOs, Chaos, IDP, FinOps
+├── agents/                           # 53 especialistas — instruções estruturadas para cada função
+│   ├── backend.md                     # Guia do agent Backend Engineer
+│   ├── ai-agent-orchestrator.md      # Agent LangGraph/CrewAI/AutoGen
 │   └── ... (53 total)
 │
-├── checklists/                  # 6 production checklists (dual format)
-│   ├── pre-deployment.md/.yaml
-│   ├── code-review.md/.yaml
-│   ├── security-audit.md/.yaml
-│   ├── incident-response.md/.yaml
-│   ├── performance-testing.md/.yaml
-│   └── release-checklist.md/.yaml
-│
-├── .github/prompts/             # 51 VS Code Copilot prompt files
-│   ├── backend.prompt.md
-│   ├── ai-agent-orchestrator.prompt.md
+├── .github/prompts/                  # 51 prompts para VS Code Copilot Chat (invocação via `/`)
+│   ├── backend.prompt.md              # Prompt executável para `/backend`
 │   └── ... (51 total)
 │
-├── DASHBOARD.md                 # Catálogo completo + métricas + scorecard
-├── USAGE.md                     # Guia completo
-├── CONTRIBUTING.md             # Como contribuir
-├── .gitignore                   # GitHub safety
+├── backend-api/                      # 🔬 PROVA DE CONCEITO — API real gerada pelos agents
+│   ├── src/                           # Express API com JWT, Zod, Pino, OpenAPI
+│   ├── tests/                         # Jest + Supertest
+│   ├── package.json                   # npm run dev, npm test
+│   └── README.md                      # Como executar localmente
+│
+├── checklists/                       # 6 production checklists (Markdown + YAML)
+│   ├── pre-deployment.md/yaml
+│   ├── code-review.md/yaml
+│   └── ... (6 total)
+│
+├── tools/governance/                 # Automação de integridade (CI + checks)
+│   ├── run-governance.mjs              # Valida inventory, frontmatter, parity, links
+│   ├── sync-dashboard-governance.mjs   # Mantém métricas sincronizadas
+│   └── ... (policy configs, history)
+│
+├── knowledge/                        # Documentação estruturada e referências técnicas
+├── rules/                            # Regras de decisão e padrões de código
+├── skills/                           # Funções reutilizáveis (diferentes de agents)
+├── workflows/                        # Orquestração multi-agent (ex: feature → design → code → test → deploy)
+│
+├── DASHBOARD.md                      # 📊 Scorecard vivo com KPIs da governança
+├── USAGE.md                          # 📖 Guia de uso (técnico + leigo)
+├── CONTRIBUTING.md                   # Contribuir ao projeto
+├── .gitignore                        # GitHub safety
 └── ai-software-factory.code-workspace
 ```
+
+### Taxonomia: Qual a diferença?
+
+| Conceito | O que é | Exemplo | Invocação |
+|----------|---------|---------|----------|
+| **Agent** | Especialista com guias estruturados (identidade, objetivo, responsabilidades, limitações) | `backend.md` (Backend Engineer) | `/backend` no Copilot Chat |
+| **Prompt** | Instruções executáveis para LLM + frontmatter YAML | `.github/prompts/backend.prompt.md` | Mesmo que agent (`/backend`) |
+| **Skill** | Função reutilizável (ex: ferramenta de refatoração, gerador de testes) | `skills/refactor-unused-imports.mjs` | Usada por múltiplos agents |
+| **Knowledge** | Documentação e referências estruturadas | `knowledge/governance-architecture.md` | Leitura durante elaboração de prompts |
+| **Rule** | Critério de decisão (ex: quando usar REST vs GraphQL) | `rules/api-style-decision.md` | Consultado durante design |
+| **Workflow** | Orquestração de múltiplos agents em sequência | `workflows/feature-development.md` (design → backend → frontend → test) | Guia para o humano coordenar agents |
+| **Checklist** | Lista verificável com critérios de pronto | `checklists/pre-deployment.yaml` | Manual ou automático no CI |
+
+**Modelo mental**: Agent ≈ persona com expertise; Prompt ≈ instrução executável; Skill ≈ ferramenta; Knowledge ≈ referência; Rule ≈ decisão; Workflow ≈ pipeline; Checklist ≈ gate.
 
 ---
 
